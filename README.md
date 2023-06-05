@@ -2,3 +2,5 @@
 ilk deneme
 
 Visual Studio Deneme Text'i
+
+Test Metni
