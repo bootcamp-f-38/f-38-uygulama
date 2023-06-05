@@ -1,2 +1,2 @@
 # f-38-uygulama
-s
+ilk deneme
