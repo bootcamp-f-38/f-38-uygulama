@@ -1,1 +1,1 @@
-# f-38-ugulama
+# f-38-uygulama
