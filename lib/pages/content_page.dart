@@ -14,7 +14,7 @@ class _Content_pageState extends State<Content_page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Title"),
+        title: Text("TitleDenemeDeğişikliği"),
       ),
       body: Column(),
     );
