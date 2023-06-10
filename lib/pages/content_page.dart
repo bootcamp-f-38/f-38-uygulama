@@ -1,251 +1,167 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class Content_page extends StatefulWidget {
-  const Content_page({super.key});
+class ContentPage extends StatefulWidget {
+  const ContentPage({Key? key}) : super(key: key);
 
   @override
-  State<Content_page> createState() => _Content_pageState();
+  State<ContentPage> createState() => _ContentPageState();
 }
 
-class _Content_pageState extends State<Content_page> {
+class _ContentPageState extends State<ContentPage> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        // contentJCH (57:1000)
-        padding: EdgeInsets.fromLTRB(24, 32, 23, 11),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Color(0xffffffff),
-        ),
+    return Material(
+      child: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              // arrowbackiosnewZe1 (57:1075)
-              margin: EdgeInsets.fromLTRB(0, 0, 359, 26),
-              width: 11.77,
-              height: 20,
-              child: Image.network(
-                'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                width: 11.77,
-                height: 20,
-              ),
-            ),
-            Container(
-              // frame663p5 (57:1159)
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 8),
-              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-              width: double.infinity,
-              height: 42.5,
+              margin: EdgeInsets.fromLTRB(24, 24, 24, 24),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    // maskgroupNE5 (57:1079)
-                    margin: EdgeInsets.fromLTRB(0, 0, 116, 0.5),
-                    width: 24,
-                    height: 24,
-                    child: Image.network(
-                      'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                      width: 24,
-                      height: 24,
+                  InkWell(
+                    onTap: () {
+                      // Handle image tap
+                    },
+                    child: CircleAvatar(
+                      radius: 24,
+                      backgroundImage: NetworkImage(
+                        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+                      ),
                     ),
                   ),
-                  Container(
-                    // frame655PP (57:1082)
-                    margin: EdgeInsets.fromLTRB(0, 0, 126, 0),
-                    height: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          // ierikbalRCM (57:1077)
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 7.5),
-                          child: Text(
-                            'İçerik Başlığı',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xff2e3648),
-                            ),
-                          ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'İçerik Başlığı',
+                        style: GoogleFonts.raleway(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                          height: 1.175,
+                          letterSpacing: 0.0255,
+                          color: Color(0xff2e3648),
                         ),
-                        Text(
-                          // yazar26062026JX3 (57:1078)
-                          'Yazar - 26.06.2026',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff2e3648),
-                          ),
+                      ),
+                      Text(
+                        'Yazar - 26.6.2026',
+                        style: GoogleFonts.raleway(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          height: 1.175,
+                          letterSpacing: 0.012,
+                          color: Color(0xff2e3648),
                         ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        'Metnin Kategorisi',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.robotoSlab(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                          height: 1.3175,
+                          letterSpacing: 0.04,
+                          color: Color(0xfff9844a),
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    // morevertqG5 (57:1084)
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0.5),
-                    width: 4,
-                    height: 16,
-                    child: Image.network(
-                      'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                      width: 4,
-                      height: 16,
-                    ),
+                  IconButton(
+                    icon: Icon(Icons.more_vert),
+                    onPressed: () {},
+                    iconSize: 24,
                   ),
                 ],
               ),
             ),
-            Center(
-              // metninkategorisiYRP (57:1157)
-              child: Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 23.5),
-                child: Text(
-                  'Metnin Kategorisi',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xfff9844a),
-                  ),
-                ),
-              ),
-            ),
             Container(
-              // frame68F4u (57:1162)
-              margin: EdgeInsets.fromLTRB(0, 0, 1, 0),
               width: 382,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    // maskgroupvgq (57:1006)
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 22),
+                    margin: EdgeInsets.only(bottom: 22),
                     width: 382,
                     height: 295,
-                    child: Image.network(
-                      'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                      width: 382,
-                      height: 295,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                  ),
-                  Container(
-                    // loremipsumdolorsitametconsecte (57:1066)
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 22),
-                    constraints: BoxConstraints(
-                      maxWidth: 382,
-                    ),
-                    child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula ultrices porta. Phasellus cursus porta nulla, eget suscipit felis elementum aliquet.',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff2e3648),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/images/image1.png',
+                        width: 382,
+                        height: 295,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   Container(
-                    // maskgroupg3j (86:90)
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                    width: 382,
-                    height: 295,
-                    child: Image.network(
-                      'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                      width: 382,
-                      height: 295,
+                    margin: EdgeInsets.only(bottom: 22),
+                    constraints: BoxConstraints(
+                      maxWidth: 382,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula ultrices porta. Phasellus cursus porta nulla, eget suscipit felis elementum aliquet.',
+                        style: GoogleFonts.robotoSlab(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                          height: 1.3175,
+                          letterSpacing: 0.04,
+                          color: Color(0xff2e3648),
+                        ),
+                      ),
                     ),
                   ),
                   Container(
-                    // frame72nsT (60:99)
-                    width: double.infinity,
-                    height: 62,
+                    margin: EdgeInsets.only(bottom: 16),
+                    width: 382,
+                    height: 295,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/images/image1.png',
+                        width: 382,
+                        height: 295,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    color: Color(0xFF2E3648),
+                    thickness: 2,
+                  ),
+                  Container(
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          // autogroupkgev9CD (P8VREfYptfvGFnT1k2kGEV)
-                          padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                          height: double.infinity,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                // frame70gT3 (60:96)
-                                margin: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                                padding: EdgeInsets.fromLTRB(2, 2, 2, 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      // recommendoXf (57:1165)
-                                      margin: EdgeInsets.fromLTRB(0, 0, 0, 18),
-                                      width: 20,
-                                      height: 20,
-                                      child: Image.network(
-                                        'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                                        width: 20,
-                                        height: 20,
-                                      ),
-                                    ),
-                                    Text(
-                                      // JjK (60:95)
-                                      '123',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xff2e3648),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                // frame69DbP (57:1169)
-                                width: 24,
-                                height: 24,
-                                child: Image.network(
-                                  'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                                  width: 24,
-                                  height: 24,
-                                ),
-                              ),
-                            ],
-                          ),
+                        IconButton(
+                          icon: Icon(Icons.recommend),
+                          onPressed: () {
+                            // IconButton 1'e tıklandığında yapılacak işlemler
+                          },
                         ),
-                        Container(
-                          // rectangle32kbK (59:89)
-                          margin: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                          width: 262,
-                          height: 62,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Color(0xff2e3648)),
-                            color: Color(0xffffffff),
-                          ),
+                        SizedBox(width: 16),
+                        IconButton(
+                          icon: Icon(Icons.share),
+                          onPressed: () {
+                            // IconButton 2'ye tıklandığında yapılacak işlemler
+                          },
                         ),
-                        Container(
-                          // frame71fiH (60:93)
-                          margin: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                          width: 24,
-                          height: 24,
-                          child: Image.network(
-                            'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                        ),
-                        Container(
-                          // commentHBL (60:91)
-                          width: 24,
-                          height: 24,
-                          child: Image.network(
-                            'https://cdn.discordapp.com/attachments/1114291598801502371/1115355605440405564/image.png',
-                            width: 24,
-                            height: 24,
-                          ),
+                        SizedBox(width: 16),
+                        IconButton(
+                          icon: Icon(Icons.comment),
+                          onPressed: () {
+                            // IconButton 3'e tıklandığında yapılacak işlemler
+                          },
                         ),
                       ],
                     ),
