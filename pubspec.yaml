@@ -61,6 +61,7 @@ flutter:
     - assets/images/image3.png
     - assets/images/image4.png
     - imagesdeneme/
+    - images/
 
 
   # The following line ensures that the Material Icons font is
