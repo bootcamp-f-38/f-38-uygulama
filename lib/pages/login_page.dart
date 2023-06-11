@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
            Container(
             width: 100,
             height: 100,
-            color: Colors.red,
+            color: Colors.amber,
            ),
             SizedBox(height: 30),
             TextField(
