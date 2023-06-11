@@ -1,4 +1,3 @@
-import 'package:f_38/pages/add_post_screen.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -47,12 +46,7 @@ class _HomePageState extends State<HomePage> {
                 )),
             Spacer(),
             IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddPostScreen()),
-                  );
-                },
+                onPressed: () {},
                 icon: Icon(
                   Icons.add_box,
                   color: Colors.green[700],
