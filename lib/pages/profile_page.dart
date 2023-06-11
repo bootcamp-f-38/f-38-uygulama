@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProfilePage());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   // This widget is the root of your application.
   @override
@@ -70,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Center(
           // Center is a layout widget. It takes a single child and positions it
@@ -95,7 +94,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 30.0, top: 30, left: 20.0),
+                    padding:
+                        const EdgeInsets.only(right: 30.0, top: 30, left: 20.0),
                     child: ClipOval(
                       child: Image.asset(
                         "images/kedi.jpg",
@@ -113,32 +113,33 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: const [
                             Text(
                               'Kullanıcı Adı',
-                              style: TextStyle(fontFamily: 'Raleway', fontSize: 21),
+                              style: TextStyle(
+                                  fontFamily: 'Raleway', fontSize: 21),
                             ),
                             SizedBox(width: 8.0),
                             Padding(
-                              padding: EdgeInsets.only(top:28.0,left: 18.0),
+                              padding: EdgeInsets.only(top: 28.0, left: 18.0),
                               child: Icon(
                                 Icons.info_outline,
                                 size: 22.0,
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top:28.0,left: 10.0),
+                              padding: EdgeInsets.only(top: 28.0, left: 10.0),
                               child: Icon(
                                 Icons.badge_outlined,
                                 size: 22.0,
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top:28.0,left: 10.0),
+                              padding: EdgeInsets.only(top: 28.0, left: 10.0),
                               child: Icon(
                                 Icons.verified,
                                 size: 22.0,
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top:28.0,left: 10.0),
+                              padding: EdgeInsets.only(top: 28.0, left: 10.0),
                               child: Icon(
                                 Icons.more_vert,
                                 size: 22.0,
@@ -158,17 +159,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-
               const Padding(
-                padding: EdgeInsets.only(top:8.0,left:15,right:15),
+                padding: EdgeInsets.only(top: 8.0, left: 15, right: 15),
                 child: Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula ultrices porta. '
-                      'Phasellus cursus porta nulla, eget suscipit felis elementum aliquet.',
-                  style: TextStyle(fontFamily: 'Roboto',
-                      fontSize: 13),
+                  'Phasellus cursus porta nulla, eget suscipit felis elementum aliquet.',
+                  style: TextStyle(fontFamily: 'Roboto', fontSize: 13),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
                 child: Row(
@@ -186,19 +184,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        const SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -206,8 +208,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
-
                     SizedBox(width: 20),
                     Column(
                       children: [
@@ -222,19 +222,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -242,12 +246,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
                   ],
-
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
                 child: Row(
@@ -265,19 +266,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        const SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -285,8 +290,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
-
                     SizedBox(width: 20),
                     Column(
                       children: [
@@ -301,19 +304,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -321,14 +328,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
                   ],
-
                 ),
               ),
-
-
-
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
                 child: Row(
@@ -346,19 +348,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        const SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -366,8 +372,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
-
                     SizedBox(width: 19),
                     Column(
                       children: [
@@ -382,19 +386,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -402,15 +410,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
                   ],
-
                 ),
               ),
-
-
-
-
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
                 child: Row(
@@ -428,19 +430,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        const SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -448,8 +454,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
-
                     SizedBox(width: 20),
                     Column(
                       children: [
@@ -464,19 +468,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                        SizedBox(
+                            height:
+                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                         const Padding(
-                          padding: EdgeInsets.only(bottom:8.0,right:38),
-
+                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
                           child: Text(
                             'Lorem Lorem',
-                            style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+                            style:
+                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right:78),
-                          child: Text('10 dakika',
-                            style: TextStyle(fontFamily: 'Roboto',
+                          padding: EdgeInsets.only(right: 78),
+                          child: Text(
+                            '10 dakika',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
                               color: Colors.grey,
                               fontSize: 13,
                             ),
@@ -484,14 +492,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-
                   ],
-
                 ),
               ),
-
-
-
             ],
           ),
         ),
