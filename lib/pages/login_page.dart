@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
 
-class LoginPage extends StatelessWidget {
+class _LoginPageState extends State<LoginPage> {
+  bool _isPasswordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
@@ -18,11 +24,11 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-           Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
-           ),
+            Container(
+              width: 100,
+              height: 100,
+              color: Colors.red,
+            ),
             SizedBox(height: 30),
             TextField(
               style: GoogleFonts.raleway(),
@@ -42,7 +48,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 15),
             TextField(
-              obscureText: true,
+              obscureText: !_isPasswordVisible,
               style: GoogleFonts.raleway(),
               decoration: InputDecoration(
                 hintText: 'Şifre',
@@ -56,15 +62,24 @@ class LoginPage extends StatelessWidget {
                     color: colorScheme.secondary,
                   ),
                 ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    color:colorScheme.primary,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextButton(
-                  onPressed: () {
-                    // Şifremi Unuttum
-                  },
+                  onPressed: () {},
                   child: Text(
                     'Şifremi Unuttum',
                     textAlign: TextAlign.start,
@@ -100,7 +115,7 @@ class LoginPage extends StatelessWidget {
               icon: Icon(Icons.login),
               label: Text(
                 'Google ile Giriş Yap',
-                style: GoogleFonts.raleway(), 
+                style: GoogleFonts.raleway(),
               ),
               style: ButtonStyle(
                 minimumSize: MaterialStateProperty.all(Size(double.infinity, 48)),
