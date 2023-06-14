@@ -9,8 +9,7 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentPageState extends State<ContentPage> {
-  String selectedImage =
-      'assets/images/image1.png'; // Başlangıçta gösterilecek büyük resim
+  String selectedImage = 'assets/images/image1.png';
 
   List<String> smallImages = [
     'assets/images/image2.png',
@@ -34,15 +33,23 @@ class _ContentPageState extends State<ContentPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(24, 24, 24, 24),
+              margin: EdgeInsets.only(left: 24.0, top: 24),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(24, 8, 24, 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {
-                      // Handle image tap
-                    },
+                    onTap: () {},
                     child: CircleAvatar(
                       radius: 24,
                       backgroundImage: NetworkImage(
@@ -102,9 +109,8 @@ class _ContentPageState extends State<ContentPage> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height *
-                  0.4, // Set the height as a fraction of the screen height
-              margin: EdgeInsets.fromLTRB(24, 24, 24, 8),
+              margin: EdgeInsets.symmetric(horizontal: 24),
+              height: MediaQuery.of(context).size.height * 0.4,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
@@ -190,25 +196,49 @@ class _ContentPageState extends State<ContentPage> {
                 children: [
                   IconButton(
                     icon: Icon(Icons.recommend),
-                    onPressed: () {
-                      // IconButton 1'e tıklandığında yapılacak işlemler
-                    },
+                    onPressed: () {},
                   ),
                   SizedBox(width: 16),
                   IconButton(
                     icon: Icon(Icons.share),
-                    onPressed: () {
-                      // IconButton 2'ye tıklandığında yapılacak işlemler
-                    },
+                    onPressed: () {},
                   ),
                   SizedBox(width: 16),
                   IconButton(
                     icon: Icon(Icons.comment),
-                    onPressed: () {
-                      // IconButton 3'e tıklandığında yapılacak işlemler
-                    },
+                    onPressed: () {},
                   ),
                 ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 24),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Yorum 1\nYorum 2\nYorum 3",
+                textAlign: TextAlign.start,
+                style: GoogleFonts.robotoSlab(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  height: 1.8,
+                  letterSpacing: 0.04,
+                  color: Color(0xff2e3648),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 24),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Yorum Yazın",
+                textAlign: TextAlign.start,
+                style: GoogleFonts.robotoSlab(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  height: 2,
+                  letterSpacing: 0.04,
+                  color: Color(0xff2e3648),
+                ),
               ),
             ),
           ],
