@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
-      primary: Color(0xFF90BE6D),
-      onSurface: Color(0xFF90BE6D),
-      secondary: Color(0xFF90BE6D),
-    );
+          primary: Color(0xFF90BE6D),
+          onSurface: Color(0xFF90BE6D),
+          secondary: Color(0xFF90BE6D),
+        );
 
     return Scaffold(
       body: Container(
@@ -18,11 +17,11 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-           Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
-           ),
+            Container(
+              width: 100,
+              height: 100,
+              color: Colors.red,
+            ),
             SizedBox(height: 30),
             TextField(
               style: GoogleFonts.raleway(),
@@ -81,6 +80,7 @@ class LoginPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 8),
               child: ElevatedButton(
                 onPressed: () {
+                  print("Login Çalıştı");
                   // Giriş işlemleri
                 },
                 child: Text(
@@ -88,8 +88,10 @@ class LoginPage extends StatelessWidget {
                   style: GoogleFonts.raleway(),
                 ),
                 style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size(double.infinity, 48)),
-                  backgroundColor: MaterialStateProperty.all(colorScheme.primary),
+                  minimumSize:
+                      MaterialStateProperty.all(Size(double.infinity, 48)),
+                  backgroundColor:
+                      MaterialStateProperty.all(colorScheme.primary),
                 ),
               ),
             ),
@@ -100,10 +102,11 @@ class LoginPage extends StatelessWidget {
               icon: Icon(Icons.login),
               label: Text(
                 'Google ile Giriş Yap',
-                style: GoogleFonts.raleway(), 
+                style: GoogleFonts.raleway(),
               ),
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(double.infinity, 48)),
+                minimumSize:
+                    MaterialStateProperty.all(Size(double.infinity, 48)),
                 foregroundColor: MaterialStateProperty.all(colorScheme.primary),
               ),
             ),
