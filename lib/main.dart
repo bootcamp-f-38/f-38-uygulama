@@ -28,7 +28,7 @@ class BasePage extends StatelessWidget {
         profileRoute: (context) => const ProfilePage(),
         contentRoute: (context) => const ContentPage(),
         loginRoute: (context) => LoginPage(),
-        signupRoute: (context) => const SignUpPage(),
+        signupRoute: (context) => SignUpPage(),
       },
       home: Yonlendirme(),
     );
