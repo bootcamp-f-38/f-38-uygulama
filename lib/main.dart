@@ -2,12 +2,21 @@ import 'package:f_38/constant/routes.dart';
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:f_38/pages/home_page.dart';
+import 'package:f_38/pages/main_page.dart';
 import 'package:f_38/pages/profile_page.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/pages/signup_page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
-void main() => runApp(BasePage());
+
+
+
+ runApp(BasePage());
+}
 
 class BasePage extends StatelessWidget {
   const BasePage({Key? key});

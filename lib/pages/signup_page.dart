@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
       primary: Color(0xFF90BE6D),
       onSurface: Color(0xff2E3648),
       secondary: Color(0xFF90BE6D),
