@@ -3,6 +3,8 @@ import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/profile_page.dart';
+import 'package:f_38/pages/login_page.dart';
+import 'package:f_38/pages/singup_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(BasePage());
@@ -19,6 +21,8 @@ class BasePage extends StatelessWidget {
         eventRoute: (context) => EventAnnouncementPage(),
         profileRoute: (context) => const ProfilePage(),
         contentRoute: (context) => const ContentPage(),
+        loginRoute: (context) => LoginPage(),
+        signupRoute: (context) => const SignUpPage(),
       },
       home: Yonlendirme(),
     );
@@ -61,6 +65,18 @@ class Yonlendirme extends StatelessWidget {
                 Navigator.pushNamed(context, homeRoute);
               },
               child: Text('Home'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, loginRoute);
+              },
+              child: Text('Login'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, signupRoute);
+              },
+              child: Text('Sign Up'),
             ),
           ],
         ),
