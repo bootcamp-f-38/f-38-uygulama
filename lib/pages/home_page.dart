@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:f_38/constant/constants.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {},
               icon: Icon(
                 Icons.home,
-                color: Colors.green[700],
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
@@ -97,28 +98,28 @@ class _HomePageState extends State<HomePage> {
               },
               icon: Icon(
                 Icons.view_timeline,
-                color: Colors.green[700],
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.add_box,
-                color: Colors.green[700],
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.menu_book_outlined,
-                color: Colors.green[700],
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.search_outlined,
-              color: Colors.green[700],
+              color: ColorConstants.AppColor,
             ),
           ),
           Spacer(),
@@ -175,20 +176,13 @@ class _HomePageState extends State<HomePage> {
                         width: 131,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xfff9844a),
+                          color: ColorConstants.secondAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(
                           child: Text(
                             'Karbon Ayak İzi',
-                            style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              height: 1.175,
-                              letterSpacing: 0.0210000008,
-                              color: Color(0xffffffff),
-                            )),
+                            style: MyTextConstant.myCustomTextStyleWhite,
                           ),
                         ),
                       ),
@@ -200,20 +194,13 @@ class _HomePageState extends State<HomePage> {
                         width: 127,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xfff9844a),
+                          color: ColorConstants.secondAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(
                           child: Text(
                             'Bisiklet Haftası',
-                            style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              height: 1.175,
-                              letterSpacing: 0.0210000008,
-                              color: Color(0xffffffff),
-                            )),
+                            style: MyTextConstant.myCustomTextStyleWhite,
                           ),
                         ),
                       ),
@@ -225,20 +212,13 @@ class _HomePageState extends State<HomePage> {
                         width: 120,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xfff9844a),
+                          color: ColorConstants.secondAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(
                           child: Text(
                             'Hafta Konusu',
-                            style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              height: 1.175,
-                              letterSpacing: 0.0210000008,
-                              color: Color(0xffffffff),
-                            )),
+                            style: MyTextConstant.myCustomTextStyleWhite,
                           ),
                         ),
                       ),
@@ -294,16 +274,29 @@ class _HomePageState extends State<HomePage> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 16),
-                              child: Text(
-                                usersSmallsize[userIndex].username,
-                                style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.175,
-                                  letterSpacing: 0.0210000008,
-                                  color: Color(0xff2e3648),
-                                )),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    usersSmallsize[userIndex].description,
+                                    style: MyTextConstant.myCustomTextStyle,
+                                  ),
+                                  Text(
+                                    " /${usersSmallsize[userIndex].username}",
+                                    style: MyTextConstant.myCustomTextStyle,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  CircleAvatar(
+                                    backgroundColor: Colors.blueAccent,
+                                    child: Text(
+                                      "B",
+                                      style: GoogleFonts.raleway(
+                                          textStyle: TextStyle(fontSize: 10)),
+                                    ),
+                                    radius: 10,
+                                  )
+                                ],
                               ),
                             ),
                           ],
@@ -369,27 +362,11 @@ class _UserPhotosState extends State<UserPhotos> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
           child: Row(
             children: [
-              Text(
-                widget.user.description,
-                style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  height: 1.175,
-                  letterSpacing: 0.0210000008,
-                  color: Color(0xff2e3648),
-                )),
-              ),
+              Text(widget.user.description,
+                  style: MyTextConstant.myCustomTextStyle),
               Text(
                 " /${widget.user.username}",
-                style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  height: 1.175,
-                  letterSpacing: 0.0210000008,
-                  color: Color(0xff2e3648),
-                )),
+                style: MyTextConstant.myCustomTextStyle,
               ),
               SizedBox(
                 width: 5,
