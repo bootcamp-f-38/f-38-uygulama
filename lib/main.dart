@@ -17,12 +17,12 @@ class BasePage extends StatelessWidget {
     return MaterialApp(
       title: "f_38 uygulama",
       routes: {
-        homeRoute: (context) => const HomePage(),
+        homeRoute: (context) => HomePage(),
         eventRoute: (context) => EventAnnouncementPage(),
         profileRoute: (context) => const ProfilePage(),
         contentRoute: (context) => const ContentPage(),
         loginRoute: (context) => LoginPage(),
-        signupRoute: (context) =>  SignUpPage(),
+        signupRoute: (context) => SignUpPage(),
       },
       home: Yonlendirme(),
     );
