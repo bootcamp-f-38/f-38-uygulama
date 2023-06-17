@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class Comment {
+  String username;
+  String comment;
+
+  Comment(this.username, this.comment);
+}
+
 class ContentPage extends StatefulWidget {
   const ContentPage({Key? key}) : super(key: key);
 
@@ -17,6 +24,12 @@ class _ContentPageState extends State<ContentPage> {
     'assets/images/image4.png',
   ];
 
+  List<Comment> comments = [
+    Comment("Çağatay", "Deneme Yorumu"),
+    Comment("Çağatay", "Deneme Yorumu"),
+    Comment("Çağatay", "Deneme Yorumu"),
+  ];
+
   void changeImage(int index) {
     setState(() {
       String temp = selectedImage;
@@ -25,8 +38,17 @@ class _ContentPageState extends State<ContentPage> {
     });
   }
 
+  void addComment(String username, String comment) {
+    setState(() {
+      comments.add(Comment(username, comment));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    String username = '';
+    String comment = '';
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -183,12 +205,39 @@ class _ContentPageState extends State<ContentPage> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-              child: Divider(
-                color: Color(0xFF2E3648),
-                thickness: 2,
-              ),
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 12),
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: comments.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text(comments[index].username),
+                        subtitle: Text(comments[index].comment),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Comment',
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            comment = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Container(
               margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -206,39 +255,11 @@ class _ContentPageState extends State<ContentPage> {
                   SizedBox(width: 16),
                   IconButton(
                     icon: Icon(Icons.comment),
-                    onPressed: () {},
+                    onPressed: () {
+                      addComment(username, comment);
+                    },
                   ),
                 ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Yorum 1\nYorum 2\nYorum 3",
-                textAlign: TextAlign.start,
-                style: GoogleFonts.robotoSlab(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  height: 1.8,
-                  letterSpacing: 0.04,
-                  color: Color(0xff2e3648),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Yorum Yazın",
-                textAlign: TextAlign.start,
-                style: GoogleFonts.robotoSlab(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  height: 2,
-                  letterSpacing: 0.04,
-                  color: Color(0xff2e3648),
-                ),
               ),
             ),
           ],
