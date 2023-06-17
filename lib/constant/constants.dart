@@ -16,6 +16,7 @@ Color hexToColor(String hex) {
 class ColorConstants {
   static Color AppColor = hexToColor('#90BE6D');
   static Color secondAppColor = hexToColor('#F9844A');
+  static Color blackAppColor = hexToColor("#2E3648");
 }
 
 class MyTextConstant {
