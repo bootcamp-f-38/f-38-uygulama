@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class Comment {
+  String username;
+  String comment;
+
+  Comment(this.username, this.comment);
+}
+
 class ContentPage extends StatefulWidget {
   const ContentPage({Key? key}) : super(key: key);
 
@@ -9,13 +16,18 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentPageState extends State<ContentPage> {
-  String selectedImage =
-      'assets/images/image1.png'; // Başlangıçta gösterilecek büyük resim
+  String selectedImage = 'assets/images/image1.png';
 
   List<String> smallImages = [
     'assets/images/image2.png',
     'assets/images/image3.png',
     'assets/images/image4.png',
+  ];
+
+  List<Comment> comments = [
+    Comment("Çağatay", "Deneme Yorumu"),
+    Comment("Çağatay", "Deneme Yorumu"),
+    Comment("Çağatay", "Deneme Yorumu"),
   ];
 
   void changeImage(int index) {
@@ -26,23 +38,40 @@ class _ContentPageState extends State<ContentPage> {
     });
   }
 
+  void addComment(String username, String comment) {
+    setState(() {
+      comments.add(Comment(username, comment));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    String username = '';
+    String comment = '';
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(24, 24, 24, 24),
+              margin: EdgeInsets.only(left: 24.0, top: 24),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(24, 8, 24, 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {
-                      // Handle image tap
-                    },
+                    onTap: () {},
                     child: CircleAvatar(
                       radius: 24,
                       backgroundImage: NetworkImage(
@@ -102,9 +131,8 @@ class _ContentPageState extends State<ContentPage> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height *
-                  0.4, // Set the height as a fraction of the screen height
-              margin: EdgeInsets.fromLTRB(24, 24, 24, 8),
+              margin: EdgeInsets.symmetric(horizontal: 24),
+              height: MediaQuery.of(context).size.height * 0.4,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
@@ -177,12 +205,39 @@ class _ContentPageState extends State<ContentPage> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-              child: Divider(
-                color: Color(0xFF2E3648),
-                thickness: 2,
-              ),
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 12),
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: comments.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text(comments[index].username),
+                        subtitle: Text(comments[index].comment),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Comment',
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            comment = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Container(
               margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -190,22 +245,18 @@ class _ContentPageState extends State<ContentPage> {
                 children: [
                   IconButton(
                     icon: Icon(Icons.recommend),
-                    onPressed: () {
-                      // IconButton 1'e tıklandığında yapılacak işlemler
-                    },
+                    onPressed: () {},
                   ),
                   SizedBox(width: 16),
                   IconButton(
                     icon: Icon(Icons.share),
-                    onPressed: () {
-                      // IconButton 2'ye tıklandığında yapılacak işlemler
-                    },
+                    onPressed: () {},
                   ),
                   SizedBox(width: 16),
                   IconButton(
                     icon: Icon(Icons.comment),
                     onPressed: () {
-                      // IconButton 3'e tıklandığında yapılacak işlemler
+                      addComment(username, comment);
                     },
                   ),
                 ],
