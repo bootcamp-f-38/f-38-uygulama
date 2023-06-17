@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 15),
             TextField(
-              obscureText: true,
+              obscureText: !_isPasswordVisible,
               style: GoogleFonts.raleway(),
               decoration: InputDecoration(
                 hintText: 'Şifre',
@@ -55,15 +55,26 @@ class LoginPage extends StatelessWidget {
                     color: colorScheme.secondary,
                   ),
                 ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: colorScheme.primary,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextButton(
-                  onPressed: () {
-                    // Şifremi Unuttum
-                  },
+                  onPressed: () {},
                   child: Text(
                     'Şifremi Unuttum',
                     textAlign: TextAlign.start,
