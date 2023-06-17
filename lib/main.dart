@@ -6,14 +6,8 @@ import 'package:f_38/pages/profile_page.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/pages/signup_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(BasePage());
-}
+void main() => runApp(BasePage());
 
 class BasePage extends StatelessWidget {
   const BasePage({Key? key});
@@ -23,7 +17,7 @@ class BasePage extends StatelessWidget {
     return MaterialApp(
       title: "f_38 uygulama",
       routes: {
-        homeRoute: (context) => const HomePage(),
+        homeRoute: (context) => HomePage(),
         eventRoute: (context) => EventAnnouncementPage(),
         profileRoute: (context) => const ProfilePage(),
         contentRoute: (context) => const ContentPage(),
