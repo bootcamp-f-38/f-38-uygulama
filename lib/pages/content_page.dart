@@ -25,7 +25,7 @@ class _ContentPageState extends State<ContentPage> {
   ];
 
   List<Comment> comments = [
-    Comment("Çağatay", "Deneme Yorumu"),
+    Comment("KaD", "Deneme Yorumu"),
     Comment("Çağatay", "Deneme Yorumu"),
     Comment("Çağatay", "Deneme Yorumu"),
   ];
@@ -46,8 +46,8 @@ class _ContentPageState extends State<ContentPage> {
 
   @override
   Widget build(BuildContext context) {
-    String username = '';
-    String comment = '';
+    String username = 'bERRE';
+    String comment = 'Berre Yorum';
 
     return Scaffold(
       body: SingleChildScrollView(

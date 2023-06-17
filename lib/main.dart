@@ -33,7 +33,7 @@ class BasePage extends StatelessWidget {
         loginRoute: (context) => LoginPage(),
         signupRoute: (context) => SignUpPage(),
       },
-      home: LoginPage(),
+      home: Yonlendirme(),
     );
   }
 }
@@ -74,18 +74,6 @@ class Yonlendirme extends StatelessWidget {
                 Navigator.pushNamed(context, homeRoute);
               },
               child: Text('Home'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, loginRoute);
-              },
-              child: Text('Login'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, signupRoute);
-              },
-              child: Text('Sign Up'),
             ),
             ElevatedButton(
               onPressed: () {
