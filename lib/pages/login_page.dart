@@ -1,6 +1,8 @@
+import 'package:f_38/constant/routes.dart';
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/signup_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +16,33 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   bool circular = false;
   bool _isPasswordVisible = false;
+
+  Future signIn() async {
+    setState(() {
+      circular = true;
+    });
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim());
+      print(userCredential.user!.email);
+      setState(() {
+        circular = false;
+      });
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (builder) => HomePage()),
+          (route) => false);
+    } catch (e) {
+      final snackBar = SnackBar(content: Text(e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      setState(() {
+        circular = false;
+      });
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,10 +134,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (builder) => HomePage()));
-                },
+                onPressed: signIn,
                 child: Text(
                   'Giriş Yap',
                   style: GoogleFonts.raleway(),
@@ -149,8 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => HomePage()));
+                    Navigator.pushNamed(context, signupRoute);
                   },
                   child: Text(
                     'Kayıt Ol',
