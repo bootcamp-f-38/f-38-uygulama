@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool _isPasswordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
@@ -91,7 +98,6 @@ class LoginPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 8),
               child: ElevatedButton(
                 onPressed: () {
-                  print("Login Çalıştı");
                   // Giriş işlemleri
                 },
                 child: Text(
