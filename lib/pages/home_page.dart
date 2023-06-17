@@ -16,10 +16,10 @@ class _HomePageState extends State<HomePage> {
         username: 'Kullanıcı 1',
         photos: [
           Photo(
-            image: 'imagesdeneme/4.jpg',
+            image: 'assets/images/image4.png',
           ),
           Photo(
-            image: 'imagesdeneme/7.jpg',
+            image: 'assets/images/image4.png',
           ),
         ],
         description: "Çok güzel bir gün!"),
@@ -27,13 +27,13 @@ class _HomePageState extends State<HomePage> {
         username: 'Kullanıcı 2',
         photos: [
           Photo(
-            image: 'imagesdeneme/5.jpg',
+            image: 'assets/images/image4.png',
           ),
           Photo(
-            image: 'imagesdeneme/2.jpg',
+            image: 'assets/images/image4.png',
           ),
           Photo(
-            image: 'imagesdeneme/3.jpg',
+            image: 'assets/images/image4.png',
           ),
         ],
         description: "İnanılmaz bir an!"),
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         username: 'Kullanıcı 3',
         photos: [
           Photo(
-            image: 'imagesdeneme/1.jpg',
+            image: 'assets/images/image1.png',
           ),
         ],
         description: "Güzel bir an!"),
@@ -52,10 +52,10 @@ class _HomePageState extends State<HomePage> {
         username: 'Kullanıcı 1',
         photos: [
           Photo(
-            image: 'imagesdeneme/6.jpg',
+            image: 'assets/images/image2.png',
           ),
           Photo(
-            image: 'imagesdeneme/1.jpg',
+            image: 'assets/images/image4.png',
           ),
         ],
         description: "Çok güzel bir gün!"),
@@ -63,13 +63,13 @@ class _HomePageState extends State<HomePage> {
         username: 'Kullanıcı 2',
         photos: [
           Photo(
-            image: 'imagesdeneme/7.jpg',
+            image: 'assets/images/image3.png',
           ),
           Photo(
-            image: 'imagesdeneme/2.jpg',
+            image: 'assets/images/image4.png',
           ),
           Photo(
-            image: 'imagesdeneme/6.jpg',
+            image: 'assets/images/image4.png',
           ),
         ],
         description: "İnanılmaz bir an!"),
