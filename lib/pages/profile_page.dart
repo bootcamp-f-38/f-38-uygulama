@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Stack(
                             children: [
                               CircleAvatar(
-                                radius: 35,
+                                radius: 34,
                                 backgroundColor: Colors.lightGreen,
                               ),
                               Positioned.fill(
