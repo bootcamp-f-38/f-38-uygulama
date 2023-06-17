@@ -87,6 +87,18 @@ class Yonlendirme extends StatelessWidget {
               },
               child: Text('Sign Up'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, loginRoute);
+              },
+              child: Text('Login'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, signupRoute);
+              },
+              child: Text('Sign Up'),
+            ),
           ],
         ),
       ),
