@@ -122,8 +122,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     'Üye Ol',
                     style: TextStyle(color: Colors.white),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: colorScheme.primary,
+                  style: ButtonStyle(
+                    minimumSize:
+                        MaterialStateProperty.all(Size(double.infinity, 48)),
+                    backgroundColor:
+                        MaterialStateProperty.all(colorScheme.primary),
                   ),
                 ),
                 SizedBox(height: 15),
