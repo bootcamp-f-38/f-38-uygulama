@@ -16,6 +16,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   bool circular = false;
   final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
   Future signUp() async {
@@ -42,13 +43,15 @@ class _SignUpPageState extends State<SignUpPage> {
         circular = false;
       });
     }
-    addUserDetails(_nameController.text.trim(), _emailController.text.trim(),
-        _passwordController.text.trim());
+    addUserDetails(_nameController.text.trim(), _usernameController.text.trim(),
+        _emailController.text.trim(), _passwordController.text.trim());
   }
 
-  Future addUserDetails(String name, String email, String password) async {
+  Future addUserDetails(
+      String name, String username, String email, String password) async {
     await FirebaseFirestore.instance.collection('users').add({
       'name': name,
+      'username': username,
       'email': email,
       'password': password,
     });
@@ -90,6 +93,19 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 15),
                 TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    hintText: 'Kullanıcı adı',
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
                     hintText: 'E-posta',
@@ -117,7 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: signUp,
                   child: Text(
                     'Üye Ol',
                     style: TextStyle(color: Colors.white),
@@ -142,10 +158,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (builder) => LoginPage()));
+                          Navigator.pushNamed(context, loginRoute);
                         },
                         child: Text(
                           'Giriş Yap',
