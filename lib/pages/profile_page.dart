@@ -1,505 +1,957 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const ProfilePage());
+  runApp(ProfilePage());
 }
 
-class ProfilePage extends StatelessWidget {
+//commit oldu mu
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _ProfilePageState extends State<ProfilePage> {
+  bool isContainerOpen = false;
+  bool isSwitched = false;
+  Color _labelColor = Colors.black;
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-
-            children: <Widget>[
-              Row(
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(right: 30.0, top: 30, left: 20.0),
-                    child: ClipOval(
-                      child: Image.asset(
-                        "images/kedi.jpg",
-                        width: 80,
-                        height: 80,
-                      ),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    return MaterialApp(home: Builder(
+      builder: (BuildContext context) {
+        return Scaffold(
+          bottomNavigationBar: BottomAppBar(
+            child: Row(children: [
+              Spacer(),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.home,
+                    color: Colors.lightGreen,
+                  )),
+              Spacer(),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                    );
+                  },
+                  icon: Icon(Icons.view_timeline, color: Colors.lightGreen)),
+              Spacer(),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.add_box, color: Colors.lightGreen)),
+              Spacer(),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.menu_book_outlined,
+                    color: Colors.lightGreen,
+                  )),
+              Spacer(),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search_outlined,
+                  color: Colors.lightGreen,
+                ),
+              ),
+              Spacer(),
+            ]),
+          ),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  ///////////////////////////////////if
+                  Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'Kullanıcı Adı',
+                        padding: const EdgeInsets.only(
+                            right: 30.0, top: 30, left: 20.0),
+                        child: ClipOval(
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                radius: 35,
+                                backgroundColor: Colors.lightGreen,
+                              ),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                            ),
+                                            contentPadding:
+                                                EdgeInsets.all(20.0),
+                                            content: Container(
+                                              width: 280,
+                                              height: 280,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 100,
+                                                    backgroundColor:
+                                                        Colors.lightGreen,
+                                                    child: Icon(
+                                                      Icons.camera_alt,
+                                                      size: 80,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 35),
+                                                  Text(
+                                                    "Yeni Profil Resmi Ekle",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Raleway',
+                                                      fontSize: 16,
+                                                      color: Colors.lightGreen,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 20.0),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 28.0, right: 20),
+                                  child: Text(
+                                    'Kullanıcı Adı',
+                                    style: TextStyle(
+                                        fontFamily: 'Raleway', fontSize: 21),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 40.0, left: 20.0),
+                                  child: Icon(
+                                    Icons.info_outline,
+                                    size: 22.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 40.0, left: 12.0),
+                                  child: Icon(
+                                    Icons.badge_outlined,
+                                    size: 22.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 40.0, left: 12.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      // Tıklama işlemlerini burada gerçekleştirin
+                                      print("Icona tıklandı!");
+                                    },
+                                    child: Icon(
+                                      Icons.verified_outlined,
+                                      size: 22.0,
+                                    ),
+                                  ),
+                                ),
+
+                                //profie setting page için
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 40.0, left: 4.0),
+                                  child: Container(
+                                    width: 40.0,
+                                    height: 40.0,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isContainerOpen = !isContainerOpen;
+                                        });
+
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Dialog(
+                                              backgroundColor:
+                                                  Colors.white.withOpacity(0.8),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                              child: SingleChildScrollView(
+                                                child: Container(
+                                                  width: 382,
+                                                  height: 724,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 16.0,
+                                                                top: 16.0),
+                                                        child: Text(
+                                                          "Profil Ayarları",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Raleway',
+                                                              fontSize: 21),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 16.0),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    16.0),
+                                                        child: TextField(
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText:
+                                                                "Kullanıcı Adı",
+                                                            labelStyle:
+                                                                TextStyle(
+                                                              fontFamily:
+                                                                  'Raleway',
+                                                              fontSize: 14,
+                                                              color:
+                                                                  _labelColor,
+                                                            ),
+                                                            focusedBorder:
+                                                                UnderlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                          ),
+                                                          onTap: () {
+                                                            // TextField'a tıklandığında çalışacak kod bloğu
+                                                            setState(() {
+                                                              // State değişikliği olduğunu bildirir ve yeniden çizimi sağlar
+                                                              _labelColor =
+                                                                  Colors.black;
+                                                            });
+                                                          },
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 8.0),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    16.0),
+                                                        child: TextField(
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText:
+                                                                "Telefon Numaranız",
+                                                            labelStyle: TextStyle(
+                                                                fontFamily:
+                                                                    'Raleway',
+                                                                fontSize: 14,
+                                                                color:
+                                                                    _labelColor),
+                                                            focusedBorder:
+                                                                UnderlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                          ),
+                                                          onTap: () {
+                                                            // TextField'a tıklandığında çalışacak kod bloğu
+                                                            setState(() {
+                                                              _labelColor = Colors
+                                                                  .black; // labelColor'ın değerini yeşil olarak güncelle
+                                                            });
+                                                          },
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 8.0),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    16.0),
+                                                        child: TextField(
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText:
+                                                                "E-Posta Adresiniz",
+                                                            labelStyle:
+                                                                TextStyle(
+                                                              fontFamily:
+                                                                  'Raleway',
+                                                              fontSize: 14,
+                                                              color:
+                                                                  _labelColor,
+                                                            ),
+                                                            focusedBorder:
+                                                                UnderlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                          ),
+                                                          onTap: () {
+                                                            // TextField'a tıklandığında çalışacak kod bloğu
+                                                            setState(() {
+                                                              _labelColor =
+                                                                  Colors.black;
+                                                            });
+                                                          },
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 8.0),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    14.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              "Şifre",
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'Raleway',
+                                                                fontSize: 20,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                                width: 8.0),
+                                                            Switch(
+                                                              value: false,
+                                                              onChanged:
+                                                                  (newValue) {},
+                                                              activeColor:
+                                                                  Colors.white,
+                                                              activeTrackColor:
+                                                                  Colors.green,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 8.0),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    14.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child: TextField(
+                                                                obscureText:
+                                                                    obscureText,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  labelText:
+                                                                      "Şifreniz",
+                                                                  labelStyle: TextStyle(
+                                                                      fontFamily:
+                                                                          'Raleway',
+                                                                      fontSize:
+                                                                          14),
+                                                                  enabledBorder:
+                                                                      UnderlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                Colors.black),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      UnderlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                Colors.black),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            IconButton(
+                                                              icon: Icon(
+                                                                obscureText
+                                                                    ? Icons
+                                                                        .visibility_outlined
+                                                                    : Icons
+                                                                        .visibility_off_outlined, // Göz simgesi, şifre görünürken veya gizliyken değişsin
+                                                                color: Colors
+                                                                    .black,
+                                                                size: 19,
+                                                              ),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  obscureText =
+                                                                      !obscureText; // Şifre görünürlüğünü değiştir
+                                                                });
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 8.0),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    14.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              "Koyu Mod",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Raleway',
+                                                                  fontSize: 20),
+                                                            ),
+                                                            SizedBox(
+                                                                width: 8.0),
+                                                            Switch(
+                                                              value: false,
+                                                              onChanged:
+                                                                  (newValue) {},
+                                                              activeColor:
+                                                                  Colors.white,
+                                                              activeTrackColor:
+                                                                  Colors.green,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 8.0),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    14.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              "Kullanıcı Geri Bildirimi",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Raleway',
+                                                                  fontSize: 20),
+                                                            ),
+                                                            SizedBox(
+                                                                width: 8.0),
+                                                            Switch(
+                                                              value: isSwitched,
+                                                              onChanged:
+                                                                  (value) {
+                                                                setState(() {
+                                                                  isSwitched =
+                                                                      value;
+                                                                });
+                                                              },
+                                                              activeColor:
+                                                                  Colors.white,
+                                                              activeTrackColor:
+                                                                  Colors.green,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 8.0),
+                                                      if (isSwitched)
+                                                        buildSwitchContent(),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(right: 0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            ElevatedButton(
+                                                              onPressed: () {},
+                                                              style:
+                                                                  ElevatedButton
+                                                                      .styleFrom(
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            130.0),
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .lightGreen,
+                                                                foregroundColor:
+                                                                    Colors
+                                                                        .white,
+                                                              ),
+                                                              child: Text(
+                                                                "Kaydet",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.more_vert,
+                                        size: 22.0,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+
+                          //if
+
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 25.0),
+                            child: Text(
+                              '@kullanıcıadı',
                               style: TextStyle(
-                                  fontFamily: 'Raleway', fontSize: 21),
+                                  fontFamily: 'Raleway', fontSize: 14),
                             ),
-                            SizedBox(width: 8.0),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0, left: 15, right: 15),
+                    child: Text(
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula ultrices porta. '
+                      'Phasellus cursus porta nulla, eget suscipit felis elementum aliquet.',
+                      style: TextStyle(fontFamily: 'Roboto', fontSize: 13),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 18.0, left: 15, right: 15),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: DecorationImage(
+                                  image: AssetImage('images/kaplan.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
                             Padding(
-                              padding: EdgeInsets.only(top: 28.0, left: 18.0),
-                              child: Icon(
-                                Icons.info_outline,
-                                size: 22.0,
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 28.0, left: 10.0),
-                              child: Icon(
-                                Icons.badge_outlined,
-                                size: 22.0,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 28.0, left: 10.0),
-                              child: Icon(
-                                Icons.verified,
-                                size: 22.0,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 28.0, left: 10.0),
-                              child: Icon(
-                                Icons.more_vert,
-                                size: 22.0,
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 1.0),
-                        child: Text(
-                          '@kullanıcıadı',
-                          style: TextStyle(fontFamily: 'Raleway', fontSize: 14),
+                        SizedBox(width: 20),
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: const DecorationImage(
+                                  image: AssetImage('images/kaplan.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 20.0, left: 15, right: 15),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: DecorationImage(
+                                  image: AssetImage('images/kaplan2.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 20),
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: const DecorationImage(
+                                  image: AssetImage('images/kaplan2.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 18.0, left: 15, right: 15),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: DecorationImage(
+                                  image: AssetImage('images/kaplan.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 19),
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: DecorationImage(
+                                  image: AssetImage('images/kaplan.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 18.0, left: 15, right: 15),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: DecorationImage(
+                                  image: AssetImage('images/kaplan2.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 20),
+                        Column(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                image: DecorationImage(
+                                  image: AssetImage('images/kaplan2.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 8.0, right: 38),
+                              child: Text(
+                                'Lorem Lorem',
+                                style: TextStyle(
+                                    fontFamily: 'Raleway', fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 78),
+                              child: Text(
+                                '10 dakika',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8.0, left: 15, right: 15),
-                child: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula ultrices porta. '
-                  'Phasellus cursus porta nulla, eget suscipit felis elementum aliquet.',
-                  style: TextStyle(fontFamily: 'Roboto', fontSize: 13),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan2.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan2.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 19),
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 18.0, left: 15, right: 15),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan2.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            image: const DecorationImage(
-                              image: AssetImage('images/kaplan2.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                            height:
-                                6), // İstenilen boşluğu ayarlamak için SizedBox ekliyoruz
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 38),
-                          child: Text(
-                            'Lorem Lorem',
-                            style:
-                                TextStyle(fontFamily: 'Raleway', fontSize: 16),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 78),
-                          child: Text(
-                            '10 dakika',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        );
+      },
+    ));
   }
+}
+
+Widget buildSwitchContent() {
+  return Expanded(
+    child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: TextField(
+                maxLines: null,
+                decoration: InputDecoration(
+                  hintText: "Bize geri dönüş gönderin...",
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(16.0),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 270.0,
+            top: 130.0,
+            child: Icon(
+              Icons.send,
+              color: Colors.lightGreen,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

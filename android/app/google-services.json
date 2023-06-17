@@ -1,20 +1,26 @@
 {
   "project_info": {
+
     "project_number": "496478449602",
     "project_id": "f38bootcamp",
     "storage_bucket": "f38bootcamp.appspot.com"
+
   },
   "client": [
     {
       "client_info": {
+
         "mobilesdk_app_id": "1:496478449602:android:782115460d3d47f225305b",
+
         "android_client_info": {
           "package_name": "com.example.f_38"
         }
       },
       "oauth_client": [
         {
+
           "client_id": "496478449602-fjnqtmch7tjh5fe61lkvqsn1l4tf5mge.apps.googleusercontent.com",
+
           "client_type": 3
         }
       ],
