@@ -16,12 +16,53 @@ class _ProfilePageState extends State<ProfilePage> {
   bool isContainerOpen = false;
   bool isSwitched = false;
   Color _labelColor = Colors.black;
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: Builder(
       builder: (BuildContext context) {
         return Scaffold(
+          bottomNavigationBar: BottomAppBar(
+            child: Row(children: [
+              Spacer(),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.home,
+                    color: Colors.lightGreen,
+                  )),
+              Spacer(),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                    );
+                  },
+                  icon: Icon(Icons.view_timeline, color: Colors.lightGreen)),
+              Spacer(),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.add_box, color: Colors.lightGreen)),
+              Spacer(),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.menu_book_outlined,
+                    color: Colors.lightGreen,
+                  )),
+              Spacer(),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search_outlined,
+                  color: Colors.lightGreen,
+                ),
+              ),
+              Spacer(),
+            ]),
+          ),
           body: SingleChildScrollView(
             child: Center(
               child: Column(
@@ -33,10 +74,64 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: const EdgeInsets.only(
                             right: 30.0, top: 30, left: 20.0),
                         child: ClipOval(
-                          child: Image.asset(
-                            "images/kedi.jpg",
-                            width: 79,
-                            height: 79,
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                radius: 35,
+                                backgroundColor: Colors.lightGreen,
+                              ),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                            ),
+                                            contentPadding:
+                                                EdgeInsets.all(20.0),
+                                            content: Container(
+                                              width: 280,
+                                              height: 280,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 100,
+                                                    backgroundColor:
+                                                        Colors.lightGreen,
+                                                    child: Icon(
+                                                      Icons.camera_alt,
+                                                      size: 80,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 35),
+                                                  Text(
+                                                    "Yeni Profil Resmi Ekle",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Raleway',
+                                                      fontSize: 16,
+                                                      color: Colors.lightGreen,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -48,7 +143,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 28.0),
+                                  padding: const EdgeInsets.only(
+                                      top: 28.0, right: 20),
                                   child: Text(
                                     'Kullanıcı Adı',
                                     style: TextStyle(
@@ -74,16 +170,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Padding(
                                   padding:
                                       EdgeInsets.only(top: 40.0, left: 12.0),
-                                  child: Icon(
-                                    Icons.verified,
-                                    size: 22.0,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      // Tıklama işlemlerini burada gerçekleştirin
+                                      print("Icona tıklandı!");
+                                    },
+                                    child: Icon(
+                                      Icons.verified_outlined,
+                                      size: 22.0,
+                                    ),
                                   ),
                                 ),
 
                                 //profie setting page için
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 40.0, left: 5.0),
+                                      EdgeInsets.only(top: 40.0, left: 4.0),
                                   child: Container(
                                     width: 40.0,
                                     height: 40.0,
@@ -282,6 +384,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                           children: [
                                                             Expanded(
                                                               child: TextField(
+                                                                obscureText:
+                                                                    obscureText,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   labelText:
@@ -310,13 +414,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             ),
                                                             IconButton(
                                                               icon: Icon(
-                                                                Icons
-                                                                    .visibility_outlined,
+                                                                obscureText
+                                                                    ? Icons
+                                                                        .visibility_outlined
+                                                                    : Icons
+                                                                        .visibility_off_outlined, // Göz simgesi, şifre görünürken veya gizliyken değişsin
                                                                 color: Colors
                                                                     .black,
                                                                 size: 19,
                                                               ),
-                                                              onPressed: () {},
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  obscureText =
+                                                                      !obscureText; // Şifre görünürlüğünü değiştir
+                                                                });
+                                                              },
                                                             ),
                                                           ],
                                                         ),
