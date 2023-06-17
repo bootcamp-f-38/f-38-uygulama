@@ -1,3 +1,6 @@
+import 'package:f_38/pages/content_page.dart';
+import 'package:f_38/pages/home_page.dart';
+import 'package:f_38/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,6 +10,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool circular = false;
   bool _isPasswordVisible = false;
 
   @override
@@ -31,9 +37,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 30),
             TextField(
+              controller: _emailController,
               style: GoogleFonts.raleway(),
               decoration: InputDecoration(
-                hintText: 'Kullanıcı Adı',
+                hintText: 'E-posta',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: colorScheme.primary,
@@ -48,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 15),
             TextField(
+              controller: _passwordController,
               obscureText: !_isPasswordVisible,
               style: GoogleFonts.raleway(),
               decoration: InputDecoration(
@@ -98,7 +106,8 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(bottom: 8),
               child: ElevatedButton(
                 onPressed: () {
-                  // Giriş işlemleri
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => HomePage()));
                 },
                 child: Text(
                   'Giriş Yap',
@@ -140,7 +149,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Kayıt Ol
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => HomePage()));
                   },
                   child: Text(
                     'Kayıt Ol',

@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "735986632418",
-    "project_id": "f-38-bootcamp",
-    "storage_bucket": "f-38-bootcamp.appspot.com"
+    "project_number": "496478449602",
+    "project_id": "f38bootcamp",
+    "storage_bucket": "f38bootcamp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:735986632418:android:d22cb69091842d5195c0bb",
+        "mobilesdk_app_id": "1:496478449602:android:782115460d3d47f225305b",
         "android_client_info": {
           "package_name": "com.example.f_38"
         }
       },
       "oauth_client": [
         {
-          "client_id": "735986632418-tt76vb02h0ko3fs1lrcvki6uj7l7s11p.apps.googleusercontent.com",
+          "client_id": "496478449602-fjnqtmch7tjh5fe61lkvqsn1l4tf5mge.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCFvYAkq-h_H-8rs_G8AK-x6y23xKlJeWE"
+          "current_key": "AIzaSyA-4AR3D8HSHot5QDLOxZiWKc2P-iVNt50"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "735986632418-tt76vb02h0ko3fs1lrcvki6uj7l7s11p.apps.googleusercontent.com",
+              "client_id": "496478449602-fjnqtmch7tjh5fe61lkvqsn1l4tf5mge.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "496478449602-ojo4le7smtctg7tevjqfusoev0agbatb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.f38"
+              }
             }
           ]
         }
