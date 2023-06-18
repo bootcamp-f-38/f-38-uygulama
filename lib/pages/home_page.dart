@@ -1,9 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_38/constant/constants.dart';
+import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/event_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../widget/get_user_name_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,6 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   List<MultiplePhotos> users = [
     MultiplePhotos(
         username: 'Kullanıcı 1',
@@ -149,17 +156,23 @@ class _HomePageState extends State<HomePage> {
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 23.5),
                 constraints: BoxConstraints(
-                  maxWidth: 161,
+                  maxWidth: 250,
                 ),
-                child: Text(
-                  'Selam,\nÇağatay',
-                  style: GoogleFonts.raleway(
-                      textStyle: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.w400,
-                    height: 1.175,
-                    color: Color(0xff2e3648),
-                  )),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Selam,',
+                      style: GoogleFonts.raleway(
+                          textStyle: TextStyle(
+                        fontSize: 42,
+                        fontWeight: FontWeight.w400,
+                        height: 1.175,
+                        color: Color(0xff2e3648),
+                      )),
+                    ),
+                    GetUserName(user.uid)
+                  ],
                 ),
               ),
               SingleChildScrollView(
@@ -342,21 +355,27 @@ class _UserPhotosState extends State<UserPhotos> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CarouselSlider.builder(
-          options: CarouselOptions(
-            height: 300,
-            enableInfiniteScroll: false,
-            viewportFraction: 1.0,
-            onPageChanged: (index, reason) {
-              setState(() {
-                currentIndex = index;
-              });
+        InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (builder) => ContentPage()));
+          },
+          child: CarouselSlider.builder(
+            options: CarouselOptions(
+              height: 300,
+              enableInfiniteScroll: false,
+              viewportFraction: 1.0,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+            ),
+            itemCount: widget.user.photos.length,
+            itemBuilder: (context, index, _) {
+              return PhotoCard(photo: widget.user.photos[index]);
             },
           ),
-          itemCount: widget.user.photos.length,
-          itemBuilder: (context, index, _) {
-            return PhotoCard(photo: widget.user.photos[index]);
-          },
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
