@@ -36,10 +36,32 @@ class MyTextConstant {
     color: Color(0xffffffff),
   );
 
+  static const TextStyle robotoSlabTextStyle = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+    height: 1.175,
+    letterSpacing: 0.4,
+    color: Color(0xff2e3648),
+  );
+
+  static const TextStyle robotoSlabTextStyleCaption = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    height: 1.175,
+    letterSpacing: 0.4,
+    color: Color(0xff2e3648),
+  );
+
   static final TextStyle myCustomTextStyle = GoogleFonts.raleway(
     textStyle: ralewayTextStyle,
   );
   static final TextStyle myCustomTextStyleWhite = GoogleFonts.raleway(
     textStyle: ralewayTextStyleWhite,
+  );
+  static final TextStyle userNameTextStyle = GoogleFonts.robotoSlab(
+    textStyle: robotoSlabTextStyle,
+  );
+  static final TextStyle captionTextStyle = GoogleFonts.robotoSlab(
+    textStyle: robotoSlabTextStyleCaption,
   );
 }

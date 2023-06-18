@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../constant/constants.dart';
+
 class Comment {
   String username;
   String comment;
+  String userImageURL; // New property for user image URL
 
-  Comment(this.username, this.comment);
+  Comment(this.username, this.comment, this.userImageURL);
 }
 
 class ContentPage extends StatefulWidget {
@@ -25,9 +28,12 @@ class _ContentPageState extends State<ContentPage> {
   ];
 
   List<Comment> comments = [
-    Comment("KaD", "Deneme Yorumu"),
-    Comment("Çağatay", "Deneme Yorumu"),
-    Comment("Çağatay", "Deneme Yorumu"),
+    Comment("Kullanıcı", "Yorum",
+        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif'),
+    Comment("Çağatay", "Çok Güzel",
+        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif'),
+    Comment("Çağatay", "Deneme Yorumu",
+        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif'),
   ];
 
   void changeImage(int index) {
@@ -40,14 +46,14 @@ class _ContentPageState extends State<ContentPage> {
 
   void addComment(String username, String comment) {
     setState(() {
-      comments.add(Comment(username, comment));
+      comments.add(Comment(username, comment, selectedImage));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    String username = 'bERRE';
-    String comment = 'Berre Yorum';
+    String username = 'KullanıcıAdı';
+    String comment = 'Yorum';
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -196,13 +202,7 @@ class _ContentPageState extends State<ContentPage> {
               padding: EdgeInsets.fromLTRB(24, 8, 24, 8),
               child: Text(
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet odio cursus, sodales augue quis, semper massa. Duis ut velit finibus, porttitor leo non, pretium tellus. Proin eget pharetra nisi, ac ullamcorper ex. Ut mattis erat ut magna varius, ut auctor felis molestie. Mauris eget sem egestas, accumsan diam a, tincidunt leo. Phasellus suscipit, metus sollicitudin ornare finibus, lectus nibh euismod risus, eu tempus augue turpis ut mauris. Fusce rutrum tempor augue, sed volutpat libero bibendum eu. Cras volutpat ornare vehicula. Quisque ut libero neque. Etiam blandit risus a massa bibendum, at tincidunt lectus lobortis.',
-                style: GoogleFonts.robotoSlab(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  height: 1.3175,
-                  letterSpacing: 0.04,
-                  color: Color(0xff2e3648),
-                ),
+                style: MyTextConstant.captionTextStyle,
               ),
             ),
             Column(
@@ -211,22 +211,43 @@ class _ContentPageState extends State<ContentPage> {
                   margin: EdgeInsets.symmetric(horizontal: 12),
                   height: 200,
                   child: ListView.builder(
+                    padding: EdgeInsets.zero,
                     itemCount: comments.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Text(comments[index].username),
-                        subtitle: Text(comments[index].comment),
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 1),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(comments[index].userImageURL),
+                          ),
+                          title: Text(
+                            comments[index].username,
+                            style: MyTextConstant.userNameTextStyle,
+                          ),
+                          subtitle: Text(
+                            comments[index].comment,
+                            style: MyTextConstant.myCustomTextStyle,
+                          ),
+                        ),
                       );
                     },
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
+                Container(
+                  padding: EdgeInsets.only(top: 8),
+                  margin: EdgeInsetsDirectional.symmetric(horizontal: 24),
                   child: Column(
                     children: [
                       TextField(
                         decoration: InputDecoration(
-                          labelText: 'Comment',
+                          hintText: "Yorum Yaz",
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: ColorConstants.AppColor,
+                            ),
+                          ),
                         ),
                         onChanged: (value) {
                           setState(() {
