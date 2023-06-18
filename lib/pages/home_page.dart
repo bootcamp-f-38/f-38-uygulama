@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../constant/routes.dart';
 import '../widget/get_user_name_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -145,10 +146,15 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Container(child: Icon(Icons.notifications_none)),
                     Container(
-                        child: CircleAvatar(
-                      backgroundColor: Colors.blueAccent,
-                      child: Text("C"),
-                      radius: 30,
+                        child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, profileRoute);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                        child: Text("B"),
+                        radius: 30,
+                      ),
                     )),
                   ],
                 ),
