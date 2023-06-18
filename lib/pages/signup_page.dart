@@ -19,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
   Future signUp() async {
     setState(() {
       circular = true;
@@ -28,7 +29,19 @@ class _SignUpPageState extends State<SignUpPage> {
           .createUserWithEmailAndPassword(
               email: _emailController.text.trim(),
               password: _passwordController.text.trim());
+      name:
+      _nameController.text.trim();
+      username:
+      _usernameController.text.trim();
       print(userCredential.user!.email);
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'name': _nameController.text.trim(),
+        'surname': _surnameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'username': _usernameController.text.trim(),
+        'password': _passwordController.text.trim(),
+      });
       setState(() {
         circular = false;
       });
@@ -43,18 +56,6 @@ class _SignUpPageState extends State<SignUpPage> {
         circular = false;
       });
     }
-    addUserDetails(_nameController.text.trim(), _usernameController.text.trim(),
-        _emailController.text.trim(), _passwordController.text.trim());
-  }
-
-  Future addUserDetails(
-      String name, String username, String email, String password) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'name': name,
-      'username': username,
-      'email': email,
-      'password': password,
-    });
   }
 
   @override
@@ -82,7 +83,20 @@ class _SignUpPageState extends State<SignUpPage> {
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    hintText: 'Ad Soyad',
+                    hintText: 'Ad',
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextField(
+                  controller: _surnameController,
+                  decoration: InputDecoration(
+                    hintText: 'Soyad',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
