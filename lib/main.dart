@@ -24,6 +24,7 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "f_38 uygulama",
       routes: {
         homeRoute: (context) => HomePage(),

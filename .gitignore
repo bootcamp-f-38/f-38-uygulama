@@ -45,3 +45,4 @@ app.*.map.json
 # Firebase configuration file
 google-services.json
 GoogleService-Info.plist
+

@@ -1,3 +1,4 @@
+import 'package:f_38/pages/event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -56,6 +57,53 @@ class _ContentPageState extends State<ContentPage> {
     String comment = 'Yorum';
 
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: Row(children: [
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.home,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EventAnnouncementPage()),
+                );
+              },
+              icon: Icon(
+                Icons.view_timeline,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.add_box,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.menu_book_outlined,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.search_outlined,
+              color: ColorConstants.AppColor,
+            ),
+          ),
+          Spacer(),
+        ]),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -263,6 +311,7 @@ class _ContentPageState extends State<ContentPage> {
             Container(
               margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
                     icon: Icon(Icons.recommend),
