@@ -32,6 +32,9 @@ Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 440 puan
 
 Daily Scrum: Daily Scrum toplantılarının Discord kanalından yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği jpeg veya word olarak Readme'de tarafımızdan paylaşılmaktadır. 
 
+[dailyscrum.docx](https://github.com/bootcamp-f-38/f-38-uygulama/files/11782422/dailyscrum.docx)
+
+
 Sprint board update: 
 Sprint board screenshotları:
 
