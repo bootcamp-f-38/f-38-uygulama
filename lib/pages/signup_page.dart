@@ -16,8 +16,10 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   bool circular = false;
   final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
   Future signUp() async {
     setState(() {
       circular = true;
@@ -27,7 +29,19 @@ class _SignUpPageState extends State<SignUpPage> {
           .createUserWithEmailAndPassword(
               email: _emailController.text.trim(),
               password: _passwordController.text.trim());
+      name:
+      _nameController.text.trim();
+      username:
+      _usernameController.text.trim();
       print(userCredential.user!.email);
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'name': _nameController.text.trim(),
+        'surname': _surnameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'username': _usernameController.text.trim(),
+        'password': _passwordController.text.trim(),
+      });
       setState(() {
         circular = false;
       });
@@ -42,16 +56,6 @@ class _SignUpPageState extends State<SignUpPage> {
         circular = false;
       });
     }
-    addUserDetails(_nameController.text.trim(), _emailController.text.trim(),
-        _passwordController.text.trim());
-  }
-
-  Future addUserDetails(String name, String email, String password) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'name': name,
-      'email': email,
-      'password': password,
-    });
   }
 
   @override
@@ -79,7 +83,33 @@ class _SignUpPageState extends State<SignUpPage> {
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    hintText: 'Ad Soyad',
+                    hintText: 'Ad',
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextField(
+                  controller: _surnameController,
+                  decoration: InputDecoration(
+                    hintText: 'Soyad',
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    hintText: 'Kullanıcı adı',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -117,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: signUp,
                   child: Text(
                     'Üye Ol',
                     style: TextStyle(color: Colors.white),
@@ -142,10 +172,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (builder) => LoginPage()));
+                          Navigator.pushNamed(context, loginRoute);
                         },
                         child: Text(
                           'Giriş Yap',
