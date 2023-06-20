@@ -52,3 +52,6 @@ Sprint Review katılımcıları: Berre Nur Çelik, Musa Berk Büyükmumcu, Çağ
 
 Sprint Retrospective:
 Takım içindeki iletişimin aynı şekilde devam etmesi, yeni görevlerle aynı düzen ile ilerleme kararı alınmıştır.
+
+Sprint Notları:
+Bir sonraki sprint için düzeni oluşturduk, eksik olduğumuz konuları belirleyip bu konulara ağırlık verme kararı aldık. Firebase bağlantılarını düzenli bir şekilde kurmaya odaklanma kararı verdik.
