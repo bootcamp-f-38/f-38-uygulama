@@ -27,6 +27,12 @@ class MyTextConstant {
     letterSpacing: 0.0210000008,
     color: Color(0xff2e3648),
   );
+  static const TextStyle ralewayTextStyleCaption = TextStyle(
+    fontSize: 42,
+    fontWeight: FontWeight.w400,
+    height: 1.175,
+    color: Color(0xff2e3648),
+  );
 
   static const TextStyle ralewayTextStyleWhite = TextStyle(
     fontSize: 14,
@@ -54,6 +60,9 @@ class MyTextConstant {
 
   static final TextStyle myCustomTextStyle = GoogleFonts.raleway(
     textStyle: ralewayTextStyle,
+  );
+  static final TextStyle myCustomTextStyleCaption = GoogleFonts.raleway(
+    textStyle: ralewayTextStyleCaption,
   );
   static final TextStyle myCustomTextStyleWhite = GoogleFonts.raleway(
     textStyle: ralewayTextStyleWhite,

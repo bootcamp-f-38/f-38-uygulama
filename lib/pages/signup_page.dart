@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_38/constant/routes.dart';
 import 'package:f_38/pages/login_page.dart';
+import 'package:f_38/resources/storage_methods.dart';
+import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../resources/auth_methods.dart';
 import 'home_page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -14,48 +18,60 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  bool circular = false;
+  bool _circular = false;
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
   final _surnameController = TextEditingController();
+  final _bioController = TextEditingController();
+  Uint8List? _image;
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _usernameController.dispose();
+  }
+
   Future signUp() async {
     setState(() {
-      circular = true;
+      _circular = true;
     });
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim());
-      name:
-      _nameController.text.trim();
-      username:
-      _usernameController.text.trim();
-      print(userCredential.user!.email);
-      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
-        'name': _nameController.text.trim(),
-        'surname': _surnameController.text.trim(),
-        'email': _emailController.text.trim(),
-        'username': _usernameController.text.trim(),
-        'password': _passwordController.text.trim(),
-      });
+    String res = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        bio: _bioController.text,
+        file: _image!);
+    if (res == "success") {
       setState(() {
-        circular = false;
+        _circular = false;
       });
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (builder) => HomePage()),
-          (route) => false);
-    } catch (e) {
-      final snackBar = SnackBar(content: Text(e.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+      if (context.mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (builder) => HomePage()),
+            (route) => false);
+      }
+    } else {
       setState(() {
-        circular = false;
+        _circular = false;
       });
+
+      if (context.mounted) {
+        showSnackBar(res, context);
+      }
     }
+  }
+
+  selectImage() async {
+    Uint8List? im = await pickImage(ImageSource.gallery);
+
+    setState(() {
+      _image = im;
+    });
   }
 
   @override
@@ -78,6 +94,27 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: 100,
                   height: 100,
                   color: Colors.red,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  onTap: selectImage,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _image != null
+                          ? CircleAvatar(
+                              radius: 25,
+                              backgroundImage: MemoryImage(_image!),
+                            )
+                          : const CircleAvatar(
+                              radius: 25,
+                              backgroundImage:
+                                  AssetImage('assets/images/default_user.png'),
+                            ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 15),
                 TextField(
@@ -148,10 +185,15 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: signUp,
-                  child: Text(
-                    'Üye Ol',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: _circular
+                      ? Center(
+                          child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ))
+                      : Text(
+                          'Üye Ol',
+                          style: TextStyle(color: Colors.white),
+                        ),
                   style: ButtonStyle(
                     minimumSize:
                         MaterialStateProperty.all(Size(double.infinity, 48)),
