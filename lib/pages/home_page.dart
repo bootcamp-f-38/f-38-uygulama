@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/routes.dart';
-import '../widget/get_user_name_widget.dart';
+import '../resources/auth_methods.dart';
+import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -83,6 +84,23 @@ class _HomePageState extends State<HomePage> {
         ],
         description: "İnanılmaz bir an!"),
   ];
+  String _username = "";
+  @override
+  void initState() {
+    getUserName();
+    super.initState();
+  }
+
+  void getUserName() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    setState(() {
+      _username = (snap.data() as Map<String, dynamic>)['username'];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +163,24 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(child: Icon(Icons.notifications_none)),
+                    Container(
+                        child: Row(
+                      children: [
+                        Icon(Icons.notifications_none),
+                        IconButton(
+                            onPressed: () async {
+                              await AuthMethods().signOut();
+                              if (context.mounted) {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginPage(),
+                                  ),
+                                );
+                              }
+                            },
+                            icon: Icon(Icons.logout))
+                      ],
+                    )),
                     Container(
                         child: InkWell(
                       onTap: () {
@@ -170,15 +205,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       'Selam,',
-                      style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
-                        fontSize: 42,
-                        fontWeight: FontWeight.w400,
-                        height: 1.175,
-                        color: Color(0xff2e3648),
-                      )),
+                      style: MyTextConstant.myCustomTextStyleCaption,
                     ),
-                    GetUserName(user.uid)
+                    Text(
+                      '$_username',
+                      style: MyTextConstant.myCustomTextStyleCaption,
+                    )
                   ],
                 ),
               ),

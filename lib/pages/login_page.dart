@@ -2,9 +2,12 @@ import 'package:f_38/constant/routes.dart';
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/signup_page.dart';
+import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../resources/auth_methods.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,33 +17,41 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool circular = false;
+  bool _circular = false;
   bool _isPasswordVisible = false;
 
-  Future signIn() async {
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  void loginUser() async {
     setState(() {
-      circular = true;
+      _circular = true;
     });
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim());
-      print(userCredential.user!.email);
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    if (res == 'success') {
+      if (context.mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (builder) => HomePage()),
+            (route) => false);
+
+        setState(() {
+          _circular = false;
+        });
+      }
+    } else {
       setState(() {
-        circular = false;
+        _circular = false;
       });
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (builder) => HomePage()),
-          (route) => false);
-    } catch (e) {
-      final snackBar = SnackBar(content: Text(e.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      setState(() {
-        circular = false;
-      });
-      print(e);
+
+      if (context.mounted) {
+        showSnackBar(res, context);
+      }
     }
   }
 
@@ -134,11 +145,16 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: ElevatedButton(
-                onPressed: signIn,
-                child: Text(
-                  'Giriş Yap',
-                  style: GoogleFonts.raleway(),
-                ),
+                onPressed: loginUser,
+                child: _circular
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ))
+                    : Text(
+                        'Giriş Yap',
+                        style: GoogleFonts.raleway(),
+                      ),
                 style: ButtonStyle(
                   minimumSize:
                       MaterialStateProperty.all(Size(double.infinity, 48)),
