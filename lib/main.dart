@@ -3,15 +3,19 @@ import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/profile_page.dart';
-import 'package:f_38/pages/login_page.dart';
-import 'package:f_38/pages/singup_page.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:f_38/pages/login_page.dart';
+import 'package:f_38/pages/signup_page.dart';
+
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(BasePage());
 }
 
@@ -21,16 +25,38 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "f_38 uygulama",
       routes: {
-        homeRoute: (context) => const HomePage(),
+        homeRoute: (context) => HomePage(),
         eventRoute: (context) => EventAnnouncementPage(),
         profileRoute: (context) => const ProfilePage(),
         contentRoute: (context) => const ContentPage(),
         loginRoute: (context) => LoginPage(),
         signupRoute: (context) => SignUpPage(),
       },
-      home: Yonlendirme(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return HomePage();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('${snapshot.error}'),
+              );
+            }
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return LoginPage();
+        },
+      ),
     );
   }
 }

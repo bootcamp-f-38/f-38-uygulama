@@ -1,5 +1,16 @@
+import 'package:f_38/pages/event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../constant/constants.dart';
+
+class Comment {
+  String username;
+  String comment;
+  String userImageURL; // New property for user image URL
+
+  Comment(this.username, this.comment, this.userImageURL);
+}
 
 class ContentPage extends StatefulWidget {
   const ContentPage({Key? key}) : super(key: key);
@@ -17,6 +28,15 @@ class _ContentPageState extends State<ContentPage> {
     'assets/images/image4.png',
   ];
 
+  List<Comment> comments = [
+    Comment("Kullanıcı", "Yorum",
+        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif'),
+    Comment("Çağatay", "Çok Güzel",
+        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif'),
+    Comment("Çağatay", "Deneme Yorumu",
+        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif'),
+  ];
+
   void changeImage(int index) {
     setState(() {
       String temp = selectedImage;
@@ -25,9 +45,65 @@ class _ContentPageState extends State<ContentPage> {
     });
   }
 
+  void addComment(String username, String comment) {
+    setState(() {
+      comments.add(Comment(username, comment, selectedImage));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    String username = 'KullanıcıAdı';
+    String comment = 'Yorum';
+
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: Row(children: [
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.home,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EventAnnouncementPage()),
+                );
+              },
+              icon: Icon(
+                Icons.view_timeline,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.add_box,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.menu_book_outlined,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.search_outlined,
+              color: ColorConstants.AppColor,
+            ),
+          ),
+          Spacer(),
+        ]),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -174,25 +250,68 @@ class _ContentPageState extends State<ContentPage> {
               padding: EdgeInsets.fromLTRB(24, 8, 24, 8),
               child: Text(
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet odio cursus, sodales augue quis, semper massa. Duis ut velit finibus, porttitor leo non, pretium tellus. Proin eget pharetra nisi, ac ullamcorper ex. Ut mattis erat ut magna varius, ut auctor felis molestie. Mauris eget sem egestas, accumsan diam a, tincidunt leo. Phasellus suscipit, metus sollicitudin ornare finibus, lectus nibh euismod risus, eu tempus augue turpis ut mauris. Fusce rutrum tempor augue, sed volutpat libero bibendum eu. Cras volutpat ornare vehicula. Quisque ut libero neque. Etiam blandit risus a massa bibendum, at tincidunt lectus lobortis.',
-                style: GoogleFonts.robotoSlab(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  height: 1.3175,
-                  letterSpacing: 0.04,
-                  color: Color(0xff2e3648),
-                ),
+                style: MyTextConstant.captionTextStyle,
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-              child: Divider(
-                color: Color(0xFF2E3648),
-                thickness: 2,
-              ),
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 12),
+                  height: 200,
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: comments.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 1),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(comments[index].userImageURL),
+                          ),
+                          title: Text(
+                            comments[index].username,
+                            style: MyTextConstant.userNameTextStyle,
+                          ),
+                          subtitle: Text(
+                            comments[index].comment,
+                            style: MyTextConstant.myCustomTextStyle,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 8),
+                  margin: EdgeInsetsDirectional.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: "Yorum Yaz",
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: ColorConstants.AppColor,
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            comment = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Container(
               margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
                     icon: Icon(Icons.recommend),
@@ -206,39 +325,11 @@ class _ContentPageState extends State<ContentPage> {
                   SizedBox(width: 16),
                   IconButton(
                     icon: Icon(Icons.comment),
-                    onPressed: () {},
+                    onPressed: () {
+                      addComment(username, comment);
+                    },
                   ),
                 ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Yorum 1\nYorum 2\nYorum 3",
-                textAlign: TextAlign.start,
-                style: GoogleFonts.robotoSlab(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  height: 1.8,
-                  letterSpacing: 0.04,
-                  color: Color(0xff2e3648),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Yorum Yazın",
-                textAlign: TextAlign.start,
-                style: GoogleFonts.robotoSlab(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  height: 2,
-                  letterSpacing: 0.04,
-                  color: Color(0xff2e3648),
-                ),
               ),
             ),
           ],
