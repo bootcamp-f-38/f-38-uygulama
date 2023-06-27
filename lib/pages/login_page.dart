@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+<<<<<<< Updated upstream
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -16,8 +19,40 @@ class _LoginPageState extends State<LoginPage> {
       onSurface: Color(0xFF90BE6D),
       secondary: Color(0xFF90BE6D),
     );
+=======
 
-    return Scaffold(
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
+          primary: Color(0xFF90BE6D),
+          onSurface: Color(0xFF90BE6D),
+          secondary: Color(0xFF90BE6D),
+        );
+        final _emailcontroller=TextEditingController();
+        final _passwordcontroller=TextEditingController();
+>>>>>>> Stashed changes
+
+        Future SignIn() async{
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _emailcontroller.text.trim(), 
+            password: _passwordcontroller.text.trim());
+        }
+              @override
+              void dispose() {
+                _emailcontroller.dispose();
+                _passwordcontroller.dispose();
+                super.dispose();
+              }
+
+     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -31,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 30),
             TextField(
+              controller:_emailcontroller,
               style: GoogleFonts.raleway(),
               decoration: InputDecoration(
                 hintText: 'Kullanıcı Adı',
@@ -48,7 +84,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 15),
             TextField(
+<<<<<<< Updated upstream
               obscureText: !_isPasswordVisible,
+=======
+              controller: _passwordcontroller,
+              obscureText: true,
+>>>>>>> Stashed changes
               style: GoogleFonts.raleway(),
               decoration: InputDecoration(
                 hintText: 'Şifre',
@@ -94,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
+<<<<<<< Updated upstream
               child: ElevatedButton(
                 onPressed: () {
                   // Giriş işlemleri
@@ -105,6 +147,26 @@ class _LoginPageState extends State<LoginPage> {
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size(double.infinity, 48)),
                   backgroundColor: MaterialStateProperty.all(colorScheme.primary),
+=======
+              child:GestureDetector(
+                onTap: SignIn,
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primary,
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                  child: Center(
+                  child: Text(
+                    'Giriş Yap',
+                    style: GoogleFonts.raleway().copyWith(
+                      color: Colors.white
+                    ),
+                    
+                    
+                  ),
+                  ),
+>>>>>>> Stashed changes
                 ),
               ),
             ),
