@@ -35,9 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.4
-  firebase_auth: ^4.6.3
- 
-firebase_auth: ^4.6.3
+
 
 dev_dependencies:
   flutter_test:
@@ -78,4 +76,4 @@ flutter:
   # https://flutter.dev/assets-and-images/#resolution-aware
 
   # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages,
+  # https://flutter.dev/assets-and-images/#from-packages

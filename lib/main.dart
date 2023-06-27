@@ -4,8 +4,12 @@ import 'package:f_38/pages/event_page.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/main_page.dart';
 import 'package:f_38/pages/profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/pages/signup_page.dart';
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 <<<<<<< Updated upstream
@@ -23,6 +27,17 @@ void main() async {
 
 
  runApp(BasePage());
+=======
+
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(BasePage());
+>>>>>>> caeaa9338bfd8c312fa1fa8d474a853c504a3961
 }
 
 class BasePage extends StatelessWidget {
@@ -31,16 +46,42 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "f_38 uygulama",
       routes: {
-        homeRoute: (context) => const HomePage(),
+        homeRoute: (context) => HomePage(),
         eventRoute: (context) => EventAnnouncementPage(),
         profileRoute: (context) => const ProfilePage(),
         contentRoute: (context) => const ContentPage(),
         loginRoute: (context) => LoginPage(),
-        signupRoute: (context) =>  SignUpPage(),
+        signupRoute: (context) => SignUpPage(),
       },
+<<<<<<< HEAD
       home: MainPage(),
+=======
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return HomePage();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('${snapshot.error}'),
+              );
+            }
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return LoginPage();
+        },
+      ),
+>>>>>>> caeaa9338bfd8c312fa1fa8d474a853c504a3961
     );
   }
 }

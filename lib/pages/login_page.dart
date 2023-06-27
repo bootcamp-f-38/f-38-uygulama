@@ -1,25 +1,84 @@
+<<<<<<< HEAD
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 <<<<<<< Updated upstream
+=======
+import 'package:f_38/constant/routes.dart';
+import 'package:f_38/pages/content_page.dart';
+import 'package:f_38/pages/home_page.dart';
+import 'package:f_38/pages/signup_page.dart';
+import 'package:f_38/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../resources/auth_methods.dart';
+
+>>>>>>> caeaa9338bfd8c312fa1fa8d474a853c504a3961
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _circular = false;
   bool _isPasswordVisible = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  void loginUser() async {
+    setState(() {
+      _circular = true;
+    });
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    if (res == 'success') {
+      if (context.mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (builder) => HomePage()),
+            (route) => false);
+
+        setState(() {
+          _circular = false;
+        });
+      }
+    } else {
+      setState(() {
+        _circular = false;
+      });
+
+      if (context.mounted) {
+        showSnackBar(res, context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
+<<<<<<< HEAD
       primary: Color(0xFF90BE6D),
       onSurface: Color(0xFF90BE6D),
       secondary: Color(0xFF90BE6D),
     );
 =======
+=======
+          primary: Color(0xFF90BE6D),
+          onSurface: Color(0xFF90BE6D),
+          secondary: Color(0xFF90BE6D),
+        );
+>>>>>>> caeaa9338bfd8c312fa1fa8d474a853c504a3961
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -66,10 +125,14 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 30),
             TextField(
+<<<<<<< HEAD
               controller:_emailcontroller,
+=======
+              controller: _emailController,
+>>>>>>> caeaa9338bfd8c312fa1fa8d474a853c504a3961
               style: GoogleFonts.raleway(),
               decoration: InputDecoration(
-                hintText: 'Kullanıcı Adı',
+                hintText: 'E-posta',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: colorScheme.primary,
@@ -84,7 +147,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 15),
             TextField(
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+              controller: _passwordController,
+>>>>>>> caeaa9338bfd8c312fa1fa8d474a853c504a3961
               obscureText: !_isPasswordVisible,
 =======
               controller: _passwordcontroller,
@@ -105,8 +172,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                    color:colorScheme.primary,
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: colorScheme.primary,
                   ),
                   onPressed: () {
                     setState(() {
@@ -137,14 +206,18 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(bottom: 8),
 <<<<<<< Updated upstream
               child: ElevatedButton(
-                onPressed: () {
-                  // Giriş işlemleri
-                },
-                child: Text(
-                  'Giriş Yap',
-                  style: GoogleFonts.raleway(),
-                ),
+                onPressed: loginUser,
+                child: _circular
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ))
+                    : Text(
+                        'Giriş Yap',
+                        style: GoogleFonts.raleway(),
+                      ),
                 style: ButtonStyle(
+<<<<<<< HEAD
                   minimumSize: MaterialStateProperty.all(Size(double.infinity, 48)),
                   backgroundColor: MaterialStateProperty.all(colorScheme.primary),
 =======
@@ -167,6 +240,12 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   ),
 >>>>>>> Stashed changes
+=======
+                  minimumSize:
+                      MaterialStateProperty.all(Size(double.infinity, 48)),
+                  backgroundColor:
+                      MaterialStateProperty.all(colorScheme.primary),
+>>>>>>> caeaa9338bfd8c312fa1fa8d474a853c504a3961
                 ),
               ),
             ),
@@ -180,7 +259,8 @@ class _LoginPageState extends State<LoginPage> {
                 style: GoogleFonts.raleway(),
               ),
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(double.infinity, 48)),
+                minimumSize:
+                    MaterialStateProperty.all(Size(double.infinity, 48)),
                 foregroundColor: MaterialStateProperty.all(colorScheme.primary),
               ),
             ),
@@ -197,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Kayıt Ol
+                    Navigator.pushNamed(context, signupRoute);
                   },
                   child: Text(
                     'Kayıt Ol',
