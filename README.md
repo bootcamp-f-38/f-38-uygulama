@@ -62,9 +62,11 @@ Daily Scrum:Daily Scrum toplantısı örneği word olarak Readme'de tarafımızd
 
 Sprint board update: 
 Sprint board screenshotları:
+
 ![image](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/61eb066f-2a22-4234-b33b-e9dff93fda1a)
 
 Ürün Durumu: Ekran görüntüleri:
+
 ![Screenshot_1688240025](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/4dfdda28-c588-4aae-a0b2-022d4d5474ae)
 ![Screenshot_1688240369](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/d36ca6f0-7bc8-40b7-821e-de3b1516961f)
 
