@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {},
               icon: Icon(
                 Icons.home,
-                color: ColorConstants.AppColor,
+                color: ColorConstants.GreenAppColor,
               )),
           Spacer(),
           IconButton(
@@ -125,28 +125,28 @@ class _HomePageState extends State<HomePage> {
               },
               icon: Icon(
                 Icons.view_timeline,
-                color: ColorConstants.AppColor,
+                color: ColorConstants.GreenAppColor,
               )),
           Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.add_box,
-                color: ColorConstants.AppColor,
+                color: ColorConstants.GreenAppColor,
               )),
           Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.menu_book_outlined,
-                color: ColorConstants.AppColor,
+                color: ColorConstants.GreenAppColor,
               )),
           Spacer(),
           IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.search_outlined,
-              color: ColorConstants.AppColor,
+              color: ColorConstants.GreenAppColor,
             ),
           ),
           Spacer(),
@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                         width: 131,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: ColorConstants.secondAppColor,
+                          color: ColorConstants.OrangeAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(
@@ -246,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                         width: 127,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: ColorConstants.secondAppColor,
+                          color: ColorConstants.OrangeAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                         width: 120,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: ColorConstants.secondAppColor,
+                          color: ColorConstants.OrangeAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(

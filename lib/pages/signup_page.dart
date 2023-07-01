@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_38/constant/constants.dart';
 import 'package:f_38/constant/routes.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/resources/storage_methods.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../resources/auth_methods.dart';
 import 'home_page.dart';
 
@@ -76,11 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
-          primary: Color(0xFF90BE6D),
-          onSurface: Color(0xff2E3648),
-          secondary: Color(0xFF90BE6D),
-        );
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -124,7 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: colorScheme.primary,
+                        color: ColorConstants.GreenAppColor,
                       ),
                     ),
                   ),
@@ -137,7 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: colorScheme.primary,
+                        color: ColorConstants.GreenAppColor,
                       ),
                     ),
                   ),
@@ -150,7 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: colorScheme.primary,
+                        color: ColorConstants.GreenAppColor,
                       ),
                     ),
                   ),
@@ -163,7 +159,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: colorScheme.primary,
+                        color: ColorConstants.GreenAppColor,
                       ),
                     ),
                   ),
@@ -177,7 +173,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: colorScheme.primary,
+                        color: ColorConstants.GreenAppColor,
                       ),
                     ),
                   ),
@@ -198,7 +194,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     minimumSize:
                         MaterialStateProperty.all(Size(double.infinity, 48)),
                     backgroundColor:
-                        MaterialStateProperty.all(colorScheme.primary),
+                        MaterialStateProperty.all(ColorConstants.GreenAppColor),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -208,7 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       "Zaten hesabın var mı ?",
                       style: TextStyle(
-                        color: colorScheme.onSurface,
+                        color: ColorConstants.BlackAppColor,
                         fontFamily: GoogleFonts.raleway().fontFamily,
                       ),
                     ),
@@ -219,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Text(
                           'Giriş Yap',
                           style: TextStyle(
-                            color: colorScheme.primary,
+                            color: ColorConstants.GreenAppColor,
                             fontFamily: GoogleFonts.raleway().fontFamily,
                           ),
                         ))

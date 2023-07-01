@@ -1,3 +1,4 @@
+import 'package:f_38/constant/constants.dart';
 import 'package:f_38/constant/routes.dart';
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/home_page.dart';
@@ -57,12 +58,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
-          primary: Color(0xFF90BE6D),
-          onSurface: Color(0xFF90BE6D),
-          secondary: Color(0xFF90BE6D),
-        );
-
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
@@ -83,12 +78,12 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'E-posta',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: colorScheme.primary,
+                    color:  ColorConstants.GreenAppColor,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: colorScheme.secondary,
+                    color: ColorConstants.GreenAppColor,
                   ),
                 ),
               ),
@@ -102,12 +97,12 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'Şifre',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: colorScheme.primary,
+                    color: ColorConstants.GreenAppColor
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: colorScheme.secondary,
+                    color:  ColorConstants.GreenAppColor
                   ),
                 ),
                 suffixIcon: IconButton(
@@ -115,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                     _isPasswordVisible
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: colorScheme.primary,
+                    color:  ColorConstants.GreenAppColor
                   ),
                   onPressed: () {
                     setState(() {
@@ -134,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                     'Şifremi Unuttum',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: colorScheme.primary,
+                      color: ColorConstants.GreenAppColor,
                       fontFamily: GoogleFonts.raleway().fontFamily,
                     ),
                   ),
@@ -159,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                   minimumSize:
                       MaterialStateProperty.all(Size(double.infinity, 48)),
                   backgroundColor:
-                      MaterialStateProperty.all(colorScheme.primary),
+                      MaterialStateProperty.all(ColorConstants.GreenAppColor),
                 ),
               ),
             ),
@@ -175,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ButtonStyle(
                 minimumSize:
                     MaterialStateProperty.all(Size(double.infinity, 48)),
-                foregroundColor: MaterialStateProperty.all(colorScheme.primary),
+                foregroundColor: MaterialStateProperty.all(ColorConstants.GreenAppColor),
               ),
             ),
             SizedBox(height: 15),
@@ -196,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'Kayıt Ol',
                     style: TextStyle(
-                      color: colorScheme.primary,
+                      color:ColorConstants.GreenAppColor,
                       fontFamily: GoogleFonts.raleway().fontFamily,
                     ),
                   ),
