@@ -57,6 +57,7 @@ Sprint Notları:
 Bir sonraki sprint için düzeni oluşturduk, eksik olduğumuz konuları belirleyip bu konulara ağırlık verme kararı aldık. Firebase bağlantılarını düzenli bir şekilde kurmaya odaklanma kararı verdik.
 # Sprint 2
 Sprint içinde tamamlanması tahmin edilen puan: 170 Puan
+
 Daily Scrum:Daily Scrum toplantısı örneği word olarak Readme'de tarafımızdan paylaşılmaktadır. 
 [dailyscrum-2.docx](https://github.com/bootcamp-f-38/f-38-uygulama/files/11927024/dailyscrum-2.docx)
 
