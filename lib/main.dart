@@ -1,118 +1,60 @@
-import 'package:f_38/constant/routes.dart';
-import 'package:f_38/pages/content_page.dart';
-import 'package:f_38/pages/event_page.dart';
-import 'package:f_38/pages/home_page.dart';
-import 'package:f_38/pages/profile_page.dart';
+import 'package:f_38/router.dart';
+import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:f_38/pages/login_page.dart';
-import 'package:f_38/pages/signup_page.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
+import 'controller/auth_controller.dart';
 import 'firebase_options.dart';
+import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(BasePage());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class BasePage extends StatelessWidget {
-  const BasePage({Key? key});
-
+class MyApp extends ConsumerStatefulWidget {
+  const MyApp({Key? key});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "f_38 uygulama",
-      routes: {
-        homeRoute: (context) => HomePage(),
-        eventRoute: (context) => EventAnnouncementPage(),
-        profileRoute: (context) => const ProfilePage(),
-        contentRoute: (context) => const ContentPage(),
-        loginRoute: (context) => LoginPage(),
-        signupRoute: (context) => SignUpPage(),
-      },
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            if (snapshot.hasData) {
-              return HomePage();
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('${snapshot.error}'),
-              );
-            }
-          }
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+}
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+class _MyAppState extends ConsumerState<MyApp> {
+  UserModel? userModel;
 
-          return LoginPage();
-        },
-      ),
-    );
+  void getData(WidgetRef ref, User data) async {
+    userModel = await ref
+        .watch(authControllerProvider.notifier)
+        .getUserData(data.uid)
+        .first;
+    ref.read(userProvider.notifier).update((state) => userModel);
+    setState(() {});
   }
-}
-
-class Yonlendirme extends StatelessWidget {
-  const Yonlendirme({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Ana Sayfa'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, eventRoute);
+    return ref.watch(authStateChangeProvider).when(
+          data: (data) => MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerDelegate: RoutemasterDelegate(
+              routesBuilder: (context) {
+                if (data != null) {
+                  getData(ref, data);
+                  if (userModel != null) {
+                    return loggedInRoute;
+                  }
+                }
+                return loggedOutRoute;
               },
-              child: Text('Etkinlikler'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, profileRoute);
-              },
-              child: Text('Profil'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, contentRoute);
-              },
-              child: Text('İçerik'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, homeRoute);
-              },
-              child: Text('Home'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, loginRoute);
-              },
-              child: Text('Login'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, signupRoute);
-              },
-              child: Text('Sign Up'),
-            ),
-          ],
-        ),
-      ),
-    );
+            routeInformationParser: const RoutemasterParser(),
+          ),
+          error: (error, stackTrace) => ErrorText(error: error.toString()),
+          loading: () => const Loader(),
+        );
   }
 }
