@@ -16,69 +16,83 @@ class AddPostPage extends ConsumerWidget {
     double iconSize = 60;
 
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      appBar: AppBar(
+        backgroundColor: ColorConstants.AppColor,
+        title: Text(
+          "Gönderi oluştur",
+          style: MyTextConstant.myCustomTextStyleWhite,
+        ),
+      ),
+      body: Column(
         children: [
-          GestureDetector(
-            onTap: () => navigateToType(context, 'fotograf'),
-            child: SizedBox(
-              height: cardHeightWidth,
-              width: cardHeightWidth,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                color: ColorConstants.AppColor,
-                elevation: 16,
-                child: Center(
-                  child: Icon(
-                    Icons.image_outlined,
-                    size: iconSize,
-                  ),
-                ),
-              ),
-            ),
+          SizedBox(
+            height: 20,
           ),
-          GestureDetector(
-            onTap: () => navigateToType(context, 'yazi'),
-            child: SizedBox(
-              height: cardHeightWidth,
-              width: cardHeightWidth,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                color: ColorConstants.AppColor,
-                elevation: 16,
-                child: Center(
-                  child: Icon(
-                    Icons.font_download_outlined,
-                    size: iconSize,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () => navigateToType(context, 'fotograf'),
+                child: SizedBox(
+                  height: cardHeightWidth,
+                  width: cardHeightWidth,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: ColorConstants.AppColor,
+                    elevation: 16,
+                    child: Center(
+                      child: Icon(
+                        Icons.image_outlined,
+                        size: iconSize,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => navigateToType(context, 'link'),
-            child: SizedBox(
-              height: cardHeightWidth,
-              width: cardHeightWidth,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                color: ColorConstants.AppColor,
-                elevation: 16,
-                child: Center(
-                  child: Icon(
-                    Icons.link_outlined,
-                    size: iconSize,
+              GestureDetector(
+                onTap: () => navigateToType(context, 'yazi'),
+                child: SizedBox(
+                  height: cardHeightWidth,
+                  width: cardHeightWidth,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: ColorConstants.AppColor,
+                    elevation: 16,
+                    child: Center(
+                      child: Icon(
+                        Icons.font_download_outlined,
+                        size: iconSize,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+              GestureDetector(
+                onTap: () => navigateToType(context, 'link'),
+                child: SizedBox(
+                  height: cardHeightWidth,
+                  width: cardHeightWidth,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: ColorConstants.AppColor,
+                    elevation: 16,
+                    child: Center(
+                      child: Icon(
+                        Icons.link_outlined,
+                        size: iconSize,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
