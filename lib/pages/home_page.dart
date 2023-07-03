@@ -2,11 +2,14 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_38/community/community_list.dart';
+import 'package:f_38/community/search_community.dart';
 import 'package:f_38/constant/constants.dart';
-import 'package:f_38/pages/add_post_page.dart';
+
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/den.dart';
 import 'package:f_38/pages/event_page.dart';
+import 'package:f_38/pages/profile_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +26,13 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = FirebaseAuth.instance.currentUser!;
     final _user = ref.watch(userProvider);
+    void displayDrawer(BuildContext context) {
+      Scaffold.of(context).openDrawer();
+    }
+
+    void displayEndDrawer(BuildContext context) {
+      Scaffold.of(context).openEndDrawer();
+    }
 
     List<MultiplePhotos> users = [
       MultiplePhotos(
@@ -119,10 +129,7 @@ class HomePage extends ConsumerWidget {
           Spacer(),
           IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddPostPage()),
-                );
+                Routemaster.of(context).push('/add-post');
               },
               icon: Icon(
                 Icons.add_box,
@@ -146,6 +153,7 @@ class HomePage extends ConsumerWidget {
           Spacer(),
         ]),
       ),
+      endDrawer: const ProfileDrawer(),
       body: Padding(
         padding: EdgeInsets.fromLTRB(24, 24, 24, 11.5),
         child: SingleChildScrollView(
@@ -160,27 +168,42 @@ class HomePage extends ConsumerWidget {
                     Container(
                         child: Row(
                       children: [
-                        Icon(Icons.notifications_none),
                         IconButton(
-                            onPressed: () async {
-                              await AuthMethods().signOut();
-                              if (context.mounted) {
-                                Routemaster.of(context).push('/signup');
-                              }
+                          onPressed: () {
+                            Routemaster.of(context)
+                                .push('/createcommunity-list');
+                          },
+                          icon: Icon(Icons.menu),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              showSearch(
+                                  context: context,
+                                  delegate: SearchCommunityDelegate(ref: ref));
                             },
-                            icon: Icon(Icons.logout))
+                            icon: Icon(Icons.search)),
                       ],
                     )),
                     Container(
-                        child: InkWell(
-                      onTap: () {
-                        Routemaster.of(context).push('/profile');
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: Colors.blueAccent,
-                        child: Text("B"),
-                        radius: 30,
-                      ),
+                        child: Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.notifications_none)),
+                        Builder(builder: (context) {
+                          return InkWell(
+                            onTap: () => displayEndDrawer(context),
+                            child: CircleAvatar(
+                              backgroundColor: ColorConstants.AppColor,
+                              child: Text(
+                                "B",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              radius: 30,
+                            ),
+                          );
+                        }),
+                      ],
                     )),
                   ],
                 ),
@@ -214,7 +237,6 @@ class HomePage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        // frame15ouT (14:284)
                         width: 131,
                         height: double.infinity,
                         decoration: BoxDecoration(
@@ -232,7 +254,6 @@ class HomePage extends ConsumerWidget {
                         width: 16,
                       ),
                       Container(
-                        // frame16H3w (14:285)
                         width: 127,
                         height: double.infinity,
                         decoration: BoxDecoration(
@@ -250,7 +271,6 @@ class HomePage extends ConsumerWidget {
                         width: 16,
                       ),
                       Container(
-                        // frame17Zn9 (14:287)
                         width: 120,
                         height: double.infinity,
                         decoration: BoxDecoration(
