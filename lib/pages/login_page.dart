@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       if (context.mounted) {
-        showSnackBar(res, context);
+        showSnackBar2(res, context);
       }
     }
   }

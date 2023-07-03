@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,11 +13,11 @@ pickImage(ImageSource source) async {
   print("Fotoğraf seçilmedi");
 }
 
-showSnackBar(String content, BuildContext context) {
+showSnackBar2(String content, BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
 }
 
-void showSnackBar2(BuildContext context, String text) {
+void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(
@@ -50,4 +51,10 @@ class Loader extends StatelessWidget {
       child: CircularProgressIndicator(),
     );
   }
+}
+
+Future<FilePickerResult?> pickFile() async {
+  final image = await FilePicker.platform.pickFiles(type: FileType.image);
+
+  return image;
 }

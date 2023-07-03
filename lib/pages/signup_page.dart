@@ -6,12 +6,11 @@ import 'package:f_38/router.dart';
 import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+
 import 'package:routemaster/routemaster.dart';
 
 import '../controller/auth_controller.dart';
@@ -25,70 +24,24 @@ class SignUpPage extends ConsumerWidget {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
-  final _surnameController = TextEditingController();
   final _bioController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _usernameController.dispose();
+    _nameController.dispose();
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<void> signInWithEmail(BuildContext context, WidgetRef ref) async {
-      final String email = _emailController.text.trim();
-      final String username = _usernameController.text.trim();
-      final String password = _passwordController.text.trim();
-      final String name = _nameController.text;
-      final String surname = _surnameController.text;
-      final String bio = _bioController.text;
-      final authController = ref.watch(authControllerProvider.notifier);
-      final authRepository = ref.read(authRepositoryProvider);
-
-      final user = UserModel(
-          email: email,
-          bio: bio,
-          followers: [],
-          following: [],
-          uid: "",
-          name: name,
-          username: username);
-      authController.updateUser(user);
-
-      final Either<String, UserCredential> result =
-          await authRepository.signInWithEmail(email, password);
-
-      result.fold(
-        (String errorMessage) => showSnackBar2(context, errorMessage),
-        (UserCredential userCredential) async {
-          UserModel userModel = UserModel(
-            email: email,
-            username: "",
-            name: name,
-            followers: [],
-            following: [],
-            uid: userCredential.user!.uid,
-            bio: '',
-          );
-          authController.updateUser(userModel);
-          await authRepository.addUserDetails(userModel);
-
-          // Navigate to the desired page after successful sign up
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        },
-      );
-    }
-
     Future<void> signUpWithEmail(BuildContext context) async {
       final String email = _emailController.text.trim();
       final String username = _usernameController.text.trim();
       final String password = _passwordController.text.trim();
       final String name = _nameController.text.trim();
-      final String surname = _surnameController.text.trim();
+
       final String bio = _bioController.text.trim();
       final authController = ref.watch(authControllerProvider.notifier);
       final authRepository = ref.read(authRepositoryProvider);
@@ -108,12 +61,13 @@ class SignUpPage extends ConsumerWidget {
           await authRepository.signUpWithEmail(email, password, username, name);
 
       result.fold(
-        (String errorMessage) => showSnackBar2(context, errorMessage),
+        (String errorMessage) => showSnackBar(context, errorMessage),
         (UserModel userModel) async {
           authController.updateUser(userModel);
           await authRepository.addUserDetails(userModel);
-
-          Routemaster.of(context).push('/');
+          if (context.mounted) {
+            Routemaster.of(context).push('/');
+          }
         },
       );
     }
