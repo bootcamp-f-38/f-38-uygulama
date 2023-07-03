@@ -58,6 +58,8 @@ Bir sonraki sprint için düzeni oluşturduk, eksik olduğumuz konuları belirle
 # Sprint 2
 Sprint içinde tamamlanması tahmin edilen puan: 170 Puan
 
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 440 puanlık backlog bulunmaktadır. Projede ilerledikçe gerekli değişiklikler yapılıp yeni backloglar eklendi, bazıları çıkarıldı. 2. Sprintte hedeflenen puanlama tamamlanmıştır. Geri kalan backlogların son sprint içinde tamamlanması hedeflenmektedir.
+
 Daily Scrum:Daily Scrum toplantısı örneği word olarak Readme'de tarafımızdan paylaşılmaktadır. 
 [dailyscrum-2.docx](https://github.com/bootcamp-f-38/f-38-uygulama/files/11927024/dailyscrum-2.docx)
 
