@@ -1,13 +1,12 @@
-import 'package:f_38/constant/constants.dart';
-import 'package:f_38/constant/routes.dart';
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/signup_page.dart';
+import 'package:f_38/router.dart';
 import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:routemaster/routemaster.dart';
 import '../resources/auth_methods.dart';
 
 class LoginPage extends StatefulWidget {
@@ -36,10 +35,10 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
       if (context.mounted) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (builder) => HomePage()),
-            (route) => false);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
 
         setState(() {
           _circular = false;
@@ -158,21 +157,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            OutlinedButton.icon(
-              onPressed: () {
-                // Google ile Giriş
-              },
-              icon: Icon(Icons.login),
-              label: Text(
-                'Google ile Giriş Yap',
-                style: GoogleFonts.raleway(),
-              ),
-              style: ButtonStyle(
-                minimumSize:
-                    MaterialStateProperty.all(Size(double.infinity, 48)),
-                foregroundColor: MaterialStateProperty.all(ColorConstants.GreenAppColor),
-              ),
-            ),
             SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -186,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, signupRoute);
+                    Routemaster.of(context).push('/signup');
                   },
                   child: Text(
                     'Kayıt Ol',

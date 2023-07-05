@@ -4,40 +4,21 @@ import 'package:f_38/constant/constants.dart';
 import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+import '../controller/auth_controller.dart';
 
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
+final isContainerOpenProvider = StateProvider<bool>((ref) => false);
 
-class _ProfilePageState extends State<ProfilePage> {
-  String username = "";
-  @override
-  void initState() {
-    getUserName();
-    super.initState();
-  }
-
-  void getUserName() async {
-    DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-
-    setState(() {
-      username = (snap.data() as Map<String, dynamic>)['username'];
-    });
-  }
-
+class ProfilePage extends ConsumerWidget {
   Uint8List? _image;
   bool isContainerOpen = false;
   bool isSwitched = false;
   Color _labelColor = Colors.black;
   bool obscureText = true;
   final user = FirebaseAuth.instance.currentUser!;
+
   Widget buildSwitchContent() {
     return Expanded(
       child: Padding(
@@ -74,15 +55,10 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void selectImage() async {
-    Uint8List im = await pickImage(ImageSource.gallery);
-    setState(() {
-      _image = im;
-    });
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _user = ref.watch(userProvider);
+    bool isContainerOpen = ref.watch(isContainerOpenProvider);
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: Row(children: [
@@ -177,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     size: 80,
                                                     color: Colors.white,
                                                   ),
-                                                  onPressed: selectImage,
+                                                  onPressed: () {},
                                                 ),
                                               ),
                                               SizedBox(height: 35),
@@ -216,7 +192,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     const EdgeInsets.only(top: 40.0, right: 20),
                                 child: Row(
                                   children: [
-                                    Text('$username'),
+                                    Text(_user!.name),
                                   ],
                                 )),
                             Padding(
@@ -255,10 +231,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 height: 40.0,
                                 child: TextButton(
                                   onPressed: () {
-                                    setState(() {
-                                      isContainerOpen = !isContainerOpen;
-                                    });
-
+                                    ref
+                                        .read(isContainerOpenProvider.state)
+                                        .state = true;
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -318,14 +293,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                       .black),
                                                         ),
                                                       ),
-                                                      onTap: () {
-                                                        // TextField'a tıklandığında çalışacak kod bloğu
-                                                        setState(() {
-                                                          // State değişikliği olduğunu bildirir ve yeniden çizimi sağlar
-                                                          _labelColor =
-                                                              Colors.black;
-                                                        });
-                                                      },
+                                                      onTap: () {},
                                                     ),
                                                   ),
                                                   SizedBox(height: 8.0),
@@ -353,10 +321,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       ),
                                                       onTap: () {
                                                         // TextField'a tıklandığında çalışacak kod bloğu
-                                                        setState(() {
-                                                          _labelColor = Colors
-                                                              .black; // labelColor'ın değerini yeşil olarak güncelle
-                                                        });
                                                       },
                                                     ),
                                                   ),
@@ -385,10 +349,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       ),
                                                       onTap: () {
                                                         // TextField'a tıklandığında çalışacak kod bloğu
-                                                        setState(() {
-                                                          _labelColor =
-                                                              Colors.black;
-                                                        });
                                                       },
                                                     ),
                                                   ),
@@ -464,12 +424,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             color: Colors.black,
                                                             size: 19,
                                                           ),
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              obscureText =
-                                                                  !obscureText; // Şifre görünürlüğünü değiştir
-                                                            });
-                                                          },
+                                                          onPressed: () {},
                                                         ),
                                                       ],
                                                     ),
@@ -518,12 +473,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         SizedBox(width: 8.0),
                                                         Switch(
                                                           value: isSwitched,
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              isSwitched =
-                                                                  value;
-                                                            });
-                                                          },
+                                                          onChanged: (value) {},
                                                           activeColor:
                                                               Colors.white,
                                                           activeTrackColor:
@@ -601,7 +551,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Row(
                             children: [
                               Text(
-                                "@${username}",
+                                "@${_user.username}",
                                 style: MyTextConstant.ralewayTextStyle,
                               )
                             ],
@@ -611,7 +561,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: 8.0, left: 15, right: 15),
+                padding: EdgeInsets.only(top: 8.0, left: 20, right: 20),
                 child: Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula ultrices porta. '
                   'Phasellus cursus porta nulla, eget suscipit felis elementum aliquet.',
@@ -619,13 +569,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 18.0, left: 15, right: 15),
+                padding: EdgeInsets.only(top: 18.0, left: 20, right: 20),
                 child: Row(
                   children: [
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
@@ -662,7 +612,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
@@ -699,13 +649,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0, left: 15, right: 15),
+                padding: EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Row(
                   children: [
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
@@ -742,7 +692,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
@@ -779,13 +729,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 18.0, left: 15, right: 15),
+                padding: EdgeInsets.only(top: 18.0, left: 20, right: 20),
                 child: Row(
                   children: [
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
@@ -822,7 +772,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
@@ -859,13 +809,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 18.0, left: 15, right: 15),
+                padding: EdgeInsets.only(top: 18.0, left: 20, right: 20),
                 child: Row(
                   children: [
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
@@ -902,7 +852,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Column(
                       children: [
                         Container(
-                          width: 180,
+                          width: 150,
                           height: 130,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),

@@ -3,113 +3,102 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_38/constant/constants.dart';
+import 'package:f_38/pages/add_post_page.dart';
 import 'package:f_38/pages/content_page.dart';
+import 'package:f_38/pages/den.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:routemaster/routemaster.dart';
 
-import '../constant/routes.dart';
+import '../controller/auth_controller.dart';
 import '../resources/auth_methods.dart';
+import '../router.dart';
 import 'login_page.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = FirebaseAuth.instance.currentUser!;
+    final _user = ref.watch(userProvider);
 
-class _HomePageState extends State<HomePage> {
-  final user = FirebaseAuth.instance.currentUser!;
+    List<MultiplePhotos> users = [
+      MultiplePhotos(
+          username: 'Kullanıcı 1',
+          photos: [
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+          ],
+          description: "Çok güzel bir gün!"),
+      MultiplePhotos(
+          username: 'Kullanıcı 2',
+          photos: [
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+          ],
+          description: "İnanılmaz bir an!"),
+      MultiplePhotos(
+          username: 'Kullanıcı 3',
+          photos: [
+            Photo(
+              image: 'assets/images/image1.png',
+            ),
+          ],
+          description: "Güzel bir an!"),
+    ];
 
-  List<MultiplePhotos> users = [
-    MultiplePhotos(
-        username: 'Kullanıcı 1',
-        photos: [
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-        ],
-        description: "Çok güzel bir gün!"),
-    MultiplePhotos(
-        username: 'Kullanıcı 2',
-        photos: [
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-        ],
-        description: "İnanılmaz bir an!"),
-    MultiplePhotos(
-        username: 'Kullanıcı 3',
-        photos: [
-          Photo(
-            image: 'assets/images/image1.png',
-          ),
-        ],
-        description: "Güzel bir an!"),
-  ];
+    List<MultiplePhotos> usersSmallsize = [
+      MultiplePhotos(
+          username: 'Kullanıcı 1',
+          photos: [
+            Photo(
+              image: 'assets/images/image2.png',
+            ),
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+          ],
+          description: "Çok güzel bir gün!"),
+      MultiplePhotos(
+          username: 'Kullanıcı 2',
+          photos: [
+            Photo(
+              image: 'assets/images/image3.png',
+            ),
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+            Photo(
+              image: 'assets/images/image4.png',
+            ),
+          ],
+          description: "İnanılmaz bir an!"),
+    ];
 
-  List<MultiplePhotos> usersSmallsize = [
-    MultiplePhotos(
-        username: 'Kullanıcı 1',
-        photos: [
-          Photo(
-            image: 'assets/images/image2.png',
-          ),
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-        ],
-        description: "Çok güzel bir gün!"),
-    MultiplePhotos(
-        username: 'Kullanıcı 2',
-        photos: [
-          Photo(
-            image: 'assets/images/image3.png',
-          ),
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-          Photo(
-            image: 'assets/images/image4.png',
-          ),
-        ],
-        description: "İnanılmaz bir an!"),
-  ];
-  String _username = "";
-  @override
-  void initState() {
-    getUserName();
-    super.initState();
-  }
-
-  void getUserName() async {
-    DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-
-    setState(() {
-      _username = (snap.data() as Map<String, dynamic>)['username'];
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: Row(children: [
           Spacer(),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => den()),
+                );
+              },
               icon: Icon(
                 Icons.home,
                 color: ColorConstants.GreenAppColor,
@@ -129,7 +118,12 @@ class _HomePageState extends State<HomePage> {
               )),
           Spacer(),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddPostPage()),
+                );
+              },
               icon: Icon(
                 Icons.add_box,
                 color: ColorConstants.GreenAppColor,
@@ -171,11 +165,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () async {
                               await AuthMethods().signOut();
                               if (context.mounted) {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
-                                  ),
-                                );
+                                Routemaster.of(context).push('/signup');
                               }
                             },
                             icon: Icon(Icons.logout))
@@ -184,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                         child: InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, profileRoute);
+                        Routemaster.of(context).push('/profile');
                       },
                       child: CircleAvatar(
                         backgroundColor: Colors.blueAccent,
@@ -208,9 +198,9 @@ class _HomePageState extends State<HomePage> {
                       style: MyTextConstant.myCustomTextStyleCaption,
                     ),
                     Text(
-                      '$_username',
+                      _user?.name ?? "",
                       style: MyTextConstant.myCustomTextStyleCaption,
-                    )
+                    ),
                   ],
                 ),
               ),
