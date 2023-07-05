@@ -191,7 +191,7 @@ class ThemeTypography extends Typography {
         'Raleway',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 24.0,
+        fontSize: 18.0,
       );
   String get titleLargeFamily => 'Raleway';
   TextStyle get titleLarge => GoogleFonts.getFont(

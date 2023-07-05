@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:f_38/models/login_model.dart';
-export 'package:f_38/models/login_model.dart';
+import 'package:f_38/models/login_page_model.dart';
+export 'package:f_38/models/login_page_model.dart';
 
 class LoginPageWidget extends StatefulWidget {
   const LoginPageWidget({Key? key}) : super(key: key);
