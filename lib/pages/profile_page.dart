@@ -9,14 +9,69 @@ import 'package:image_picker/image_picker.dart';
 
 import '../controller/auth_controller.dart';
 
-final isContainerOpenProvider = StateProvider<bool>((ref) => false);
+//final isContainerOpenProvider = StateProvider<bool>((ref) => false);
+final passwordVisibleProvider = StateProvider<bool>((ref) => false);
+final isSwitchedProvider = StateProvider<bool>((ref) => false);
+final issSwitchedProvider = StateProvider<bool>((ref) => false);
+
+final _iconBoolProvider = StateProvider<bool>((ref) => false);
+
+
+class IsContainerOpenNotifier extends StateNotifier<bool> {
+  IsContainerOpenNotifier() : super(false);
+
+  void setIsContainerOpen(bool value) {
+    state = value;
+  }
+}
+
+final isContainerOpenProvider = StateNotifierProvider<IsContainerOpenNotifier, bool>((ref) {
+  return IsContainerOpenNotifier();
+});
+
+
+
+//AAA
+//BBB
+
+
+
+
 
 class ProfilePage extends ConsumerWidget {
+  
+  IconData _iconLight=Icons.wb_sunny;
+  IconData _iconDark=Icons.nights_stay;
+
+   ThemeData _lightTheme=ThemeData( );
+
+
+  
+
+  ThemeData _darkTheme=ThemeData(
+    primarySwatch: Colors.green,
+    brightness: Brightness.dark,
+    primaryColor: Colors.green.shade900,
+     scaffoldBackgroundColor: const Color.fromARGB(255, 83, 82, 82),
+    
+    
+  );
+
+  bool _iconBool=false;
+
+
+
+
+
   Uint8List? _image;
-  bool isContainerOpen = false;
+  //bool isContainerOpen = false;
+  //bool _passwordVisible = ref.watch(passwordVisibleProvider.state).state;
   bool isSwitched = false;
+  bool issSwitched = false;
+
+ 
   Color _labelColor = Colors.black;
-  bool obscureText = true;
+ 
   final user = FirebaseAuth.instance.currentUser!;
 
   Widget buildSwitchContent() {
@@ -43,7 +98,7 @@ class ProfilePage extends ConsumerWidget {
             ),
             Positioned(
               left: 270.0,
-              top: 130.0,
+              top: 120.0,
               child: Icon(
                 Icons.send,
                 color: ColorConstants.AppColor,
@@ -57,9 +112,25 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     final _user = ref.watch(userProvider);
-    bool isContainerOpen = ref.watch(isContainerOpenProvider);
+    final isContainerOpen = ref.watch(isContainerOpenProvider);
+    final passwordVisible = ref.watch(passwordVisibleProvider);
+    bool issSwitched = ref.watch(isSwitchedProvider);
+    bool isSwitched = ref.watch(isSwitchedProvider);
+    final _iconBool = ref.watch(_iconBoolProvider);
+
+  
+
+    ThemeData selectedTheme;
+   //selectedTheme = _iconBool == _iconLight ? _lightTheme : _darkTheme;
+    
+
+    
+    
+
     return Scaffold(
+      
       bottomNavigationBar: BottomAppBar(
         child: Row(children: [
           Spacer(),
@@ -102,7 +173,8 @@ class ProfilePage extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
+          
+        child: Column(
             children: <Widget>[
               Row(
                 children: [
@@ -147,15 +219,19 @@ class ProfilePage extends ConsumerWidget {
                                                 radius: 100,
                                                 backgroundColor:
                                                     ColorConstants.AppColor,
-                                                child: IconButton(
-                                                  icon: Icon(
-                                                    Icons.camera_alt,
-                                                    size: 80,
-                                                    color: Colors.white,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(right: 50,bottom: 40),
+                                                  child: IconButton(
+                                                    icon: Icon(
+                                                      Icons.camera_alt,
+                                                      size: 80,
+                                                      color: Colors.white,
+                                                    ),
+                                                    onPressed: () {},
                                                   ),
-                                                  onPressed: () {},
                                                 ),
                                               ),
+                                              
                                               SizedBox(height: 35),
                                               Text(
                                                 "Yeni Profil Resmi Ekle",
@@ -196,7 +272,7 @@ class ProfilePage extends ConsumerWidget {
                                   ],
                                 )),
                             Padding(
-                              padding: EdgeInsets.only(top: 40.0, left: 10.0),
+                              padding: EdgeInsets.only(top: 40.0, left: 85.0),
                               child: Icon(
                                 Icons.info_outline,
                                 size: 22.0,
@@ -231,9 +307,7 @@ class ProfilePage extends ConsumerWidget {
                                 height: 40.0,
                                 child: TextButton(
                                   onPressed: () {
-                                    ref
-                                        .read(isContainerOpenProvider.state)
-                                        .state = true;
+                                     ref.read(isContainerOpenProvider.notifier).setIsContainerOpen(true);
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -354,32 +428,37 @@ class ProfilePage extends ConsumerWidget {
                                                   ),
                                                   SizedBox(height: 8.0),
                                                   Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 14.0),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
                                                     child: Row(
                                                       children: [
                                                         Text(
                                                           "Şifre",
                                                           style: TextStyle(
-                                                            fontFamily:
-                                                                'Raleway',
+                                                            fontFamily: 'Raleway',
                                                             fontSize: 20,
                                                           ),
                                                         ),
                                                         SizedBox(width: 8.0),
-                                                        Switch(
-                                                          value: false,
-                                                          onChanged:
-                                                              (newValue) {},
-                                                          activeColor:
-                                                              Colors.white,
-                                                          activeTrackColor:
-                                                              Colors.green,
+                                                        Consumer(
+                                                          builder: (context, ref, _) {
+                                                            final issSwitched = ref.watch(issSwitchedProvider.state).state;
+                                                            return Switch(
+                                                              value: issSwitched,
+                                                              onChanged: (value) {
+                                                                ref.read(issSwitchedProvider.state).state = !issSwitched;
+                                                              },
+                                                              activeColor: Colors.white,
+                                                              activeTrackColor: Colors.green,
+                                                            );
+                                                          },
                                                         ),
+                                                        
+                                                        
                                                       ],
                                                     ),
                                                   ),
+
+
                                                   SizedBox(height: 8.0),
                                                   Padding(
                                                     padding: const EdgeInsets
@@ -387,105 +466,124 @@ class ProfilePage extends ConsumerWidget {
                                                         horizontal: 14.0),
                                                     child: Row(
                                                       children: [
-                                                        Expanded(
-                                                          child: TextField(
-                                                            obscureText:
-                                                                obscureText,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              labelText:
-                                                                  "Şifreniz",
-                                                              labelStyle: TextStyle(
-                                                                  fontFamily:
-                                                                      'Raleway',
-                                                                  fontSize: 14),
-                                                              enabledBorder:
-                                                                  UnderlineInputBorder(
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .black),
-                                                              ),
-                                                              focusedBorder:
-                                                                  UnderlineInputBorder(
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .black),
-                                                              ),
+                                                    Expanded(
+                                                  child: Consumer(
+                                                    builder: (context, ref, _) {
+                                                      final passwordVisible = ref.watch(passwordVisibleProvider.state).state;
+                                                      return TextField(
+                                                        obscureText: !passwordVisible,
+                                                        decoration: InputDecoration(
+                                                          labelText: "Şifreniz",
+                                                          labelStyle: TextStyle(
+                                                            fontFamily: 'Raleway',
+                                                            fontSize: 14,
+                                                            color: Colors.black, // Set the label text color to black
+                                                          ),
+                                                          enabledBorder: UnderlineInputBorder(
+                                                            borderSide: BorderSide(color: Colors.black),
+                                                          ),
+                                                          focusedBorder: UnderlineInputBorder(
+                                                            borderSide: BorderSide(color: Colors.black),
+                                                          ),
+                                                          suffixIcon: GestureDetector(
+                                                            onTap: () {
+                                                              ref.read(passwordVisibleProvider.state).state = !passwordVisible;
+                                                            },
+                                                            child: Icon(
+                                                              passwordVisible ? Icons.visibility : Icons.visibility_off,
+                                                              color: Colors.green,
                                                             ),
                                                           ),
                                                         ),
-                                                        IconButton(
-                                                          icon: Icon(
-                                                            obscureText
-                                                                ? Icons
-                                                                    .visibility_outlined
-                                                                : Icons
-                                                                    .visibility_off_outlined, // Göz simgesi, şifre görünürken veya gizliyken değişsin
-                                                            color: Colors.black,
-                                                            size: 19,
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+
+                                                  ],
+
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 18.0),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 14.0),
+                                                    child: Row(
+                                                      children: [
+                                                      Expanded(
+                                                        child: Consumer(
+                                                          builder: (context, ref, _) {
+                                                            final _iconBool = ref.watch(_iconBoolProvider.state).state;
+                                                            return Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                
+                                                                GestureDetector(
+                                                                  onTap: () {
+                                                                    ref.read(_iconBoolProvider.state).state = !_iconBool;
+                                                                  },
+                                                                  child: Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                    children: [
+                                                                      Text(
+                                                                        _iconBool ? "Açık Mod" : "Koyu Mod",
+                                                                        style: TextStyle(
+                                                                          fontFamily: 'Raleway',
+                                                                          fontSize: 14,
+                                                                        ),
+                                                                      ),
+                                                                      Icon(
+                                                                        _iconBool ? _iconDark : _iconLight,
+                                                                        color: Colors.green,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 8.0),
+                                                  Expanded(
+                                                  child: Consumer(
+                                                    builder: (context, ref, _) {
+                                                      final isSwitched = ref.watch(isSwitchedProvider.state).state;
+                                                      return Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          GestureDetector(
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                  "Kullanıcı Geri Bildirimi",
+                                                                  style: TextStyle(
+                                                                    fontFamily: 'Raleway',
+                                                                    fontSize: 20,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(width: 8.0),
+                                                                Switch(
+                                                                  value: isSwitched,
+                                                                  onChanged: (value) {
+                                                                    ref.read(isSwitchedProvider.state).state = !isSwitched;
+                                                                  },
+                                                                  activeColor: Colors.white,
+                                                                  activeTrackColor: Colors.green,
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                          onPressed: () {},
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 8.0),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 14.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Koyu Mod",
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Raleway',
-                                                              fontSize: 20),
-                                                        ),
-                                                        SizedBox(width: 8.0),
-                                                        Switch(
-                                                          value: false,
-                                                          onChanged:
-                                                              (newValue) {},
-                                                          activeColor:
-                                                              Colors.white,
-                                                          activeTrackColor:
-                                                              Colors.green,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 8.0),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 14.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Kullanıcı Geri Bildirimi",
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Raleway',
-                                                              fontSize: 20),
-                                                        ),
-                                                        SizedBox(width: 8.0),
-                                                        Switch(
-                                                          value: isSwitched,
-                                                          onChanged: (value) {},
-                                                          activeColor:
-                                                              Colors.white,
-                                                          activeTrackColor:
-                                                              Colors.green,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 8.0),
-                                                  if (isSwitched)
-                                                    buildSwitchContent(),
-                                                  Padding(
+                                                          SizedBox(height: 8.0), // Reduce the SizedBox height to adjust spacing
+                                                          if (ref.read(isSwitchedProvider.state).state)
+                                                            buildSwitchContent(),
+                                                            Padding(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             right: 0),
@@ -524,6 +622,17 @@ class ProfilePage extends ConsumerWidget {
                                                       ],
                                                     ),
                                                   ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+
+                                                    //AAAAAAAAAAAAAAAAAAA
+                                                  
+                                                  
+
+                                                  
                                                 ],
                                               ),
                                             ),
@@ -894,4 +1003,20 @@ class ProfilePage extends ConsumerWidget {
       ),
     );
   }
+
+  
+  ThemeData get selectedTheme {
+   return _iconBool ? _darkTheme : _lightTheme;
+   // return _iconBool == _iconLight ? _darkTheme:_lightTheme ;
+
+/*
+    if(_iconBool==_iconDark)
+      return _darkTheme;
+    else if(_iconBool==_iconLight) 
+      return _lightTheme;
+    else
+     return _lightTheme; */
+    
+  }
+
 }

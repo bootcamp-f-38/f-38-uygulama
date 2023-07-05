@@ -8,6 +8,13 @@ import 'package:routemaster/routemaster.dart';
 import 'controller/auth_controller.dart';
 import 'firebase_options.dart';
 import 'models/user.dart';
+import 'package:f_38/pages/profile_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/src/provider.dart';
+
+
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,11 +42,17 @@ class _MyAppState extends ConsumerState<MyApp> {
     setState(() {});
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    ProfilePage profilePage = ProfilePage();
+    ThemeData themes = profilePage.selectedTheme;
+    
     return ref.watch(authStateChangeProvider).when(
           data: (data) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
+            theme: themes,
             routerDelegate: RoutemasterDelegate(
               routesBuilder: (context) {
                 if (data != null) {
@@ -52,6 +65,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               },
             ),
             routeInformationParser: const RoutemasterParser(),
+            
           ),
           error: (error, stackTrace) => ErrorText(error: error.toString()),
           loading: () => const Loader(),
