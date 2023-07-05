@@ -1,3 +1,4 @@
+import 'package:f_38/pages/new_pages/home_page.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/pages/profile_page.dart';
@@ -10,7 +11,7 @@ final loggedOutRoute = RouteMap(routes: {
   '/signup': (_) => MaterialPage(child: SignUpPage()),
 });
 final loggedInRoute = RouteMap(routes: {
-  '/': (_) => MaterialPage(child: HomePage()),
+  '/': (_) => MaterialPage(child: HomePageWidget()),
   '/profile': (routeData) => MaterialPage(
         child: ProfilePage(),
       ),
