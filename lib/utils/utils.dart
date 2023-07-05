@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
@@ -30,11 +29,11 @@ pickImage(ImageSource source) async {
   print("Fotoğraf seçilmedi");
 }
 
-showSnackBar(String content, BuildContext context) {
+showSnackBar2(String content, BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
 }
 
-void showSnackBar2(BuildContext context, String text) {
+void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(
@@ -330,4 +329,10 @@ extension ListDivideExt<T extends Widget> on Iterable<T> {
 
   List<Widget> addToEnd(Widget t) =>
       enumerate.map((e) => e.value).toList()..add(t);
+
+Future<FilePickerResult?> pickFile() async {
+  final image = await FilePicker.platform.pickFiles(type: FileType.image);
+
+  return image;
+
 }

@@ -65,7 +65,7 @@ class AuthController extends StateNotifier<bool> {
 
     state = false;
     result.fold(
-      (String errorMessage) => showSnackBar2(context, errorMessage),
+      (String errorMessage) => showSnackBar(context, errorMessage),
       (UserCredential? userCredential) async {
         if (userCredential != null) {
           UserModel userModel = UserModel(
@@ -83,7 +83,7 @@ class AuthController extends StateNotifier<bool> {
     );
   }
 
-  Future<void> signUpWithEmail(
+  Future<void> signUpWithEmailc(
     BuildContext context,
     String email,
     String password,
@@ -98,7 +98,7 @@ class AuthController extends StateNotifier<bool> {
     state = false;
 
     result.fold(
-      (String errorMessage) => showSnackBar2(context, errorMessage),
+      (String errorMessage) => showSnackBar(context, errorMessage),
       (UserModel userModel) async {
         _ref.read(userProvider.notifier).state = userModel;
         await _authRepository.addUserDetails(userModel);

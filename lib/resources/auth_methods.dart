@@ -4,6 +4,8 @@ import 'package:f_38/resources/storage_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:f_38/models/user.dart' as model;
 
+import '../models/user.dart';
+
 class AuthMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -13,38 +15,35 @@ class AuthMethods {
     required String name,
     required String password,
     required String username,
-    required String bio,
-    required Uint8List file,
   }) async {
     String res = "Some error Occurred";
     try {
       if (email.isNotEmpty ||
           name.isNotEmpty ||
           password.isNotEmpty ||
-          username.isNotEmpty ||
-          bio.isNotEmpty ||
-          file != null) {
+          username.isNotEmpty) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
 
-        String photoUrl = await StorageMethods()
-            .uploadImageToStorage('profilePics', file, false);
-
-        model.UserModel user = model.UserModel(
-          username: username,
-          uid: cred.user!.uid,
-          name: name,
+        UserModel userModel = UserModel(
           email: email,
-          bio: bio,
+          username: username,
+          name: name,
           followers: [],
           following: [],
+          uid: cred.user!.uid,
+          bio: '',
         );
 
         res = "success";
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(userModel.uid)
+            .set(userModel.toMap());
       } else {
-        res = "Please enter all the fields";
+        res = "Tüm bilgileri giriniz";
       }
     } catch (err) {
       return err.toString();
