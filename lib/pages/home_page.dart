@@ -9,7 +9,9 @@ import 'package:f_38/constant/constants.dart';
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/den.dart';
 import 'package:f_38/pages/event_page.dart';
+import 'package:f_38/pages/feed_screen.dart';
 import 'package:f_38/pages/profile_drawer.dart';
+import 'package:f_38/pages/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,6 +34,10 @@ class HomePage extends ConsumerWidget {
 
     void displayEndDrawer(BuildContext context) {
       Scaffold.of(context).openEndDrawer();
+    }
+
+    void navigateToUserP(BuildContext context, String uid) {
+      Routemaster.of(context).push('/userp/$uid');
     }
 
     List<MultiplePhotos> users = [
@@ -103,12 +109,7 @@ class HomePage extends ConsumerWidget {
         child: Row(children: [
           Spacer(),
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => den()),
-                );
-              },
+              onPressed: () {},
               icon: Icon(
                 Icons.home,
                 color: ColorConstants.AppColor,
@@ -119,7 +120,9 @@ class HomePage extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => EventAnnouncementPage()),
+                      builder: (context) => UserProfileScreen(
+                            uid: user.uid,
+                          )),
                 );
               },
               icon: Icon(
@@ -137,7 +140,9 @@ class HomePage extends ConsumerWidget {
               )),
           Spacer(),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Routemaster.of(context).push('/feed');
+              },
               icon: Icon(
                 Icons.menu_book_outlined,
                 color: ColorConstants.AppColor,

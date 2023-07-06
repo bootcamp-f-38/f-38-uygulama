@@ -34,7 +34,7 @@ class PostRepository {
     return _posts
         .where('communityName',
             whereIn: communities.map((e) => e.name).toList())
-        .orderBy('timeStamp', descending: true)
+        .orderBy('timestamp', descending: true)
         .snapshots()
         .map((event) => event.docs
             .map((e) => Post.fromMap(e.data() as Map<String, dynamic>))

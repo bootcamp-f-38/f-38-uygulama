@@ -21,6 +21,20 @@ class UserModel {
       required this.followers,
       required this.following});
 
+  static UserModel fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
+
+    return UserModel(
+      username: snapshot["username"],
+      uid: snapshot["uid"],
+      email: snapshot["email"],
+      bio: snapshot["bio"],
+      followers: snapshot["followers"],
+      following: snapshot["following"],
+      name: snapshot["name"],
+    );
+  }
+
   UserModel copyWith({
     String? email,
     String? uid,

@@ -1,15 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 class Post {
   final String id;
   final String title;
-  final List<String> imageUrls;
+  final String? postUrl;
   final String? link;
   final String? description;
   final String communityName;
-
   final DateTime timestamp;
   final String username;
   final String uid;
@@ -18,7 +15,7 @@ class Post {
   Post({
     required this.id,
     required this.title,
-    required this.imageUrls,
+    this.postUrl,
     this.link,
     this.description,
     required this.communityName,
@@ -32,7 +29,7 @@ class Post {
   Post copyWith({
     String? id,
     String? title,
-    List<String>? imageUrls,
+    String? postUrl,
     String? link,
     String? description,
     String? communityName,
@@ -45,7 +42,7 @@ class Post {
     return Post(
       id: id ?? this.id,
       title: title ?? this.title,
-      imageUrls: imageUrls ?? this.imageUrls,
+      postUrl: postUrl ?? this.postUrl,
       link: link ?? this.link,
       description: description ?? this.description,
       communityName: communityName ?? this.communityName,
@@ -61,7 +58,7 @@ class Post {
     return <String, dynamic>{
       'id': id,
       'title': title,
-      'imageUrls': imageUrls,
+      'postUrl': postUrl,
       'link': link,
       'description': description,
       'communityName': communityName,
@@ -75,29 +72,24 @@ class Post {
 
   factory Post.fromMap(Map<String, dynamic> map) {
     return Post(
-        id: map['id'] as String,
-        title: map['title'] ?? '',
-        imageUrls: List<String>.from(map['imageUrls'] as List<String>),
-        link: map['link'],
-        description: map['description'],
-        communityName: map['communityName'] ?? '',
-        timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
-        username: map['username'] as String,
-        uid: map['uid'] as String,
-        type: map['type'] ?? '',
-        likes: List<String>.from(
-          (map['likes'] as List<String>),
-        ));
+      id: map['id'] as String,
+      title: map['title'] ?? '',
+      link: map['link'],
+      postUrl: map['link'],
+      description: map['description'],
+      communityName: map['communityName'] ?? '',
+      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
+      username: map['username'] as String,
+      uid: map['uid'] as String,
+      type: map['type'] ?? '',
+      likes: List<String>.from(
+          (map['likes'] as List<dynamic>).map((e) => e.toString())),
+    );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Post.fromJson(String source) =>
-      Post.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Post(id: $id, title: $title, imageUrls: $imageUrls, link: $link, description: $description, communityName: $communityName, timestamp: $timestamp, username: $username, uid: $uid, type: $type, likes: $likes)';
+    return 'Post(id: $id, title: $title,  link: $link,  postUrl: $postUrl,description: $description, communityName: $communityName, timestamp: $timestamp, username: $username, uid: $uid, type: $type, likes: $likes)';
   }
 
   @override
@@ -106,8 +98,8 @@ class Post {
 
     return other.id == id &&
         other.title == title &&
-        listEquals(other.imageUrls, imageUrls) &&
         other.link == link &&
+        other.postUrl == postUrl &&
         other.description == description &&
         other.communityName == communityName &&
         other.timestamp == timestamp &&
@@ -121,8 +113,8 @@ class Post {
   int get hashCode {
     return id.hashCode ^
         title.hashCode ^
-        imageUrls.hashCode ^
         link.hashCode ^
+        postUrl.hashCode ^
         description.hashCode ^
         communityName.hashCode ^
         timestamp.hashCode ^
