@@ -1,0 +1,58 @@
+import 'package:f_38/constant/constants.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
+
+import '../controller/auth_controller.dart';
+
+class ProfileDrawer extends ConsumerWidget {
+  const ProfileDrawer({super.key});
+
+  void logOut(WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).logout();
+  }
+
+  void navigateToUserProfile(BuildContext context) {
+    Routemaster.of(context).push('/profile');
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider)!;
+
+    return Drawer(
+      child: SafeArea(
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: AssetImage("assets/images/default_user.png"),
+            ),
+            const SizedBox(height: 10),
+            Text('${user.name}', style: MyTextConstant.myCustomTextStyle),
+            const SizedBox(height: 10),
+            const Divider(),
+            ListTile(
+              title: const Text(
+                'Profilim',
+                style: MyTextConstant.ralewayTextStyle,
+              ),
+              leading: const Icon(Icons.person),
+              onTap: () => navigateToUserProfile(context),
+            ),
+            ListTile(
+              title: const Text(
+                'Çıkış yap',
+                style: MyTextConstant.ralewayTextStyle,
+              ),
+              leading: Icon(
+                Icons.logout,
+              ),
+              onTap: () => logOut(ref),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
