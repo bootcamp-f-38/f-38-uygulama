@@ -52,3 +52,33 @@ Sprint Review katılımcıları: Berre Nur Çelik, Musa Berk Büyükmumcu, Çağ
 
 Sprint Retrospective:
 Takım içindeki iletişimin aynı şekilde devam etmesi, yeni görevlerle aynı düzen ile ilerleme kararı alınmıştır.
+
+Sprint Notları:
+Bir sonraki sprint için düzeni oluşturduk, eksik olduğumuz konuları belirleyip bu konulara ağırlık verme kararı aldık. Firebase bağlantılarını düzenli bir şekilde kurmaya odaklanma kararı verdik.
+# Sprint 2
+Sprint içinde tamamlanması tahmin edilen puan: 170 Puan
+
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 440 puanlık backlog bulunmaktadır. Projede ilerledikçe gerekli değişiklikler yapılıp yeni backloglar eklendi, bazıları çıkarıldı. 2. Sprint içinde hedeflenen puanlama tamamlanmıştır. Geri kalan backlogların son sprint içinde tamamlanması hedeflenmektedir.
+
+Daily Scrum:Daily Scrum toplantısı örneği word olarak Readme'de tarafımızdan paylaşılmaktadır. 
+[dailyscrum-2.docx](https://github.com/bootcamp-f-38/f-38-uygulama/files/11927024/dailyscrum-2.docx)
+
+Sprint board update: 
+Sprint board screenshotları:
+
+![image](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/61eb066f-2a22-4234-b33b-e9dff93fda1a)
+
+Ürün Durumu: Ekran görüntüleri:
+
+![Screenshot_1688240025](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/4dfdda28-c588-4aae-a0b2-022d4d5474ae)
+![Screenshot_1688240369](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/d36ca6f0-7bc8-40b7-821e-de3b1516961f)
+
+Sprint Review: Alınan kararlar: Models, repository ve controller classları oluşturulmuş, state management kısmına geçilmiştir.Riverpod Provider eklenmiştir.
+
+Sprint Review katılımcıları: Berre Nur Çelik, Musa Berk Büyükmumcu, Çağatay Atay, Eda Nur Işık
+
+Sprint Retrospective:
+Takımdaki çoğu kişinin sınav haftasına denk geldiği için biraz yavaş ilerlendi, önümüzdeki son sprint hızlanıp eksiklikleri giderme kararı alınmıştır.
+
+Sprint Notları:
+Backend kısmına yoğunlaştık. Users kısmı halledildi, post ve comment kısmına aynı şekilde devam ediliyor.
