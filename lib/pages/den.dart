@@ -1,3 +1,4 @@
+import 'package:f_38/constant/constants.dart';
 import 'package:f_38/repository/post_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +14,10 @@ class den extends ConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Home'),
+          title: Text(
+            'Home',
+            style: MyTextConstant.myCustomTextStyle,
+          ),
         ),
         body: Center(child: Text(user?.name ?? "")));
   }
