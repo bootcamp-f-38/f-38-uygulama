@@ -15,7 +15,7 @@ class den extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Home',
+            'Home denemesi',
             style: MyTextConstant.myCustomTextStyle,
           ),
         ),
