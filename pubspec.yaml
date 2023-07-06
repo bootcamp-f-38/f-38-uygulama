@@ -83,6 +83,11 @@ dependencies:
   file_picker: ^5.3.1
   dotted_border: ^2.0.0+3
 
+  any_link_preview: ^3.0.0
+  
+
+
+
 
 dev_dependencies:
   flutter_test:

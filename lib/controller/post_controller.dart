@@ -53,9 +53,8 @@ class PostController extends StateNotifier<bool> {
     final Post post = Post(
       id: postId,
       title: title,
-      imageUrls: [],
       communityName: selectedCommunity.name,
-      username: user.name,
+      username: user.username,
       uid: user.uid,
       type: 'yazi',
       timestamp: DateTime.now(),
@@ -88,9 +87,9 @@ class PostController extends StateNotifier<bool> {
       final Post post = Post(
         id: postId,
         title: title,
-        imageUrls: [],
+
         communityName: selectedCommunity.name,
-        username: user.name,
+        username: user.username,
         uid: user.uid,
         type: 'fotograf',
         timestamp: DateTime.now(),
@@ -122,9 +121,8 @@ class PostController extends StateNotifier<bool> {
     final Post post = Post(
       id: postId,
       title: title,
-      imageUrls: [],
       communityName: selectedCommunity.name,
-      username: user.name,
+      username: user.username,
       uid: user.uid,
       type: 'link',
       timestamp: DateTime.now(),
