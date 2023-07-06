@@ -3,9 +3,10 @@ import 'package:f_38/providers/firebase_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import '../models/community.dart';
+import '../models/post.dart';
 import '../type_defs.dart';
 
-final CommunityRepositoryProvider = Provider((ref) {
+final communityRepositoryProvider = Provider((ref) {
   return CommunityRepository(firestore: ref.watch(firestoreProvider));
 });
 
@@ -96,5 +97,22 @@ class CommunityRepository {
     });
   }
 
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _posts
+        .where('communityName', isEqualTo: name)
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map(
+          (event) => event.docs
+              .map(
+                (e) => Post.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+        );
+  }
+
+  CollectionReference get _posts => _firestore.collection("posts");
   CollectionReference get _communities => _firestore.collection("communities");
 }
