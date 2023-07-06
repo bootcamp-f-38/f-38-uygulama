@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:routemaster/routemaster.dart';
+import '../constant/constants.dart';
 import '../resources/auth_methods.dart';
 
 class LoginPage extends StatefulWidget {

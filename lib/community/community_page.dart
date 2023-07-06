@@ -49,7 +49,7 @@ class CommunityPage extends ConsumerWidget {
                         alignment: Alignment.topLeft,
                         child: CircleAvatar(
                           radius: 30,
-                          backgroundColor: ColorConstants.AppColor,
+                          backgroundColor: ColorConstants.OrangeAppColor,
                           child: Text(
                             community.name[0].toUpperCase(),
                             style: MyTextConstant.ralewayTextStyle,

@@ -194,7 +194,7 @@ class HomePage extends ConsumerWidget {
                           return InkWell(
                             onTap: () => displayEndDrawer(context),
                             child: CircleAvatar(
-                              backgroundColor: ColorConstants.AppColor,
+                              backgroundColor: ColorConstants.OrangeAppColor,
                               child: Text(
                                 "B",
                                 style: TextStyle(color: Colors.white),

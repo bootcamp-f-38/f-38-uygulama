@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
 import '../main.dart';
 import 'package:intl/intl.dart';
-
+import 'package:file_picker/file_picker.dart';
 export 'package:f_38/constant/model.dart';
 export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
@@ -67,6 +67,12 @@ class Loader extends StatelessWidget {
       child: CircularProgressIndicator(),
     );
   }
+}
+
+Future<FilePickerResult?> pickFile() async {
+  final image = await FilePicker.platform.pickFiles(type: FileType.image);
+
+  return image;
 }
 
 T valueOrDefault<T>(T? value, T defaultValue) =>
@@ -329,10 +335,4 @@ extension ListDivideExt<T extends Widget> on Iterable<T> {
 
   List<Widget> addToEnd(Widget t) =>
       enumerate.map((e) => e.value).toList()..add(t);
-
-Future<FilePickerResult?> pickFile() async {
-  final image = await FilePicker.platform.pickFiles(type: FileType.image);
-
-  return image;
-
 }

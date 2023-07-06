@@ -5,13 +5,11 @@ import 'package:f_38/router.dart';
 import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:routemaster/routemaster.dart';
-
+import '../constant/constants.dart';
 import '../controller/auth_controller.dart';
 import '../models/user.dart';
 import '../repository/auth_repository.dart';

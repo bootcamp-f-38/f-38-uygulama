@@ -21,7 +21,7 @@ class CommunityList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorConstants.AppColor,
+        backgroundColor: ColorConstants.OrangeAppColor,
         title: Text(
           "Topluluklar",
           style: MyTextConstant.ralewayTextStyle,
@@ -67,7 +67,7 @@ class CommunityList extends ConsumerWidget {
                           final community = communities[index];
                           return ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: ColorConstants.AppColor,
+                              backgroundColor: ColorConstants.OrangeAppColor,
                               child: Text(
                                 community.name.isNotEmpty
                                     ? community.name[0].toUpperCase()

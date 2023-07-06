@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:f_38/models/signup_model.dart';
+
+import '../../constant/model.dart';
 export 'package:f_38/models/signup_model.dart';
 
 class SignupWidget extends StatefulWidget {
