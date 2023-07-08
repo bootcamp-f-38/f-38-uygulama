@@ -1,15 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_38/community/community_list.dart';
+
 import 'package:f_38/community/search_community.dart';
 import 'package:f_38/constant/constants.dart';
-
+import 'package:f_38/index.dart';
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/den.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:f_38/pages/feed_screen.dart';
+import 'package:f_38/pages/new_pages/comunity_page.dart';
 import 'package:f_38/pages/profile_drawer.dart';
 import 'package:f_38/pages/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,7 +36,8 @@ class HomePage extends ConsumerWidget {
       Scaffold.of(context).openEndDrawer();
     }
 
-    void navigateToUserP(BuildContext context, String uid) {
+    void navigateToUserP(BuildContext context) {
+      final uid = user.uid;
       Routemaster.of(context).push('/userp/$uid');
     }
 
@@ -109,22 +110,16 @@ class HomePage extends ConsumerWidget {
         child: Row(children: [
           Spacer(),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                navigateToUserP(context);
+              },
               icon: Icon(
                 Icons.home,
                 color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => UserProfileScreen(
-                            uid: user.uid,
-                          )),
-                );
-              },
+              onPressed: () {},
               icon: Icon(
                 Icons.view_timeline,
                 color: ColorConstants.AppColor,
@@ -410,10 +405,7 @@ class _UserPhotosState extends State<UserPhotos> {
     return Column(
       children: [
         InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (builder) => ContentPage()));
-          },
+          onTap: () {},
           child: CarouselSlider.builder(
             options: CarouselOptions(
               height: 300,

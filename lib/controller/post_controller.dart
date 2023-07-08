@@ -87,7 +87,6 @@ class PostController extends StateNotifier<bool> {
       final Post post = Post(
         id: postId,
         title: title,
-
         communityName: selectedCommunity.name,
         username: user.username,
         uid: user.uid,
@@ -144,5 +143,16 @@ class PostController extends StateNotifier<bool> {
       return _postRepository.fetchUserPosts(communities);
     }
     return Stream.value([]);
+  }
+
+  void like(Post post) async {
+    final uid = _ref.read(userProvider)!.uid;
+    _postRepository.like(post, uid);
+  }
+
+  void deletePost(Post post, BuildContext context) async {
+    final res = await _postRepository.deletePost(post);
+
+    res.fold((l) => null, (r) => showSnackBar(context, 'Gönderi silindi!'));
   }
 }
