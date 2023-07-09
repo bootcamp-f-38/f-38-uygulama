@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:uuid/uuid.dart';
+import '../models/comment.dart';
 import '../models/community.dart';
 import '../models/post.dart';
 import '../providers/storage_repository_provider.dart';
@@ -25,6 +26,16 @@ final userPostsProvider =
     StreamProvider.family((ref, List<Community> communities) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.fetchUserPosts(communities);
+});
+
+final getPostByIdProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.getPostById(postId);
+});
+
+final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchPostComments(postId);
 });
 
 class PostController extends StateNotifier<bool> {
@@ -145,6 +156,14 @@ class PostController extends StateNotifier<bool> {
     return Stream.value([]);
   }
 
+  Stream<List<Comment>> fetchPostComments(String postId) {
+    return _postRepository.getCommentsOfPost(postId);
+  }
+
+  Stream<Post> getPostById(String postId) {
+    return _postRepository.getPostById(postId);
+  }
+
   void like(Post post) async {
     final uid = _ref.read(userProvider)!.uid;
     _postRepository.like(post, uid);
@@ -154,5 +173,25 @@ class PostController extends StateNotifier<bool> {
     final res = await _postRepository.deletePost(post);
 
     res.fold((l) => null, (r) => showSnackBar(context, 'Gönderi silindi!'));
+  }
+
+  void addComment({
+    required BuildContext context,
+    required String text,
+    required Post post,
+  }) async {
+    final user = _ref.read(userProvider)!;
+    String commentId = const Uuid().v1();
+    Comment comment = Comment(
+      id: commentId,
+      text: text,
+      createdAt: DateTime.now(),
+      postId: post.id,
+      username: user.username,
+      profilePic: "",
+    );
+    final res = await _postRepository.addComment(comment);
+
+    res.fold((l) => showSnackBar(context, l.message), (r) => null);
   }
 }
