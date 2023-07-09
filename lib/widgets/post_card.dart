@@ -4,6 +4,7 @@ import 'package:f_38/controller/post_controller.dart';
 import 'package:f_38/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../controller/auth_controller.dart';
 
@@ -20,6 +21,10 @@ class PostCardWidget extends ConsumerWidget {
 
   void likePost(WidgetRef ref) async {
     ref.read(postControllerProvider.notifier).like(post);
+  }
+
+  void navigateToComments(BuildContext context) {
+    Routemaster.of(context).push('/post/${post.id}/comments');
   }
 
   @override
@@ -54,7 +59,7 @@ class PostCardWidget extends ConsumerWidget {
                               children: [
                                 CircleAvatar(
                                   child: Text(
-                                    post.username[0],
+                                    post.username[0].toUpperCase(),
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   backgroundColor: ColorConstants.AppColor,
@@ -81,6 +86,7 @@ class PostCardWidget extends ConsumerWidget {
                                 onPressed: () => deletePost(ref, context),
                                 icon: Icon(
                                   Icons.delete,
+                                  size: 24,
                                 ),
                               ),
                           ],
@@ -135,7 +141,7 @@ class PostCardWidget extends ConsumerWidget {
                                 style: MyTextConstant.ralewayTextStyle),
                           ),
                         SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -146,18 +152,24 @@ class PostCardWidget extends ConsumerWidget {
                                     size: 25,
                                     color: post.likes.contains(user.uid)
                                         ? Colors.redAccent
-                                        : Colors.grey))
+                                        : Colors.grey)),
+                            IconButton(
+                              onPressed: () => navigateToComments(context),
+                              icon: const Icon(
+                                Icons.comment,
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         Divider(
                           thickness: 1,
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               )),
             ],

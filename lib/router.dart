@@ -3,6 +3,7 @@ import 'package:f_38/community/community_page.dart';
 import 'package:f_38/community/create_community_page.dart';
 import 'package:f_38/pages/add_post_page.dart';
 import 'package:f_38/pages/add_post_type_screen.dart';
+import 'package:f_38/pages/comments_screen.dart';
 import 'package:f_38/pages/feed_screen.dart';
 import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/login_page.dart';
@@ -46,4 +47,9 @@ final loggedInRoute = RouteMap(routes: {
           child: UserProfileScreen(
         uid: routeData.pathParameters['uid']!,
       )),
+  '/post/:postId/comments': (route) => MaterialPage(
+        child: CommentsScreen(
+          postId: route.pathParameters['postId']!,
+        ),
+      ),
 });
