@@ -13,11 +13,13 @@ import '../controller/auth_controller.dart';
 final passwordVisibleProvider = StateProvider<bool>((ref) => false);
 final isSwitchedProvider = StateProvider<bool>((ref) => false);
 final issSwitchedProvider = StateProvider<bool>((ref) => false);
+final isSifreProvider = StateProvider<bool>((ref) => false);
 
 final _iconBoolProvider = StateProvider<bool>((ref) => false);
 
 
 class IsContainerOpenNotifier extends StateNotifier<bool> {
+ 
   IsContainerOpenNotifier() : super(false);
 
   void setIsContainerOpen(bool value) {
@@ -43,12 +45,8 @@ class ProfilePage extends ConsumerWidget {
   IconData _iconLight=Icons.wb_sunny;
   IconData _iconDark=Icons.nights_stay;
 
-   ThemeData _lightTheme=ThemeData( );
-
-
-  
-
-  ThemeData _darkTheme=ThemeData(
+  ThemeData _lightTheme=ThemeData( );
+ ThemeData _darkTheme=ThemeData(
     primarySwatch: Colors.green,
     brightness: Brightness.dark,
     primaryColor: Colors.green.shade900,
@@ -58,17 +56,17 @@ class ProfilePage extends ConsumerWidget {
   );
 
   bool _iconBool=false;
+ 
+
 
 
 
 
 
   Uint8List? _image;
-  //bool isContainerOpen = false;
-  //bool _passwordVisible = ref.watch(passwordVisibleProvider.state).state;
   bool isSwitched = false;
   bool issSwitched = false;
-
+  bool isSifre = false;
  
   Color _labelColor = Colors.black;
  
@@ -98,7 +96,7 @@ class ProfilePage extends ConsumerWidget {
             ),
             Positioned(
               left: 270.0,
-              top: 120.0,
+              top: 190.0,
               child: Icon(
                 Icons.send,
                 color: ColorConstants.AppColor,
@@ -119,6 +117,7 @@ class ProfilePage extends ConsumerWidget {
     bool issSwitched = ref.watch(isSwitchedProvider);
     bool isSwitched = ref.watch(isSwitchedProvider);
     final _iconBool = ref.watch(_iconBoolProvider);
+    bool isSifre = ref.watch(isSifreProvider);
 
   
 
@@ -427,47 +426,50 @@ class ProfilePage extends ConsumerWidget {
                                                     ),
                                                   ),
                                                   SizedBox(height: 8.0),
-                                                  Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Şifre",
-                                                          style: TextStyle(
-                                                            fontFamily: 'Raleway',
-                                                            fontSize: 20,
+                                                  Expanded(
+                                                  child: Consumer(
+                                                    builder: (context, ref, _) {
+                                                      final isSifre = ref.watch(isSifreProvider.state).state;
+                                                      return Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                           GestureDetector(
+                                                            child: Padding(
+                                                              padding: EdgeInsets.only(left: 16.0), // Add left padding of 16 units
+                                                              child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                  "Şifre Değiştir",
+                                                                  style: TextStyle(
+                                                                    fontFamily: 'Raleway',
+                                                                    fontSize: 14,
+                                                                  ),
+                                                                ),
+                                                              
+                                                                SizedBox(width: 8.0),
+                                                                Switch(
+                                                                  value: isSifre,
+                                                                  onChanged: (value) {
+                                                                    ref.read(isSifreProvider.state).state = !isSifre;
+                                                                  },
+                                                                  activeColor: Colors.white,
+                                                                  activeTrackColor: Colors.green,
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                        SizedBox(width: 8.0),
-                                                        Consumer(
-                                                          builder: (context, ref, _) {
-                                                            final issSwitched = ref.watch(issSwitchedProvider.state).state;
-                                                            return Switch(
-                                                              value: issSwitched,
-                                                              onChanged: (value) {
-                                                                ref.read(issSwitchedProvider.state).state = !issSwitched;
-                                                              },
-                                                              activeColor: Colors.white,
-                                                              activeTrackColor: Colors.green,
-                                                            );
-                                                          },
-                                                        ),
-                                                        
-                                                        
-                                                      ],
-                                                    ),
-                                                  ),
-
-
-                                                  SizedBox(height: 8.0),
-                                                  Padding(
+                                                           ),
+                                                          SizedBox(height: 8.0), // Reduce the SizedBox height to adjust spacing
+                                                          if (ref.read(isSifreProvider.state).state)
+                                                             Padding(
                                                     padding: const EdgeInsets
                                                             .symmetric(
                                                         horizontal: 14.0),
                                                     child: Row(
                                                       children: [
                                                     Expanded(
-                                                  child: Consumer(
+                                                   child: Consumer(
                                                     builder: (context, ref, _) {
                                                       final passwordVisible = ref.watch(passwordVisibleProvider.state).state;
                                                       return TextField(
@@ -504,7 +506,7 @@ class ProfilePage extends ConsumerWidget {
 
                                                     ),
                                                   ),
-                                                  SizedBox(height: 18.0),
+                                                     SizedBox(height: 8.0),
                                                   Padding(
                                                     padding: const EdgeInsets
                                                             .symmetric(
@@ -550,7 +552,7 @@ class ProfilePage extends ConsumerWidget {
                                                     ),
                                                   ),
                                                   SizedBox(height: 8.0),
-                                                  Expanded(
+                                                Expanded(
                                                   child: Consumer(
                                                     builder: (context, ref, _) {
                                                       final isSwitched = ref.watch(isSwitchedProvider.state).state;
@@ -558,17 +560,19 @@ class ProfilePage extends ConsumerWidget {
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           GestureDetector(
-                                                            child: Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  "Kullanıcı Geri Bildirimi",
-                                                                  style: TextStyle(
-                                                                    fontFamily: 'Raleway',
-                                                                    fontSize: 20,
+                                                            child: Padding(
+                                                              padding: EdgeInsets.only(left: 16.0), // Add left padding of 16 units
+                                                              child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    "Kullanıcı Geri Bildirimi",
+                                                                    style: TextStyle(
+                                                                      fontFamily: 'Raleway',
+                                                                      fontSize: 14,
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                                SizedBox(width: 8.0),
+                                                                   SizedBox(width: 8.0),
                                                                 Switch(
                                                                   value: isSwitched,
                                                                   onChanged: (value) {
@@ -579,6 +583,7 @@ class ProfilePage extends ConsumerWidget {
                                                                 ),
                                                               ],
                                                             ),
+                                                          ),
                                                           ),
                                                           SizedBox(height: 8.0), // Reduce the SizedBox height to adjust spacing
                                                           if (ref.read(isSwitchedProvider.state).state)
@@ -627,6 +632,13 @@ class ProfilePage extends ConsumerWidget {
                                                     },
                                                   ),
                                                 ),
+                                                          ], );},),),
+
+
+                                                  SizedBox(height: 8.0),
+                                                 
+                                               
+                                                  
 
                                                     //AAAAAAAAAAAAAAAAAAA
                                                   
@@ -1009,14 +1021,6 @@ class ProfilePage extends ConsumerWidget {
    return _iconBool ? _darkTheme : _lightTheme;
    // return _iconBool == _iconLight ? _darkTheme:_lightTheme ;
 
-/*
-    if(_iconBool==_iconDark)
-      return _darkTheme;
-    else if(_iconBool==_iconLight) 
-      return _lightTheme;
-    else
-     return _lightTheme; */
-    
   }
 
 }
