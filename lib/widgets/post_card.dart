@@ -39,7 +39,7 @@ class PostCardWidget extends ConsumerWidget {
                           children: [
                             CircleAvatar(
                               child: Text(post.communityName[0]),
-                              backgroundColor: ColorConstants.AppColor,
+                              backgroundColor: ColorConstants.OrangeAppColor,
                               radius: 20,
                             ),
                             Padding(

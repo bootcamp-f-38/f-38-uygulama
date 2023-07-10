@@ -76,7 +76,7 @@ class Loader extends StatelessWidget {
   }
 }
 
-Future<FilePickerResult?> pickFile() async {
+Future<FilePickerResult?> pickFiles() async {
   final image = await FilePicker.platform.pickFiles(type: FileType.image);
 
   return image;
