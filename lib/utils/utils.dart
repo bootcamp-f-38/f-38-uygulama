@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:from_css_color/from_css_color.dart';
@@ -27,6 +28,12 @@ pickImage(ImageSource source) async {
     return await _file.readAsBytes();
   }
   print("Fotoğraf seçilmedi");
+}
+
+Future<FilePickerResult?> pickFile() async {
+  final image = await FilePicker.platform.pickFiles(type: FileType.image);
+
+  return image;
 }
 
 showSnackBar2(String content, BuildContext context) {

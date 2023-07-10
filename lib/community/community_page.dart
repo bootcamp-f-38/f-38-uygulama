@@ -2,6 +2,7 @@ import 'package:f_38/constant/constants.dart';
 import 'package:f_38/controller/community_controller.dart';
 import 'package:f_38/models/community.dart';
 import 'package:f_38/utils/utils.dart';
+import 'package:f_38/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,7 +25,7 @@ class CommunityPage extends ConsumerWidget {
     final user = ref.watch(userProvider)!;
     return Scaffold(
       body: ref.watch(getCommunityByNameProvider(name)).when(
-          data: (community) => NestedScrollView(
+            data: (community) => NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
@@ -88,9 +89,25 @@ class CommunityPage extends ConsumerWidget {
                   )
                 ];
               },
-              body: Text("Gönderi göster")),
-          error: (error, stackTrace) => ErrorText(error: error.toString()),
-          loading: () => const Loader()),
+              body: ref.watch(getCommunityPostsProvider(name)).when(
+                    data: (data) {
+                      return ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final post = data[index];
+                          return PostCardWidget(post: post);
+                        },
+                      );
+                    },
+                    error: (error, stackTrace) {
+                      return ErrorText(error: error.toString());
+                    },
+                    loading: () => const Loader(),
+                  ),
+            ),
+            error: (error, stackTrace) => ErrorText(error: error.toString()),
+            loading: () => const Loader(),
+          ),
     );
   }
 }

@@ -4,6 +4,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../models/community.dart';
+import '../models/post.dart';
+import '../providers/storage_repository_provider.dart';
 import '../repository/community_repository.dart';
 import '../type_defs.dart';
 import '../utils/utils.dart';
@@ -16,9 +18,13 @@ final userCommunitiesProvider = StreamProvider((ref) {
 });
 final communityControllerProvider =
     StateNotifierProvider<CommunityController, bool>((ref) {
-  final communityRepository = ref.watch(CommunityRepositoryProvider);
+  final communityRepository = ref.watch(communityRepositoryProvider);
+  final storageRepository = ref.watch(storageRepositoryProvider);
   return CommunityController(
-      communityRepository: communityRepository, ref: ref);
+    communityRepository: communityRepository,
+    storageRepository: storageRepository,
+    ref: ref,
+  );
 });
 
 //name için --> .family ekledik
@@ -31,15 +37,22 @@ final searchCommunityProvider = StreamProvider.family((ref, String query) {
   return ref.watch(communityControllerProvider.notifier).searchCommunity(query);
 });
 
+final getCommunityPostsProvider = StreamProvider.family((ref, String name) {
+  return ref.read(communityControllerProvider.notifier).getCommunityPosts(name);
+});
+
 class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
   final Ref _ref;
+  final StorageRepository _storageRepository;
 
   CommunityController({
     required CommunityRepository communityRepository,
     required Ref ref,
+    required StorageRepository storageRepository,
   })  : _communityRepository = communityRepository,
         _ref = ref,
+        _storageRepository = storageRepository,
         super(false);
 
   void createCommunity(String name, BuildContext context) async {
@@ -88,5 +101,9 @@ class CommunityController extends StateNotifier<bool> {
         showSnackBar(context, "Topluluğa katıldı!");
       }
     });
+  }
+
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _communityRepository.getCommunityPosts(name);
   }
 }
