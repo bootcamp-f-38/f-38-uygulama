@@ -54,7 +54,7 @@ class UserProfileScreen extends ConsumerWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 25),
                             ),
-                            child: const Text('Edit Profile'),
+                            child: const Text('Profili Düzenle'),
                           ),
                         ),
                       ],
@@ -69,7 +69,7 @@ class UserProfileScreen extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'u/${user.name}',
+                                '@${user.name}',
                                 style: const TextStyle(
                                   fontSize: 19,
                                   fontWeight: FontWeight.bold,

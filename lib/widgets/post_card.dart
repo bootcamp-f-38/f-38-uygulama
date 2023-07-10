@@ -147,7 +147,9 @@ class PostCardWidget extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             IconButton(
-                                onPressed: () => likePost(ref),
+                                onPressed: () {
+                                  likePost(ref);
+                                },
                                 icon: Icon(Icons.favorite,
                                     size: 25,
                                     color: post.likes.contains(user.uid)
@@ -159,6 +161,13 @@ class PostCardWidget extends ConsumerWidget {
                                 Icons.comment,
                               ),
                             ),
+                            Text(
+                              '${post.commentCount == 0 ? 'Yorum' : post.commentCount}',
+                              style: MyTextConstant.ralewayTextStyle,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            )
                           ],
                         ),
                         SizedBox(
