@@ -62,7 +62,11 @@ class PostRepository {
 
   FutureVoid addComment(Comment comment) async {
     try {
-      return right(_comments.doc(comment.id).set(comment.toMap()));
+      await right(_comments.doc(comment.id).set(comment.toMap()));
+
+      return right(_posts
+          .doc(comment.postId)
+          .update({'commentCount': FieldValue.increment(1)}));
     } on FirebaseException catch (e) {
       throw e.message!;
     } catch (e) {
@@ -83,7 +87,7 @@ class PostRepository {
   void like(Post post, String userId) async {
     if (post.likes.contains(userId)) {
       _posts.doc(post.id).update({
-        'likes': FieldValue.arrayRemove([userId])
+        'likes': FieldValue.arrayRemove([userId]),
       });
     } else {
       _posts.doc(post.id).update({
