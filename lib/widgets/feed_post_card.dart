@@ -8,9 +8,9 @@ import 'package:routemaster/routemaster.dart';
 
 import '../controller/auth_controller.dart';
 
-class PostCardWidget extends ConsumerWidget {
+class PostCardFeedWidget extends ConsumerWidget {
   final Post post;
-  const PostCardWidget({
+  const PostCardFeedWidget({
     Key? key,
     required this.post,
   }) : super(key: key);
@@ -89,6 +89,17 @@ class PostCardWidget extends ConsumerWidget {
                                   size: 24,
                                 ),
                               ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Topluluk Paylaşımı /${post.communityName}",
+                              style: MyTextConstant.myCustomTextStyle,
+                            ),
                           ],
                         ),
                         Divider(

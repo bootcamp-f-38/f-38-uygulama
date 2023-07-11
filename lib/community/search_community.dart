@@ -47,7 +47,7 @@ class SearchCommunityDelegate extends SearchDelegate {
               final community = communities[index];
               return ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: ColorConstants.OrangeAppColor,
+                  backgroundColor: ColorConstants.AppColor,
                   child: Text(
                     community.name.isNotEmpty
                         ? community.name[0].toUpperCase()

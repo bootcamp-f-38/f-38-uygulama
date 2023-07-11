@@ -46,7 +46,7 @@ class ProfilePage extends ConsumerWidget {
               top: 130.0,
               child: Icon(
                 Icons.send,
-                color: ColorConstants.GreenAppColor,
+                color: ColorConstants.AppColor,
               ),
             ),
           ],
@@ -67,7 +67,7 @@ class ProfilePage extends ConsumerWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.home,
-                color: ColorConstants.GreenAppColor,
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
@@ -77,24 +77,24 @@ class ProfilePage extends ConsumerWidget {
                   MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               },
-              icon: Icon(Icons.view_timeline, color: ColorConstants.GreenAppColor)),
+              icon: Icon(Icons.view_timeline, color: ColorConstants.AppColor)),
           Spacer(),
           IconButton(
               onPressed: () {},
-              icon: Icon(Icons.add_box, color: ColorConstants.GreenAppColor)),
+              icon: Icon(Icons.add_box, color: ColorConstants.AppColor)),
           Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.menu_book_outlined,
-                color: ColorConstants.GreenAppColor,
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.search_outlined,
-              color: ColorConstants.GreenAppColor,
+              color: ColorConstants.AppColor,
             ),
           ),
           Spacer(),
@@ -146,7 +146,7 @@ class ProfilePage extends ConsumerWidget {
                                               CircleAvatar(
                                                 radius: 100,
                                                 backgroundColor:
-                                                    ColorConstants.GreenAppColor,
+                                                    ColorConstants.AppColor,
                                                 child: IconButton(
                                                   icon: Icon(
                                                     Icons.camera_alt,
@@ -163,7 +163,7 @@ class ProfilePage extends ConsumerWidget {
                                                   fontFamily: 'Raleway',
                                                   fontSize: 16,
                                                   color:
-                                                      ColorConstants.GreenAppColor,
+                                                      ColorConstants.AppColor,
                                                 ),
                                               ),
                                             ],

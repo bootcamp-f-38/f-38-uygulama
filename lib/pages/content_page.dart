@@ -64,7 +64,7 @@ class _ContentPageState extends State<ContentPage> {
               onPressed: () {},
               icon: Icon(
                 Icons.home,
-                color: ColorConstants.GreenAppColor,
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
@@ -77,28 +77,28 @@ class _ContentPageState extends State<ContentPage> {
               },
               icon: Icon(
                 Icons.view_timeline,
-                color: ColorConstants.GreenAppColor,
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.add_box,
-                color: ColorConstants.GreenAppColor,
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.menu_book_outlined,
-                color: ColorConstants.GreenAppColor,
+                color: ColorConstants.AppColor,
               )),
           Spacer(),
           IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.search_outlined,
-              color: ColorConstants.GreenAppColor,
+              color: ColorConstants.AppColor,
             ),
           ),
           Spacer(),
@@ -293,7 +293,7 @@ class _ContentPageState extends State<ContentPage> {
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: ColorConstants.GreenAppColor,
+                              color: ColorConstants.AppColor,
                             ),
                           ),
                         ),

@@ -17,7 +17,7 @@ class AddPostPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorConstants.OrangeAppColor,
+        backgroundColor: ColorConstants.AppColor,
         title: Text(
           "Gönderi oluştur",
           style: MyTextConstant.myCustomTextStyleWhite,
@@ -41,7 +41,7 @@ class AddPostPage extends ConsumerWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    color: ColorConstants.OrangeAppColor,
+                    color: ColorConstants.AppColor,
                     elevation: 16,
                     child: Center(
                       child: Icon(
@@ -61,7 +61,7 @@ class AddPostPage extends ConsumerWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    color: ColorConstants.OrangeAppColor,
+                    color: ColorConstants.AppColor,
                     elevation: 16,
                     child: Center(
                       child: Icon(
@@ -81,7 +81,7 @@ class AddPostPage extends ConsumerWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    color: ColorConstants.OrangeAppColor,
+                    color: ColorConstants.AppColor,
                     elevation: 16,
                     child: Center(
                       child: Icon(

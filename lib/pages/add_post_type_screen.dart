@@ -86,7 +86,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
     final isTypeLink = widget.type == 'link';
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorConstants.OrangeAppColor,
+        backgroundColor: ColorConstants.AppColor,
         title: Text(
           'Gönderi ${widget.type}',
           style: MyTextConstant.myCustomTextStyleWhite,
@@ -128,7 +128,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
                         radius: const Radius.circular(10),
                         dashPattern: const [10, 4],
                         strokeCap: StrokeCap.round,
-                        color: ColorConstants.OrangeAppColor,
+                        color: ColorConstants.AppColor,
                         child: Container(
                           width: double.infinity,
                           height: 150,

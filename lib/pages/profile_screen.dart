@@ -1,22 +1,52 @@
-import 'package:f_38/constant/constants.dart';
-import 'package:f_38/widgets/post_card.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:f_38/constant/constants.dart';
+import 'package:f_38/widgets/post_card.dart';
 
 import '../controller/auth_controller.dart';
 import '../controller/profile_controller.dart';
 import '../utils/utils.dart';
 import '../widgets/profile_post_card.dart';
 
+final displayTextProvider =
+    StateNotifierProvider<DisplayTextNotifier, bool>((ref) {
+  final user = FirebaseAuth.instance.currentUser!;
+  return DisplayTextNotifier(user.uid, ref);
+});
+
+class DisplayTextNotifier extends StateNotifier<bool> {
+  final String uid;
+  final Ref _ref;
+
+  DisplayTextNotifier(
+    this.uid,
+    this._ref,
+  ) : super(true);
+
+  void toggle() {
+    state = !state;
+    _ref.read(getUserPostsProvider(uid));
+  }
+}
+
 class UserProfileScreen extends ConsumerWidget {
   final String uid;
   const UserProfileScreen({
-    super.key,
+    Key? key,
     required this.uid,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final displayText = ref.watch(displayTextProvider);
+
+    void toggleDisplay() {
+      ref.read(displayTextProvider.notifier).toggle();
+    }
+
     return Scaffold(
       body: ref.watch(getUserDataProvider(uid)).when(
             data: (user) => NestedScrollView(
@@ -39,7 +69,7 @@ class UserProfileScreen extends ConsumerWidget {
                           padding:
                               const EdgeInsets.all(20).copyWith(bottom: 70),
                           child: CircleAvatar(
-                            backgroundColor: ColorConstants.OrangeAppColor,
+                            backgroundColor: ColorConstants.AppColor,
                             radius: 22,
                             child: Text(
                               user.name[0].toUpperCase(),
@@ -49,7 +79,7 @@ class UserProfileScreen extends ConsumerWidget {
                         ),
                         Container(
                           alignment: Alignment.bottomLeft,
-                          padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(16),
                           child: OutlinedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
@@ -59,9 +89,12 @@ class UserProfileScreen extends ConsumerWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 25),
                             ),
-                            child: const Text(
-                              'Profili Düzenle',
-                              style: MyTextConstant.ralewayTextStyleWhite,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Profili Düzenle',
+                                style: MyTextConstant.ralewayTextStyleWhite,
+                              ),
                             ),
                           ),
                         ),
@@ -76,12 +109,47 @@ class UserProfileScreen extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                '@${user.username}',
-                                style: const TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Column(
+                                children: [
+                                  Text('${user.name}',
+                                      style: MyTextConstant.ralewayTextStyle),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text('@${user.username}',
+                                      style:
+                                          MyTextConstant.ralewayTextStyleBold),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      if (!displayText) toggleDisplay();
+                                    },
+                                    child: Text(
+                                      'Yazılar',
+                                      style: TextStyle(
+                                        color: displayText
+                                            ? Colors.black
+                                            : Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      if (displayText) toggleDisplay();
+                                    },
+                                    child: Text(
+                                      'Fotoğraflar',
+                                      style: TextStyle(
+                                        color: displayText
+                                            ? Colors.grey
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -95,13 +163,49 @@ class UserProfileScreen extends ConsumerWidget {
               },
               body: ref.watch(getUserPostsProvider(uid)).when(
                     data: (data) {
-                      return ListView.builder(
-                        itemCount: data.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final post = data[index];
-                          return PostCardProfileWidget(post: post);
-                        },
-                      );
+                      final filteredData = displayText
+                          ? data.where((post) => post.type == 'yazi').toList()
+                          : data
+                              .where((post) => post.type == 'fotograf')
+                              .toList();
+
+                      if (displayText) {
+                        return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1, childAspectRatio: 2),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 8.0),
+                          itemCount: filteredData.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final post = filteredData[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: PostCardProfileWidget(
+                                  post:
+                                      post), // Replace with your text-based widget
+                            );
+                          },
+                        );
+                      } else {
+                        return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.60,
+                          ),
+                          itemCount: filteredData.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final post = filteredData[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: PostCardProfileWidget(
+                                  post:
+                                      post), // Replace with your image-based widget
+                            );
+                          },
+                        );
+                      }
                     },
                     error: (error, stackTrace) {
                       return ErrorText(error: error.toString());

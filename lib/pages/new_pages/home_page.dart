@@ -1,4 +1,5 @@
 import 'package:f_38/utils/utils.dart';
+
 import '/components/categories_widget.dart';
 import '/components/post_small_widget.dart';
 import '/components/post_widget.dart';
@@ -11,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:f_38/models/home_page_model.dart';
 export 'package:f_38/models/home_page_model.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_38/constant/constants.dart';

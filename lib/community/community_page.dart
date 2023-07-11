@@ -36,7 +36,7 @@ class CommunityPage extends ConsumerWidget {
                       children: [
                         Positioned.fill(
                             child: Image.asset(
-                          "assets/images/communitybanner.jpg",
+                          "assets/images/logo_greenshare.png",
                           fit: BoxFit.cover,
                         ))
                       ],
@@ -50,7 +50,7 @@ class CommunityPage extends ConsumerWidget {
                         alignment: Alignment.topLeft,
                         child: CircleAvatar(
                           radius: 30,
-                          backgroundColor: ColorConstants.OrangeAppColor,
+                          backgroundColor: ColorConstants.AppColor,
                           child: Text(
                             community.name[0].toUpperCase(),
                             style: MyTextConstant.ralewayTextStyle,
