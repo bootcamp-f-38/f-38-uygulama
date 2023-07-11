@@ -65,10 +65,11 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
+            Image.asset(
+             "assets/images/logo_greenshare.png",
+              height: 150,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
             ),
             SizedBox(height: 30),
             TextField(

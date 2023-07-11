@@ -1,3 +1,4 @@
+import 'package:f_38/constant/constants.dart';
 import 'package:f_38/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../controller/auth_controller.dart';
 import '../controller/profile_controller.dart';
 import '../utils/utils.dart';
+import '../widgets/profile_post_card.dart';
 
 class UserProfileScreen extends ConsumerWidget {
   final String uid;
@@ -28,7 +30,7 @@ class UserProfileScreen extends ConsumerWidget {
                       children: [
                         Positioned.fill(
                           child: Image.asset(
-                            "assets/images/image1.png",
+                            "assets/images/logo_greenshare.png",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -37,9 +39,12 @@ class UserProfileScreen extends ConsumerWidget {
                           padding:
                               const EdgeInsets.all(20).copyWith(bottom: 70),
                           child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage("assets/images/image1.png"),
-                            radius: 45,
+                            backgroundColor: ColorConstants.OrangeAppColor,
+                            radius: 22,
+                            child: Text(
+                              user.name[0].toUpperCase(),
+                              style: MyTextConstant.ralewayTextStyle,
+                            ),
                           ),
                         ),
                         Container(
@@ -54,7 +59,10 @@ class UserProfileScreen extends ConsumerWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 25),
                             ),
-                            child: const Text('Edit Profile'),
+                            child: const Text(
+                              'Profili Düzenle',
+                              style: MyTextConstant.ralewayTextStyleWhite,
+                            ),
                           ),
                         ),
                       ],
@@ -69,7 +77,7 @@ class UserProfileScreen extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'u/${user.name}',
+                                '@${user.username}',
                                 style: const TextStyle(
                                   fontSize: 19,
                                   fontWeight: FontWeight.bold,
@@ -91,7 +99,7 @@ class UserProfileScreen extends ConsumerWidget {
                         itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
                           final post = data[index];
-                          return PostCardWidget(post: post);
+                          return PostCardProfileWidget(post: post);
                         },
                       );
                     },
