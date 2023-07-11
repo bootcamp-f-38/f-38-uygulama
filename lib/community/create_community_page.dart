@@ -37,7 +37,7 @@ class _CreateCommunityPageState extends ConsumerState<CreateCommunityPage> {
           "Topluluk oluştur",
           style: MyTextConstant.myCustomTextStyleWhite,
         ),
-        backgroundColor: ColorConstants.AppColor,
+        backgroundColor: ColorConstants.OrangeAppColor,
       ),
       body: _isLoading
           ? const Loader()
@@ -67,7 +67,7 @@ class _CreateCommunityPageState extends ConsumerState<CreateCommunityPage> {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(double.infinity, 50),
-                          backgroundColor: ColorConstants.AppColor,
+                          backgroundColor: ColorConstants.OrangeAppColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
                       onPressed: createCommunity,

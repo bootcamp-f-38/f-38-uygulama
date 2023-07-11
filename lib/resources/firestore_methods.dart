@@ -26,7 +26,6 @@ class FireStoreMethods {
         id: postId,
         title: '',
         type: '',
-        commentCount: 0,
       );
       _firestore.collection('posts').doc(postId).set(post.toMap());
       res = "success";

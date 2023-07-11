@@ -39,7 +39,7 @@ class UserProfileScreen extends ConsumerWidget {
                           padding:
                               const EdgeInsets.all(20).copyWith(bottom: 70),
                           child: CircleAvatar(
-                            backgroundColor: ColorConstants.AppColor,
+                            backgroundColor: ColorConstants.OrangeAppColor,
                             radius: 22,
                             child: Text(
                               user.name[0].toUpperCase(),
