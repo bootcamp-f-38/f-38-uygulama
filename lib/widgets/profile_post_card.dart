@@ -33,132 +33,124 @@ class PostCardProfileWidget extends ConsumerWidget {
     final isTypeText = post.type == 'yazi';
     final isTypeLink = post.type == 'link';
     final user = ref.watch(userProvider)!;
+
     return Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-                child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                    horizontal: 16,
-                  ).copyWith(right: 0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        child: Text(
-                          post.communityName[0].toUpperCase(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: ColorConstants.AppColor,
-                        radius: 20,
+        Expanded(
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 4,
+                  horizontal: 4,
+                ).copyWith(right: 0),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Topluluk Paylaşımı",
+                            style: MyTextConstant.ralewayTextStyleBold,
+                          ),
+                          Text(
+                            "/${post.communityName}",
+                            style: MyTextConstant.myCustomTextStyle,
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          post.title,
+                          style: MyTextConstant.ralewayTextStyleBold,
+                          maxLines: 3,
+                        ),
+                      ],
+                    ),
+                    if (isTypeImage)
+                      Container(
+                        alignment: Alignment.topLeft,
+                        height: MediaQuery.of(context).size.height * 0.20,
+                        width: MediaQuery.of(context).size.width * 0.40,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              "Topluluk Paylaşımı /${post.communityName}",
-                              style: MyTextConstant.ralewayTextStyleBold,
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: SizedBox(
+                                  child: Image.network(
+                                    post.link!,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    children: [
+                    if (isTypeLink)
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        child: AnyLinkPreview(
+                          displayDirection: UIDirection.uiDirectionHorizontal,
+                          link: post.link!,
+                        ),
+                      ),
+                    if (isTypeText)
+                      Container(
+                        alignment: Alignment.bottomLeft,
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
-                          post.title,
-                          style: MyTextConstant.ralewayTextStyleBold,
+                          post.description!,
+                          style: MyTextConstant.ralewayTextStyle,
                         ),
                       ),
-                      if (isTypeImage)
-                        Container(
-                          alignment: Alignment.topLeft,
-                          height: MediaQuery.of(context).size.height * 0.25,
-                          width: MediaQuery.of(context).size.width * 0.50,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  child: SizedBox(
-                                    child: Image.network(
-                                      post.link!,
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () => navigateToComments(context),
+                          icon: const Icon(
+                            Icons.comment,
+                            size: 16,
                           ),
                         ),
-                      if (isTypeLink)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 18),
-                          child: AnyLinkPreview(
-                            displayDirection: UIDirection.uiDirectionHorizontal,
-                            link: post.link!,
-                          ),
-                        ),
-                      if (isTypeText)
-                        Container(
-                          alignment: Alignment.bottomLeft,
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Text(post.description!,
-                              style: MyTextConstant.ralewayTextStyle),
-                        ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
+                        if (post.uid == user.uid)
                           IconButton(
-                            onPressed: () => navigateToComments(context),
-                            icon: const Icon(
-                              Icons.comment,
+                            onPressed: () => deletePost(ref, context),
+                            icon: Icon(
+                              Icons.delete,
+                              size: 16,
                             ),
                           ),
-                          Text(
-                            '${post.commentCount == 0 ? 'Yorum' : post.commentCount}',
-                            style: MyTextConstant.ralewayTextStyle,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          if (post.uid == user.uid)
-                            IconButton(
-                              onPressed: () => deletePost(ref, context),
-                              icon: Icon(
-                                Icons.delete,
-                                size: 24,
-                              ),
-                            ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Divider(
-                        thickness: 1,
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1,
+                    ),
+                  ],
                 ),
-              ],
-            )),
-          ],
+              ),
+            ],
+          ),
         ),
       ],
     );

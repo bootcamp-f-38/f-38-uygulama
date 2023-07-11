@@ -17,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:routemaster/routemaster.dart';
-
 import '../controller/auth_controller.dart';
 import '../resources/auth_methods.dart';
 import '../router.dart';

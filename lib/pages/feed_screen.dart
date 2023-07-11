@@ -10,6 +10,7 @@ import '../community/search_community.dart';
 import '../constant/constants.dart';
 import '../controller/auth_controller.dart';
 import '../utils/utils.dart';
+import '../widgets/feed_post_card.dart';
 import '../widgets/post_card.dart';
 
 class FeedScreen extends ConsumerWidget {
@@ -116,7 +117,7 @@ class FeedScreen extends ConsumerWidget {
                 scrollDirection: Axis.horizontal,
                 child: Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
-                  width: 882,
+                  width: 1000,
                   height: 32,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -172,7 +173,7 @@ class FeedScreen extends ConsumerWidget {
                               itemCount: data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 final post = data[index];
-                                return PostCardWidget(post: post);
+                                return PostCardFeedWidget(post: post);
                               },
                             );
                           },
