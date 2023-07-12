@@ -1,15 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:f_38/controller/community_controller.dart';
 import 'package:f_38/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../constant/constants.dart';
+import '../controller/profile_controller.dart';
 
-class SearchCommunityDelegate extends SearchDelegate {
+class SearchUserDelegate extends SearchDelegate {
   final WidgetRef ref;
-  SearchCommunityDelegate({
+  SearchUserDelegate({
     required this.ref,
   });
 
@@ -25,7 +25,8 @@ class SearchCommunityDelegate extends SearchDelegate {
   }
 
   @override
-  String get searchFieldLabel => 'Topluluk arayın...';
+  String get searchFieldLabel => 'Kullanıcı arayın..';
+
   @override
   Widget? buildLeading(BuildContext context) {
     return null;
@@ -38,37 +39,37 @@ class SearchCommunityDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return ref.watch(searchCommunityProvider(query)).when(
-        data: (communities) => ListView.builder(
-            itemCount: communities.length,
+    return ref.watch(searchUserProvider(query)).when(
+        data: (users) => ListView.builder(
+            itemCount: users.length,
             itemBuilder: (BuildContext context, int index) {
-              if (index >= communities.length) {
+              if (index >= users.length) {
                 return null;
               }
 
-              final community = communities[index];
+              final user = users[index];
               return ListTile(
                 leading: CircleAvatar(
                   backgroundColor: ColorConstants.AppColor,
                   child: Text(
-                    community.name.isNotEmpty
-                        ? community.name[0].toUpperCase()
-                        : "",
+                    user.name.isNotEmpty ? user.name[0].toUpperCase() : "",
                     style: MyTextConstant.ralewayTextStyle,
                   ),
                 ),
                 title: Text(
-                  community.name,
+                  user.name,
                   style: MyTextConstant.ralewayTextStyle,
                 ),
-                onTap: () => navigateToCommunity(context, community.name),
+                onTap: () => navigateToUserP(context),
               );
             }),
         error: (error, stackTrace) => ErrorText(error: error.toString()),
         loading: () => const Loader());
   }
 
-  void navigateToCommunity(BuildContext context, String communityName) {
-    Routemaster.of(context).push('/community/${communityName}');
+  void navigateToUserP(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+    final uid = user.uid;
+    Routemaster.of(context).push('/userp/$uid');
   }
 }

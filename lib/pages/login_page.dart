@@ -36,10 +36,7 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
       if (context.mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => FeedScreen()),
-        );
+        Routemaster.of(context).push('/');
 
         setState(() {
           _circular = false;
