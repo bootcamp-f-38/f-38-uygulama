@@ -1,6 +1,7 @@
 import 'package:f_38/controller/community_controller.dart';
 import 'package:f_38/controller/post_controller.dart';
 import 'package:f_38/pages/profile_drawer.dart';
+import 'package:f_38/pages/search_user.dart';
 import 'package:f_38/widgets/bottomappbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -10,6 +11,7 @@ import 'package:routemaster/routemaster.dart';
 import '../community/search_community.dart';
 import '../constant/constants.dart';
 import '../controller/auth_controller.dart';
+import '../models/community.dart';
 import '../utils/utils.dart';
 import '../widgets/feed_post_card.dart';
 import '../widgets/post_card.dart';
@@ -32,6 +34,10 @@ class FeedScreen extends ConsumerWidget {
     void navigateToUserP(BuildContext context) {
       final uid = user.uid;
       Routemaster.of(context).push('/userp/$uid');
+    }
+
+    void navigateToCommunity(BuildContext context, Community community) {
+      Routemaster.of(context).push('/community/${community.name}');
     }
 
     return Scaffold(
@@ -63,6 +69,15 @@ class FeedScreen extends ConsumerWidget {
                               showSearch(
                                 context: context,
                                 delegate: SearchCommunityDelegate(ref: ref),
+                              );
+                            },
+                            icon: Icon(Icons.explore),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              showSearch(
+                                context: context,
+                                delegate: SearchUserDelegate(ref: ref),
                               );
                             },
                             icon: Icon(Icons.search),
@@ -128,18 +143,23 @@ class FeedScreen extends ConsumerWidget {
                             return communities.map((community) {
                               return Row(
                                 children: [
-                                  Container(
-                                    width: 131,
-                                    height: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: ColorConstants.secondAppColor,
-                                      borderRadius: BorderRadius.circular(18.5),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        community.name,
-                                        style: MyTextConstant
-                                            .myCustomTextStyleWhite,
+                                  InkWell(
+                                    onTap: () =>
+                                        navigateToCommunity(context, community),
+                                    child: Container(
+                                      width: 131,
+                                      height: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: ColorConstants.secondAppColor,
+                                        borderRadius:
+                                            BorderRadius.circular(18.5),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          community.name,
+                                          style: MyTextConstant
+                                              .myCustomTextStyleWhite,
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -44,4 +44,24 @@ class UserProfileRepository {
               .toList(),
         );
   }
+
+  Stream<List<UserModel>> searchUser(String query) {
+    return _users
+        .where("username",
+            isGreaterThanOrEqualTo: query.isEmpty ? 0 : query,
+            isLessThan: query.isEmpty
+                ? null
+                : query.substring(0, query.length - 1) +
+                    String.fromCharCode(
+                      query.codeUnitAt(query.length - 1) + 1,
+                    ))
+        .snapshots()
+        .map((event) {
+      List<UserModel> users = [];
+      for (var user in event.docs) {
+        users.add(UserModel.fromMap(user.data() as Map<String, dynamic>));
+      }
+      return users;
+    });
+  }
 }

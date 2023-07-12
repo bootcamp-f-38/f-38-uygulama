@@ -1,3 +1,4 @@
+import 'package:f_38/models/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/post.dart';
 import '../providers/storage_repository_provider.dart';
@@ -17,6 +18,10 @@ final getUserPostsProvider = StreamProvider.family((ref, String uid) {
   return ref.read(userProfileControllerProvider.notifier).getUserPosts(uid);
 });
 
+final searchUserProvider = StreamProvider.family((ref, String query) {
+  return ref.watch(userProfileControllerProvider.notifier).searchUser(query);
+});
+
 class UserProfileController extends StateNotifier<bool> {
   final UserProfileRepository _userProfileRepository;
   final Ref _ref;
@@ -31,5 +36,9 @@ class UserProfileController extends StateNotifier<bool> {
         super(false);
   Stream<List<Post>> getUserPosts(String uid) {
     return _userProfileRepository.getUserPosts(uid);
+  }
+
+  Stream<List<UserModel>> searchUser(String query) {
+    return _userProfileRepository.searchUser(query);
   }
 }

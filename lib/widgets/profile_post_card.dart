@@ -53,7 +53,7 @@ class PostCardProfileWidget extends ConsumerWidget {
                         children: [
                           Text(
                             "Topluluk Paylaşımı",
-                            style: MyTextConstant.ralewayTextStyleBold,
+                            style: MyTextConstant.ralewayTextStyleBoldGreen,
                           ),
                           Text(
                             "/${post.communityName}",
