@@ -9,7 +9,7 @@ import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/den.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:f_38/pages/feed_screen.dart';
-import 'package:f_38/pages/new_pages/comunity_page.dart';
+
 import 'package:f_38/pages/profile_drawer.dart';
 import 'package:f_38/pages/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
