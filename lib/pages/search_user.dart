@@ -6,6 +6,7 @@ import 'package:routemaster/routemaster.dart';
 
 import '../constant/constants.dart';
 import '../controller/profile_controller.dart';
+import '../models/user.dart';
 
 class SearchUserDelegate extends SearchDelegate {
   final WidgetRef ref;
@@ -60,15 +61,14 @@ class SearchUserDelegate extends SearchDelegate {
                   user.name,
                   style: MyTextConstant.ralewayTextStyle,
                 ),
-                onTap: () => navigateToUserP(context),
+                onTap: () => navigateToUserP(context, user),
               );
             }),
         error: (error, stackTrace) => ErrorText(error: error.toString()),
         loading: () => const Loader());
   }
 
-  void navigateToUserP(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+  void navigateToUserP(BuildContext context, UserModel user) {
     final uid = user.uid;
     Routemaster.of(context).push('/userp/$uid');
   }

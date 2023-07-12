@@ -45,38 +45,39 @@ class _CommentsScreenState extends ConsumerState<CommentsScreen> {
       ),
       body: ref.watch(getPostByIdProvider(widget.postId)).when(
             data: (data) {
-              return Column(
-                children: [
-                  PostCardWidget(post: data),
-                  TextField(
-                    onSubmitted: (val) => addComment(data),
-                    controller: _commentController,
-                    decoration: const InputDecoration(
-                      hintText: 'Yorum ekle...',
-                      filled: true,
-                      border: InputBorder.none,
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    PostCardWidget(post: data),
+                    TextField(
+                      onSubmitted: (val) => addComment(data),
+                      controller: _commentController,
+                      decoration: const InputDecoration(
+                        hintText: 'Yorum ekle...',
+                        filled: true,
+                        border: InputBorder.none,
+                      ),
                     ),
-                  ),
-                  ref.watch(getPostCommentsProvider(widget.postId)).when(
-                        data: (data) {
-                          return Expanded(
-                            child: ListView.builder(
+                    ref.watch(getPostCommentsProvider(widget.postId)).when(
+                          data: (data) {
+                            return ListView.builder(
+                              shrinkWrap: true,
                               itemCount: data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 final comment = data[index];
                                 return CommentCard(comment: comment);
                               },
-                            ),
-                          );
-                        },
-                        error: (error, stackTrace) {
-                          return ErrorText(
-                            error: error.toString(),
-                          );
-                        },
-                        loading: () => const Loader(),
-                      ),
-                ],
+                            );
+                          },
+                          error: (error, stackTrace) {
+                            return ErrorText(
+                              error: error.toString(),
+                            );
+                          },
+                          loading: () => const Loader(),
+                        ),
+                  ],
+                ),
               );
             },
             error: (error, stackTrace) {
