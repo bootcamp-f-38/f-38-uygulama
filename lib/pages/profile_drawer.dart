@@ -1,4 +1,5 @@
 import 'package:f_38/constant/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -12,13 +13,15 @@ class ProfileDrawer extends ConsumerWidget {
     ref.read(authControllerProvider.notifier).logout();
   }
 
-  void navigateToUserProfile(BuildContext context) {
-    Routemaster.of(context).push('/profile');
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
+    final _user = FirebaseAuth.instance.currentUser!;
+
+    void navigateToUserP(BuildContext context) {
+      final uid = user.uid;
+      Routemaster.of(context).push('/userp/$uid');
+    }
 
     return Drawer(
       child: SafeArea(
@@ -38,7 +41,7 @@ class ProfileDrawer extends ConsumerWidget {
                 style: MyTextConstant.ralewayTextStyle,
               ),
               leading: const Icon(Icons.person),
-              onTap: () => navigateToUserProfile(context),
+              onTap: () => navigateToUserP(context),
             ),
             ListTile(
               title: const Text(

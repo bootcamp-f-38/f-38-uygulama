@@ -20,6 +20,7 @@ import 'package:routemaster/routemaster.dart';
 import '../controller/auth_controller.dart';
 import '../resources/auth_methods.dart';
 import '../router.dart';
+import '../widgets/bottomappbar.dart';
 import 'login_page.dart';
 
 class HomePage extends ConsumerWidget {
@@ -105,53 +106,7 @@ class HomePage extends ConsumerWidget {
     ];
 
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: Row(children: [
-          Spacer(),
-          IconButton(
-              onPressed: () {
-                navigateToUserP(context);
-              },
-              icon: Icon(
-                Icons.home,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.view_timeline,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-              onPressed: () {
-                Routemaster.of(context).push('/add-post');
-              },
-              icon: Icon(
-                Icons.add_box,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-              onPressed: () {
-                Routemaster.of(context).push('/feed');
-              },
-              icon: Icon(
-                Icons.menu_book_outlined,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.search_outlined,
-              color: ColorConstants.AppColor,
-            ),
-          ),
-          Spacer(),
-        ]),
-      ),
+      bottomNavigationBar: BottomAppBarWidget(),
       endDrawer: const ProfileDrawer(),
       body: Padding(
         padding: EdgeInsets.fromLTRB(24, 24, 24, 11.5),
