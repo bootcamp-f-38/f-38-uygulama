@@ -168,6 +168,14 @@ class UserProfileScreen extends ConsumerWidget {
                           : data
                               .where((post) => post.type == 'fotograf')
                               .toList();
+                      if (filteredData.isEmpty) {
+                        return Center(
+                          child: Text(
+                            'Henüz gönderi bulunmamaktadır.',
+                            style: MyTextConstant.ralewayTextStyle,
+                          ),
+                        );
+                      }
 
                       if (displayText) {
                         return GridView.builder(

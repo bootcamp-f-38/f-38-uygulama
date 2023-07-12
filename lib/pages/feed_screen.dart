@@ -34,6 +34,53 @@ class FeedScreen extends ConsumerWidget {
     }
 
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: Row(children: [
+          Spacer(),
+          IconButton(
+              onPressed: () {
+                navigateToUserP(context);
+              },
+              icon: Icon(
+                Icons.home,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.view_timeline,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {
+                Routemaster.of(context).push('/add-post');
+              },
+              icon: Icon(
+                Icons.add_box,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+              onPressed: () {
+                Routemaster.of(context).push('/feed');
+              },
+              icon: Icon(
+                Icons.menu_book_outlined,
+                color: ColorConstants.AppColor,
+              )),
+          Spacer(),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.search_outlined,
+              color: ColorConstants.AppColor,
+            ),
+          ),
+          Spacer(),
+        ]),
+      ),
       endDrawer: const ProfileDrawer(),
       body: Padding(
         padding: EdgeInsets.fromLTRB(24, 24, 24, 11.5),
@@ -142,7 +189,7 @@ class FeedScreen extends ConsumerWidget {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 16,
+                                    width: 8,
                                   ),
                                 ],
                               );
@@ -166,6 +213,35 @@ class FeedScreen extends ConsumerWidget {
                         .watch(userPostsProvider(communities))
                         .when(
                           data: (data) {
+                            if (data.isEmpty) {
+                              return Center(
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/logo_greenshare.png",
+                                      height: 150,
+                                      width: MediaQuery.of(context).size.width,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Text(
+                                      'Henüz gönderi bulunmamaktadır.',
+                                      style: MyTextConstant.ralewayTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      'Topluluklara katıl!',
+                                      style:
+                                          MyTextConstant.ralewayTextStyleBold,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
                             return ListView.builder(
                               shrinkWrap: true, // Bu özellik eklendi.
                               physics:
