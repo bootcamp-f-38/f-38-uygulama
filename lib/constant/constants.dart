@@ -21,7 +21,7 @@ class ColorConstants {
 
 class MyTextConstant {
   static const TextStyle ralewayTextStyle = TextStyle(
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     height: 1.175,
     letterSpacing: 0.0210000008,
@@ -35,7 +35,7 @@ class MyTextConstant {
     color: Color(0xff2e3648),
   );
   static const TextStyle ralewayTextStyleBoldGreen = TextStyle(
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: FontWeight.bold,
     height: 1.175,
     letterSpacing: 0.0210000008,
@@ -62,6 +62,27 @@ class MyTextConstant {
     height: 1.175,
     letterSpacing: 0.4,
     color: Color(0xff2e3648),
+  );
+  static const TextStyle robotoSlabTextStyleSize15 = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+    height: 1.175,
+    letterSpacing: 0.4,
+    color: Color(0xff2e3648),
+  );
+  static const TextStyle robotoSlabTextStyleSize15Bold = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w700,
+    height: 1.175,
+    letterSpacing: 0.4,
+    color: Color(0xff2e3648),
+  );
+  static const TextStyle robotoSlabTextStyleSize15BoldGreen = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w700,
+    height: 1.175,
+    letterSpacing: 0.4,
+    color: Color(0xFF1B5E20),
   );
 
   static const TextStyle robotoSlabTextStyleCaption = TextStyle(
