@@ -4,7 +4,7 @@ import 'package:f_38/community/community_list.dart';
 
 import 'package:f_38/community/search_community.dart';
 import 'package:f_38/constant/constants.dart';
-import 'package:f_38/index.dart';
+
 import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/den.dart';
 import 'package:f_38/pages/event_page.dart';
