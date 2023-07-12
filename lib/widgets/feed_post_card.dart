@@ -4,6 +4,7 @@ import 'package:f_38/controller/post_controller.dart';
 import 'package:f_38/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../controller/auth_controller.dart';
@@ -27,12 +28,19 @@ class PostCardFeedWidget extends ConsumerWidget {
     Routemaster.of(context).push('/post/${post.id}/comments');
   }
 
+  String formatTimestamp(DateTime timestamp) {
+    final formatter = DateFormat('dd.MM.yyyy HH:mm');
+    return formatter.format(timestamp);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTypeImage = post.type == 'fotograf';
     final isTypeText = post.type == 'yazi';
     final isTypeLink = post.type == 'link';
     final user = ref.watch(userProvider)!;
+    final timestampString = formatTimestamp(post.timestamp);
+
     return Column(
       children: [
         Container(
@@ -86,18 +94,18 @@ class PostCardFeedWidget extends ConsumerWidget {
                                 onPressed: () => deletePost(ref, context),
                                 icon: Icon(
                                   Icons.delete,
-                                  size: 24,
+                                  size: 22,
                                 ),
                               ),
                           ],
                         ),
                         SizedBox(
-                          height: 4,
+                          height: 6,
                         ),
                         Row(
                           children: [
                             Text(
-                              "Topluluk Paylaşımı /${post.communityName}",
+                              " Topluluk Paylaşımı /${post.communityName}",
                               style: MyTextConstant.myCustomTextStyle,
                             ),
                           ],
@@ -162,7 +170,7 @@ class PostCardFeedWidget extends ConsumerWidget {
                                   likePost(ref);
                                 },
                                 icon: Icon(Icons.favorite,
-                                    size: 25,
+                                    size: 22,
                                     color: post.likes.contains(user.uid)
                                         ? Colors.redAccent
                                         : Colors.grey)),
@@ -170,6 +178,7 @@ class PostCardFeedWidget extends ConsumerWidget {
                               onPressed: () => navigateToComments(context),
                               icon: const Icon(
                                 Icons.comment,
+                                size: 22,
                               ),
                             ),
                             Text(
@@ -182,10 +191,21 @@ class PostCardFeedWidget extends ConsumerWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 8,
+                          height: 5,
                         ),
                         Divider(
                           thickness: 1,
+                        ),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            'Gönderildi: $timestampString',
+                            style: MyTextConstant.ralewayTextStyle.copyWith(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
                         ),
                       ],
                     ),
