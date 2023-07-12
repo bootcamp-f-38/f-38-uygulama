@@ -18,8 +18,8 @@ final loggedOutRoute = RouteMap(routes: {
   '/signup': (_) => MaterialPage(child: SignUpPage()),
 });
 final loggedInRoute = RouteMap(routes: {
-  '/signup': (_) => MaterialPage(child: HomePage()),
-  '/': (_) => MaterialPage(child: HomePage()),
+  '/signup': (_) => MaterialPage(child: FeedScreen()),
+  '/': (_) => MaterialPage(child: FeedScreen()),
   '/profile': (routeData) => MaterialPage(
         child: ProfilePage(),
       ),

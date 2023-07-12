@@ -1,6 +1,7 @@
 import 'package:f_38/controller/community_controller.dart';
 import 'package:f_38/controller/post_controller.dart';
 import 'package:f_38/pages/profile_drawer.dart';
+import 'package:f_38/widgets/bottomappbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,53 +35,7 @@ class FeedScreen extends ConsumerWidget {
     }
 
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: Row(children: [
-          Spacer(),
-          IconButton(
-              onPressed: () {
-                navigateToUserP(context);
-              },
-              icon: Icon(
-                Icons.home,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.view_timeline,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-              onPressed: () {
-                Routemaster.of(context).push('/add-post');
-              },
-              icon: Icon(
-                Icons.add_box,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-              onPressed: () {
-                Routemaster.of(context).push('/feed');
-              },
-              icon: Icon(
-                Icons.menu_book_outlined,
-                color: ColorConstants.AppColor,
-              )),
-          Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.search_outlined,
-              color: ColorConstants.AppColor,
-            ),
-          ),
-          Spacer(),
-        ]),
-      ),
+      bottomNavigationBar: BottomAppBarWidget(),
       endDrawer: const ProfileDrawer(),
       body: Padding(
         padding: EdgeInsets.fromLTRB(24, 24, 24, 11.5),
