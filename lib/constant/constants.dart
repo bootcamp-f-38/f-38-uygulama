@@ -71,6 +71,13 @@ class MyTextConstant {
     letterSpacing: 0.4,
     color: Color(0xff2e3648),
   );
+  static const TextStyle robotoSlabTextStyleBold = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    height: 1.175,
+    letterSpacing: 0.4,
+    color: Color(0xff2e3648),
+  );
   static const TextStyle robotoSlabTextStyleCaption2 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
