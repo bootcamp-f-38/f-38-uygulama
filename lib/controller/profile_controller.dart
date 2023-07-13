@@ -1,8 +1,10 @@
+import 'package:f_38/enums/enums.dart';
 import 'package:f_38/models/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/post.dart';
 import '../providers/storage_repository_provider.dart';
 import '../repository/profile_repository.dart';
+import 'auth_controller.dart';
 
 final userProfileControllerProvider =
     StateNotifierProvider<UserProfileController, bool>((ref) {
@@ -40,5 +42,14 @@ class UserProfileController extends StateNotifier<bool> {
 
   Stream<List<UserModel>> searchUser(String query) {
     return _userProfileRepository.searchUser(query);
+  }
+
+  void updateUserBadge(UserBadge badge) async {
+    UserModel user = _ref.read(userProvider)!;
+    user = user.copyWith(badge: user.badge + badge.badge);
+
+    final res = await _userProfileRepository.updateUserBadge(user);
+    res.fold((l) => null,
+        (r) => _ref.read(userProvider.notifier).update((state) => user));
   }
 }

@@ -54,6 +54,7 @@ class SignUpPage extends ConsumerWidget {
         following: [],
         uid: "",
         bio: bio,
+        badge: 0,
       );
       authController.updateUser(user);
 

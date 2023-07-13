@@ -70,7 +70,7 @@ class UserProfileScreen extends ConsumerWidget {
                               const EdgeInsets.all(20).copyWith(bottom: 70),
                           child: CircleAvatar(
                             backgroundColor: ColorConstants.AppColor,
-                            radius: 22,
+                            radius: 23,
                             child: Text(
                               user.name[0].toUpperCase(),
                               style: MyTextConstant.ralewayTextStyle,
@@ -80,22 +80,36 @@ class UserProfileScreen extends ConsumerWidget {
                         Container(
                           alignment: Alignment.bottomLeft,
                           padding: const EdgeInsets.all(16),
-                          child: OutlinedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                          child: Row(
+                            children: [
+                              OutlinedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 25),
+                                ),
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Profili Düzenle',
+                                    style: MyTextConstant.ralewayTextStyleWhite,
+                                  ),
+                                ),
                               ),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                            ),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Profili Düzenle',
-                                style: MyTextConstant.ralewayTextStyleWhite,
+                              SizedBox(
+                                width: 10,
                               ),
-                            ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  '✨ ${user.badge} Etkileşim Puanı',
+                                  style: MyTextConstant.ralewayTextStyleBold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
