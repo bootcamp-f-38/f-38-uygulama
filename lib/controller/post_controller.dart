@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:f_38/controller/profile_controller.dart';
+import 'package:f_38/enums/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -75,6 +77,9 @@ class PostController extends StateNotifier<bool> {
     );
 
     final res = await _postRepository.addPost(post);
+    _ref
+        .read(userProfileControllerProvider.notifier)
+        .updateUserBadge(UserBadge.textPost);
 
     state = false;
     res.fold((l) => showSnackBar(context, l.message), (r) {
@@ -112,6 +117,9 @@ class PostController extends StateNotifier<bool> {
       );
 
       final res = await _postRepository.addPost(post);
+      _ref
+          .read(userProfileControllerProvider.notifier)
+          .updateUserBadge(UserBadge.imagePost);
 
       state = false;
       res.fold((l) => showSnackBar(context, l.message), (r) {
@@ -145,6 +153,9 @@ class PostController extends StateNotifier<bool> {
     );
 
     final res = await _postRepository.addPost(post);
+    _ref
+        .read(userProfileControllerProvider.notifier)
+        .updateUserBadge(UserBadge.linkPost);
 
     state = false;
     res.fold((l) => showSnackBar(context, l.message), (r) {
@@ -170,11 +181,17 @@ class PostController extends StateNotifier<bool> {
 
   void like(Post post) async {
     final uid = _ref.read(userProvider)!.uid;
+    _ref
+        .read(userProfileControllerProvider.notifier)
+        .updateUserBadge(UserBadge.like);
     _postRepository.like(post, uid);
   }
 
   void deletePost(Post post, BuildContext context) async {
     final res = await _postRepository.deletePost(post);
+    _ref
+        .read(userProfileControllerProvider.notifier)
+        .updateUserBadge(UserBadge.deletePost);
 
     res.fold((l) => null, (r) => showSnackBar(context, 'Gönderi silindi!'));
   }
@@ -195,6 +212,9 @@ class PostController extends StateNotifier<bool> {
       profilePic: "",
     );
     final res = await _postRepository.addComment(comment);
+    _ref
+        .read(userProfileControllerProvider.notifier)
+        .updateUserBadge(UserBadge.comment);
 
     res.fold((l) => showSnackBar(context, l.message), (r) => null);
   }

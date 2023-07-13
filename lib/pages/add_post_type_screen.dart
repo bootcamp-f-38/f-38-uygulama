@@ -135,12 +135,14 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              size: 40,
-                            ),
-                          ),
+                          child: imageFile != null
+                              ? Image.file(imageFile!)
+                              : const Center(
+                                  child: Icon(
+                                    Icons.camera_alt_outlined,
+                                    size: 40,
+                                  ),
+                                ),
                         ),
                       ),
                     ),

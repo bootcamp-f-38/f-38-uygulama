@@ -76,6 +76,7 @@ class AuthController extends StateNotifier<bool> {
             following: [],
             uid: userCredential.user!.uid,
             bio: '',
+            badge: 0,
           );
           _ref.read(userProvider.notifier).state = userModel;
         }
