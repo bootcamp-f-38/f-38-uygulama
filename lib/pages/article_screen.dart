@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../models/article_model.dart';
 import '../widgets/custom_tag.dart';
@@ -139,8 +140,12 @@ class _NewsBody extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             article.body,
-            style:
-                Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.5),
+            style: GoogleFonts.raleway(
+                textStyle: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(height: 1.5),
+                fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 20),
           GridView.builder(

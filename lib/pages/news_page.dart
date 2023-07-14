@@ -1,5 +1,6 @@
 import 'package:f_38/widgets/bottomappbar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../models/article_model.dart';
@@ -59,13 +60,18 @@ class _BreakingNews extends StatelessWidget {
             children: [
               Text(
                 'Yeni Haberler',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style: GoogleFonts.raleway(
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
               ),
-              Text('Daha fazlası',
-                  style: Theme.of(context).textTheme.bodyLarge),
+              Text(
+                'Daha fazlası',
+                style: GoogleFonts.raleway(
+                    textStyle: Theme.of(context).textTheme.bodyLarge),
+              ),
             ],
           ),
           const SizedBox(height: 20),
@@ -103,11 +109,18 @@ class _BreakingNews extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                            '${DateTime.now().difference(articles[index].createdAt).inHours} saat önce',
-                            style: Theme.of(context).textTheme.bodySmall),
+                          '${DateTime.now().difference(articles[index].createdAt).inHours} saat önce',
+                          style: GoogleFonts.raleway(
+                              fontWeight: FontWeight.w500,
+                              textStyle: Theme.of(context).textTheme.bodySmall),
+                        ),
                         const SizedBox(height: 5),
-                        Text('${articles[index].author}',
-                            style: Theme.of(context).textTheme.bodySmall),
+                        Text(
+                          '${articles[index].author}',
+                          style: GoogleFonts.raleway(
+                              fontWeight: FontWeight.w500,
+                              textStyle: Theme.of(context).textTheme.bodySmall),
+                        ),
                       ],
                     ),
                   ),
@@ -145,9 +158,12 @@ class _NewsOfTheDay extends StatelessWidget {
             children: [
               Text(
                 'Günün Haberi',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.white,
-                    ),
+                style: GoogleFonts.raleway(
+                  fontWeight: FontWeight.w500,
+                  textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.white,
+                      ),
+                ),
               ),
             ],
           ),
@@ -164,9 +180,12 @@ class _NewsOfTheDay extends StatelessWidget {
               children: [
                 Text(
                   'Daha fazla öğren',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Colors.black,
-                      ),
+                  style: GoogleFonts.raleway(
+                    fontWeight: FontWeight.w600,
+                    textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.black,
+                        ),
+                  ),
                 ),
                 const SizedBox(width: 10),
                 const Icon(
