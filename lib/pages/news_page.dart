@@ -20,9 +20,11 @@ class NewsPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Routemaster.of(context).pop();
+          },
           icon: const Icon(
-            Icons.menu,
+            Icons.arrow_back,
             color: Colors.white,
           ),
         ),
