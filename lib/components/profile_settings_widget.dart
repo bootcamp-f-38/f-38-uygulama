@@ -256,7 +256,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                         Switch.adaptive(
                           value: _model.switchValue1 ??= true,
                           onChanged: (newValue) async {
-                            setState(() => _model.switchValue1 = newValue!);
+                            setState(() => _model.switchValue1 = newValue);
                           },
                           activeColor: AppTheme.of(context).primary,
                           activeTrackColor: AppTheme.of(context).alternate,
@@ -286,7 +286,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                         Switch.adaptive(
                           value: _model.switchValue2 ??= false,
                           onChanged: (newValue) async {
-                            setState(() => _model.switchValue2 = newValue!);
+                            setState(() => _model.switchValue2 = newValue);
                           },
                           activeColor: AppTheme.of(context).primary,
                           activeTrackColor: AppTheme.of(context).alternate,

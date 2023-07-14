@@ -27,6 +27,13 @@ class MyTextConstant {
     letterSpacing: 0.0210000008,
     color: Color(0xff2e3648),
   );
+  static const TextStyle ralewayTextStyleBold = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    height: 1.175,
+    letterSpacing: 0.0210000008,
+    color: Color(0xff2e3648),
+  );
   static const TextStyle ralewayTextStyleCaption = TextStyle(
     fontSize: 42,
     fontWeight: FontWeight.w400,

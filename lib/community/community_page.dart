@@ -36,7 +36,7 @@ class CommunityPage extends ConsumerWidget {
                       children: [
                         Positioned.fill(
                             child: Image.asset(
-                          "assets/images/communitybanner.jpg",
+                          "assets/images/logo_greenshare.png",
                           fit: BoxFit.cover,
                         ))
                       ],

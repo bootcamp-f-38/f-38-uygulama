@@ -21,6 +21,7 @@ class ContentPage extends StatefulWidget {
 
 class _ContentPageState extends State<ContentPage> {
   String selectedImage = 'assets/images/image1.png';
+  String logoImage ='assets/images/logo.png';
 
   List<String> smallImages = [
     'assets/images/image2.png',
