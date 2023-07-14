@@ -9,7 +9,6 @@ import 'package:f_38/pages/comments_screen.dart';
 import 'package:f_38/pages/feed_screen.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/pages/news_page.dart';
-import 'package:f_38/pages/profile_page.dart';
 import 'package:f_38/pages/profile_screen.dart';
 import 'package:f_38/pages/profile_settings.dart';
 import 'package:f_38/pages/signup_page.dart';
@@ -23,9 +22,6 @@ final loggedOutRoute = RouteMap(routes: {
 final loggedInRoute = RouteMap(routes: {
   '/signup': (_) => MaterialPage(child: FeedScreen()),
   '/': (_) => MaterialPage(child: FeedScreen()),
-  '/profile': (routeData) => MaterialPage(
-        child: ProfilePage(),
-      ),
   '/add-post/:type': (routeData) => MaterialPage(
         child: AddPostTypeScreen(
           type: routeData.pathParameters['type']!,
