@@ -1,23 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/resources/storage_methods.dart';
 import 'package:f_38/router.dart';
 import 'package:f_38/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:routemaster/routemaster.dart';
-
 import '../controller/auth_controller.dart';
 import '../models/user.dart';
 import '../repository/auth_repository.dart';
-import '../resources/auth_methods.dart';
-import 'home_page.dart';
 
 class SignUpPage extends ConsumerWidget {
   final _emailController = TextEditingController();
