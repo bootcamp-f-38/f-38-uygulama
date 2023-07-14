@@ -1,9 +1,10 @@
-import 'package:f_38/constant/app_theme.dart';
 import 'package:f_38/constant/constants.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:routemaster/routemaster.dart';
+
+import '../constant/app_theme.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key});
