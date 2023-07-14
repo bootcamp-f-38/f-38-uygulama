@@ -2,10 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:f_38/constant/constants.dart';
-import 'package:f_38/widgets/post_card.dart';
-
 import '../controller/auth_controller.dart';
 import '../controller/profile_controller.dart';
 import '../utils/utils.dart';

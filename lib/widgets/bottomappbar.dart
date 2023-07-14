@@ -29,7 +29,9 @@ class BottomAppBarWidget extends StatelessWidget {
             )),
         Spacer(),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Routemaster.of(context).push('/news');
+            },
             icon: Icon(
               Icons.view_timeline,
               color: ColorConstants.AppColor,

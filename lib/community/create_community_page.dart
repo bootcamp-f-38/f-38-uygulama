@@ -2,7 +2,6 @@ import 'package:f_38/constant/constants.dart';
 import 'package:f_38/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../controller/community_controller.dart';
 
 class CreateCommunityPage extends ConsumerStatefulWidget {
