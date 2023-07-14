@@ -7,7 +7,6 @@ import 'package:f_38/pages/add_post_type_screen.dart';
 import 'package:f_38/pages/article_screen.dart';
 import 'package:f_38/pages/comments_screen.dart';
 import 'package:f_38/pages/feed_screen.dart';
-import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/login_page.dart';
 import 'package:f_38/pages/news_page.dart';
 import 'package:f_38/pages/profile_page.dart';

@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_38/pages/feed_screen.dart';
 import 'package:f_38/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import '../models/user.dart';
-import '../pages/home_page.dart';
 import '../utils/utils.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
@@ -106,7 +106,7 @@ class AuthController extends StateNotifier<bool> {
 
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => FeedScreen()),
         );
       },
     );

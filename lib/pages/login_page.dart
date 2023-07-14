@@ -1,6 +1,4 @@
-import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/feed_screen.dart';
-import 'package:f_38/pages/home_page.dart';
 import 'package:f_38/pages/signup_page.dart';
 import 'package:f_38/router.dart';
 import 'package:f_38/utils/utils.dart';
