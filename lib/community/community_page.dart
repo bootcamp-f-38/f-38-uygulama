@@ -6,7 +6,6 @@ import 'package:f_38/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
-
 import '../controller/auth_controller.dart';
 import '../models/user.dart';
 import '../repository/auth_repository.dart';
