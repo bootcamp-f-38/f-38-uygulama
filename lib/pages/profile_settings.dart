@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_38/constant/constants.dart';
-import 'package:f_38/pages/profile_page.dart';
+
 import 'package:f_38/utils/utils.dart';
 import 'package:f_38/widgets/bottomappbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
