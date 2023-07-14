@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:f_38/constant/constants.dart';
+import 'package:routemaster/routemaster.dart';
 import '../controller/auth_controller.dart';
 import '../controller/profile_controller.dart';
 import '../utils/utils.dart';
@@ -89,9 +90,11 @@ class UserProfileScreen extends ConsumerWidget {
                                       horizontal: 25),
                                 ),
                                 child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Routemaster.of(context).push('/settings');
+                                  },
                                   child: Text(
-                                    'Profili Düzenle',
+                                    'Ayarlar',
                                     style: MyTextConstant.ralewayTextStyleWhite,
                                   ),
                                 ),
