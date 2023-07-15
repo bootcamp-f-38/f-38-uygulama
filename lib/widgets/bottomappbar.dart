@@ -30,15 +30,6 @@ class BottomAppBarWidget extends StatelessWidget {
         Spacer(),
         IconButton(
             onPressed: () {
-              Routemaster.of(context).push('/news');
-            },
-            icon: Icon(
-              Icons.view_timeline,
-              color: ColorConstants.AppColor,
-            )),
-        Spacer(),
-        IconButton(
-            onPressed: () {
               Routemaster.of(context).push('/add-post');
             },
             icon: Icon(
@@ -51,17 +42,18 @@ class BottomAppBarWidget extends StatelessWidget {
               Routemaster.of(context).push('/createcommunity-list');
             },
             icon: Icon(
-              Icons.menu_book_outlined,
+              Icons.view_timeline,
               color: ColorConstants.AppColor,
             )),
         Spacer(),
         IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.search_outlined,
-            color: ColorConstants.AppColor,
-          ),
-        ),
+            onPressed: () {
+              Routemaster.of(context).push('/news');
+            },
+            icon: Icon(
+              Icons.menu_book_outlined,
+              color: ColorConstants.AppColor,
+            )),
         Spacer(),
       ]),
     );
