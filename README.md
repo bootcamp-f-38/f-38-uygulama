@@ -6,13 +6,13 @@ Takım Flutter F-38
 - Musa Berk Büyükmumcu: Product Owner/Developer
 - Çağatay Atay: Developer
 - Eda Nur Işık: Developer
-- Esma Zeynep Sayılı: Developer
+- Esma Zeynep Sayılı: Aktif Olmayan Üye
 # Ürün İsmi
 GreenShare
 # Product Backlog URL
 https://trello.com/b/eqyNmw51/f38
 # Ürün Açıklaması
-GreenShare, toplumsal ve çevresel sorunları ele alarak toplumu bilinçlendirmeyi hedefleyen yenilikçi bir mobil uygulamadır. Bu uygulama, insanların günlük hayatta küçük adımlar atarak büyük değişimlere katkıda bulunabileceğimize inanıyoruz. GreenShare ile insanlarla aranızda bağlantı kurup birbirlerine ilham verebilir ve toplumun genelinde farkındalık yaratabilirsiniz.
+GreenShare, insanları çevre etkinliklerine teşvik etmek amacıyla tasarlanmış bir uygulamadır. Bu uygulama ile günlük hayatta küçük adımlar atarak büyük değişimlere katkıda bulunabileceğimize inanıyoruz. GreenShare ile insanlarla aranızda bağlantı kurup birbirlerine ilham verebilir ve toplumun genelinde farkındalık yaratabilirsiniz.
 
 Özellikler:
 
@@ -22,7 +22,7 @@ GreenShare, toplumsal ve çevresel sorunları ele alarak toplumu bilinçlendirme
  
 3. 	Bilgilendirici İçerikler: GreenShare, toplumsal ve çevresel sorunlarla ilgili bilgilendirici içerikleri sunar.
  
-4. 	Ödüller ve Teşvikler: GreenShare, kullanıcılarına çevresel farkındalık ve sürdürülebilir eylemler için ödüller ve teşvikler sunar. Kullanıcılar, belirli hedeflere ulaşarak rozetler kazanabilir veya sıralamalarda yükselerek diğer kullanıcılarla rekabet edebilirler. Bu teşvikler, kullanıcıların motivasyonunu artırır ve çevresel eylemlerin bir oyun gibi keyifli bir deneyim haline gelmesini sağlar.
+4. 	Ödüller ve Teşvikler: GreenShare, kullanıcılarına çevresel farkındalık ve sürdürülebilir eylemler için puan sistemi sunar. Kullanıcılar etkişimde bulunarak etkileşim puanı biriktirebilir. Bu kullanıcıların motivasyonunu artırır ve topluluklarda öne çıkmasını sağlar.
 # Hedef Kitle
 - Çevreci gönüllüler
 # Sprint 1
@@ -82,3 +82,31 @@ Takımdaki çoğu kişinin sınav haftasına denk geldiği için biraz yavaş il
 
 Sprint Notları:
 Backend kısmına yoğunlaştık. Users kısmı halledildi, post ve comment kısmına aynı şekilde devam ediliyor.
+
+# Sprint 3
+
+Sprint içinde tamamlanması tahmin edilen puan: 190 Puan
+
+Puan tamamlama mantığı: Toplamda proje boyunca tamamlanması gereken 440 puanlık backlog bulunmaktadır. Projede ilerledikçe gerekli değişiklikler yapılıp yeni backloglar eklendi, bazıları çıkarıldı. Yeni eklenen backloglar ile toplam 550 puanlık backlog tamamlanmıştır. Bu sprint de hedeflenen puanlama tamamlanmıştır.
+
+Daily Scrum:Daily Scrum toplantısı örneği word olarak Readme'de tarafımızdan paylaşılmaktadır. [dailyscrum-sprint3.docx](https://github.com/bootcamp-f-38/f-38-uygulama/files/12065012/dailyscrum-sprint3.docx)
+
+
+Sprint board update: 
+Sprint board screenshotları:
+
+![image](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/07d4a416-4da1-407f-8ed1-84f23a77a34e)
+
+Ürün Durumu: Ekran görüntüleri:
+
+![Screenshot_1689500956](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/e4df3f00-8417-49c2-8232-e8b7b65ec681)
+![Screenshot_1689500990](https://github.com/bootcamp-f-38/f-38-uygulama/assets/121867571/272bd422-ef85-438a-85dd-4cea912f6701)
+
+
+Sprint Review: Alınan kararlar: Uygulama etkileşimleri üzerinde duruldu. Etkileşim puanları eklendi. Post, comment classları tamamlandı. Topluluk listeleri, ana ekran, profil sayfaları, haber sayfaları düzenlenip tamamlandı. Kullanıcı ve topluluk arama özellikleri eklendi. Uygulama tamamlandı.
+
+Sprint Review katılımcıları: Berre Nur Çelik, Musa Berk Büyükmumcu, Çağatay Atay, Eda Nur Işık
+
+Sprint Retrospective: İstenilen görevler tamamlanmıştır. Uygulama tamamlanmıştır.
+
+Sprint Notları: Eksik kalan tüm özellikler tamamlandı. Proje ilerledikçe ortaya çıkan yeni fikirler de eklendi.Uygulama tamamlanmıştır.
