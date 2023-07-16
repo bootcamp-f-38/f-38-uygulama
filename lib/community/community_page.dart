@@ -50,68 +50,71 @@ class CommunityPage extends ConsumerWidget {
             backgroundColor: Colors.white.withOpacity(0.9), // Arkaplan rengi
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Üyeler',
-                    style: MyTextConstant.robotoSlabTextStyleSize15Bold,
-                  ),
-                  SizedBox(height: 16),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: members.map((memberUid) {
-                        return ref.watch(getUserDataProvider(memberUid)).when(
-                          data: (user) {
-                            if (user != null) {
-                              return ListTile(
-                                title: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      child: Text(
-                                        user.username[0].toUpperCase(),
-                                        style: TextStyle(color: Colors.white),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Üyeler',
+                      style: MyTextConstant.robotoSlabTextStyleSize15Bold,
+                    ),
+                    SizedBox(height: 16),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: members.map((memberUid) {
+                          return ref.watch(getUserDataProvider(memberUid)).when(
+                            data: (user) {
+                              if (user != null) {
+                                return ListTile(
+                                  title: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        child: Text(
+                                          user.username[0].toUpperCase(),
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        backgroundColor:
+                                            ColorConstants.AppColor,
+                                        radius: 16,
                                       ),
-                                      backgroundColor: ColorConstants.AppColor,
-                                      radius: 16,
-                                    ),
-                                    Text(
-                                      "  @${user.username}",
-                                      style: MyTextConstant
-                                          .robotoSlabTextStyleSize15,
-                                    ),
-                                  ],
+                                      Text(
+                                        "  @${user.username}",
+                                        style: MyTextConstant
+                                            .robotoSlabTextStyleSize15,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return SizedBox.shrink();
+                              }
+                            },
+                            loading: () {
+                              return CircularProgressIndicator();
+                            },
+                            error: (error, stackTrace) {
+                              return Text(
+                                'Üye bilgileri yüklenirken bir hata oluştu.',
+                                style: TextStyle(
+                                  color: Colors.red,
                                 ),
                               );
-                            } else {
-                              return SizedBox.shrink();
-                            }
-                          },
-                          loading: () {
-                            return CircularProgressIndicator();
-                          },
-                          error: (error, stackTrace) {
-                            return Text(
-                              'Üye bilgileri yüklenirken bir hata oluştu.',
-                              style: TextStyle(
-                                color: Colors.red,
-                              ),
-                            );
-                          },
-                        );
-                      }).toList(),
+                            },
+                          );
+                        }).toList(),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  TextButton(
-                    child: Text('Kapat',
-                        style:
-                            MyTextConstant.robotoSlabTextStyleSize15BoldGreen),
-                    onPressed: () {
-                      Navigator.of(dialogContext).pop();
-                    },
-                  ),
-                ],
+                    SizedBox(height: 16),
+                    TextButton(
+                      child: Text('Kapat',
+                          style: MyTextConstant
+                              .robotoSlabTextStyleSize15BoldGreen),
+                      onPressed: () {
+                        Navigator.of(dialogContext).pop();
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );
