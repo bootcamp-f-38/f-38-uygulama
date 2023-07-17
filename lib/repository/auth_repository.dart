@@ -58,6 +58,7 @@ class AuthRepository {
         following: [],
         uid: userCredential.user!.uid,
         bio: '',
+        badge: 0,
       );
 
       await _users.doc(userModel.uid).set(userModel.toMap());

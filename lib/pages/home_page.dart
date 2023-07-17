@@ -9,7 +9,6 @@ import 'package:f_38/pages/content_page.dart';
 import 'package:f_38/pages/den.dart';
 import 'package:f_38/pages/event_page.dart';
 import 'package:f_38/pages/feed_screen.dart';
-import 'package:f_38/pages/new_pages/comunity_page.dart';
 import 'package:f_38/pages/profile_drawer.dart';
 import 'package:f_38/pages/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,10 +16,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:routemaster/routemaster.dart';
-
 import '../controller/auth_controller.dart';
 import '../resources/auth_methods.dart';
 import '../router.dart';
+import '../widgets/bottomappbar.dart';
 import 'login_page.dart';
 
 class HomePage extends ConsumerWidget {
@@ -110,16 +109,22 @@ class HomePage extends ConsumerWidget {
         child: Row(children: [
           Spacer(),
           IconButton(
-              onPressed: () {
-                navigateToUserP(context);
-              },
+              onPressed: () {},
               icon: Icon(
                 Icons.home,
                 color: ColorConstants.GreenAppColor,
               )),
           Spacer(),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UserProfileScreen(
+                            uid: user.uid,
+                          )),
+                );
+              },
               icon: Icon(
                 Icons.view_timeline,
                 color: ColorConstants.GreenAppColor,
@@ -194,7 +199,7 @@ class HomePage extends ConsumerWidget {
                           return InkWell(
                             onTap: () => displayEndDrawer(context),
                             child: CircleAvatar(
-                              backgroundColor: ColorConstants.OrangeAppColor,
+                              backgroundColor: ColorConstants.AppColor,
                               child: Text(
                                 "B",
                                 style: TextStyle(color: Colors.white),
@@ -240,7 +245,7 @@ class HomePage extends ConsumerWidget {
                         width: 131,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: ColorConstants.OrangeAppColor,
+                          color: ColorConstants.secondAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(
@@ -257,7 +262,7 @@ class HomePage extends ConsumerWidget {
                         width: 127,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: ColorConstants.OrangeAppColor,
+                          color: ColorConstants.secondAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(
@@ -274,7 +279,7 @@ class HomePage extends ConsumerWidget {
                         width: 120,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: ColorConstants.OrangeAppColor,
+                          color: ColorConstants.secondAppColor,
                           borderRadius: BorderRadius.circular(18.5),
                         ),
                         child: Center(

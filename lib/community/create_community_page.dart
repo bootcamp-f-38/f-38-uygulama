@@ -2,7 +2,6 @@ import 'package:f_38/constant/constants.dart';
 import 'package:f_38/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../controller/community_controller.dart';
 
 class CreateCommunityPage extends ConsumerStatefulWidget {
@@ -37,7 +36,7 @@ class _CreateCommunityPageState extends ConsumerState<CreateCommunityPage> {
           "Topluluk oluştur",
           style: MyTextConstant.myCustomTextStyleWhite,
         ),
-        backgroundColor: ColorConstants.OrangeAppColor,
+        backgroundColor: ColorConstants.AppColor,
       ),
       body: _isLoading
           ? const Loader()
@@ -67,7 +66,7 @@ class _CreateCommunityPageState extends ConsumerState<CreateCommunityPage> {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(double.infinity, 50),
-                          backgroundColor: ColorConstants.OrangeAppColor,
+                          backgroundColor: ColorConstants.AppColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
                       onPressed: createCommunity,

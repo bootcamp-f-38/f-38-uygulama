@@ -35,6 +35,7 @@ class AuthMethods {
           following: [],
           uid: cred.user!.uid,
           bio: '',
+          badge: 0,
         );
 
         res = "success";

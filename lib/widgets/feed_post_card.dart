@@ -4,19 +4,43 @@ import 'package:f_38/controller/post_controller.dart';
 import 'package:f_38/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:routemaster/routemaster.dart';
 
-class PostCardWidget extends ConsumerWidget {
+import '../controller/auth_controller.dart';
+
+class PostCardFeedWidget extends ConsumerWidget {
   final Post post;
-  const PostCardWidget({
+  const PostCardFeedWidget({
     Key? key,
     required this.post,
   }) : super(key: key);
+
+  void deletePost(WidgetRef ref, BuildContext context) async {
+    ref.read(postControllerProvider.notifier).deletePost(post, context);
+  }
+
+  void likePost(WidgetRef ref) async {
+    ref.read(postControllerProvider.notifier).like(post);
+  }
+
+  void navigateToComments(BuildContext context) {
+    Routemaster.of(context).push('/post/${post.id}/comments');
+  }
+
+  String formatTimestamp(DateTime timestamp) {
+    final formatter = DateFormat('dd.MM.yyyy HH:mm');
+    return formatter.format(timestamp);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTypeImage = post.type == 'fotograf';
     final isTypeText = post.type == 'yazi';
     final isTypeLink = post.type == 'link';
+    final user = ref.watch(userProvider)!;
+    final timestampString = formatTimestamp(post.timestamp);
+
     return Column(
       children: [
         Container(
@@ -70,9 +94,20 @@ class PostCardWidget extends ConsumerWidget {
                                 onPressed: () => deletePost(ref, context),
                                 icon: Icon(
                                   Icons.delete,
-                                  size: 24,
+                                  size: 22,
                                 ),
                               ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              " Topluluk Paylaşımı /${post.communityName}",
+                              style: MyTextConstant.myCustomTextStyle,
+                            ),
                           ],
                         ),
                         Divider(
@@ -124,6 +159,54 @@ class PostCardWidget extends ConsumerWidget {
                             child: Text(post.description!,
                                 style: MyTextConstant.ralewayTextStyle),
                           ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  likePost(ref);
+                                },
+                                icon: Icon(Icons.favorite,
+                                    size: 22,
+                                    color: post.likes.contains(user.uid)
+                                        ? Colors.redAccent
+                                        : Colors.grey)),
+                            IconButton(
+                              onPressed: () => navigateToComments(context),
+                              icon: const Icon(
+                                Icons.comment,
+                                size: 22,
+                              ),
+                            ),
+                            Text(
+                              '${post.commentCount == 0 ? 'Yorum' : post.commentCount}',
+                              style: MyTextConstant.ralewayTextStyle,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            'Gönderildi: $timestampString',
+                            style: MyTextConstant.ralewayTextStyle.copyWith(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

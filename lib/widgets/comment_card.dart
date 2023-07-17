@@ -28,7 +28,7 @@ class CommentCard extends ConsumerWidget {
                   comment.username[0].toUpperCase(),
                   style: TextStyle(color: Colors.white),
                 ),
-                backgroundColor: ColorConstants.OrangeAppColor,
+                backgroundColor: ColorConstants.AppColor,
                 radius: 20,
               ),
               Expanded(
